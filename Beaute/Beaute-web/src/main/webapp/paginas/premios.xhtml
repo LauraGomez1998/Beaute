@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:q="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/default.xhtml">
+
+	<ui:define name="contenido">
+		<h:form id="form2" prependId="false"
+			style="display: flex; justify-content:center; align-items:center; flex-direction:column;">
+
+			<h1>Resgistrar Premios</h1>
+			<br />
+			<br />
+			<h:panelGrid columns="2" id="contenedor">
+
+
+				<p:outputLabel value="Codigo" for="cod" />
+				<h:inputText value="#{afiliadopremioWeb.codigo}" id="cod"
+					required="true" />
+
+				<p:outputLabel value="Cedula afiliado" for="afi" />
+				<h:inputText value="#{afiliadopremioWeb.afiliado}" id="afi"
+					required="true" />
+
+				<p:outputLabel value="Tipo Premio" for="tipo" />
+				<p:selectOneRadio
+					value="#{afiliadopremioWeb.tipoPremioSeleccionado}" id="tipo"
+					required="true">
+					<f:selectItem itemValue="0" itemLabel="Especie" />
+					<f:selectItem itemValue="1" itemLabel="Montario" />
+					<f:ajax event="change" render="panelGroup" execute="@this"
+						listener="#{afiliadopremioWeb.tipoPremioSelect()}" />
+				</p:selectOneRadio>
+
+				<p:outputLabel value="Premio" />
+
+				<h:panelGroup id="panelGroup">
+					<p:selectOneMenu rendered="#{afiliadopremioWeb.activarAfiliado}"
+						converter="#{premioConverter}" id="comboAfiliado"
+						value="#{afiliadopremioWeb.premioSeleccionado}">
+						<f:selectItems value="#{afiliadopremioWeb.premiosAfiliados}"
+							var="afili" itemValue="#{afili}" itemLabel="#{afili.descripcion}" />
+					</p:selectOneMenu>
+
+					<p:selectOneMenu rendered="#{afiliadopremioWeb.activarVentas}"
+						converter="#{premioConverter}" id="comboVentas"
+						value="#{afiliadopremioWeb.premioSeleccionado}">
+						<f:selectItems value="#{afiliadopremioWeb.premiosVentas}"
+							var="afili" itemValue="#{afili}" itemLabel="#{afili.descripcion}" />
+					</p:selectOneMenu>
+
+				</h:panelGroup>
+
+
+			</h:panelGrid>
+			<br />
+			<p:commandButton action="#{afiliadopremioWeb.registrarPremio()}"
+				value="Registrar" update="form2" id="registrar" />
+
+		</h:form>
+	</ui:define>
+</ui:composition>

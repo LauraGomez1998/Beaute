@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:q="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/default.xhtml">
+
+	<ui:define name="contenido">
+		<h:form id="form2" prependId="false"
+			style="display: flex; justify-content:center; align-items:center; flex-direction:column;">
+			<h1>Resgistrar Cliente</h1>
+
+
+			<br />
+			<h2>Datos</h2>
+			<h:panelGrid columns="2" id="contenedor">
+
+				<p:outputLabel value="#{msj['usuario.cedula']}" for="cedula" />
+				<h:inputText value="#{clienteWeb.cedula}" id="cedula" required="true" />
+				
+				<p:outputLabel value="#{msj['usuario.nombre']}" for="nombre" />
+				<h:inputText value="#{clienteWeb.nombre}" id="nombre" required="true" />
+				
+				<p:outputLabel value="#{msj['usuario.apellido']}" for="apellido" />
+				<h:inputText value="#{clienteWeb.apellido}" id="apellido" required="true" />
+				
+				<p:outputLabel value="#{msj['usuario.genero']}" for="gen" />
+				<p:selectOneMenu id="gen" value="#{clienteWeb.genero}">
+					<f:selectItems values="#{clienteWeb.listaGeneros}" var="gene" itemValue="gene" itemLabel="gene" />
+				</p:selectOneMenu>
+				
+				<p:outputLabel value="#{msj['usuario.ciudad']}" for="ciudad" />
+				<p:selectOneMenu converter="#{ciudadConverter}" id="ciudad" value="#{clienteWeb.listaCiudades}">
+					<f:selectItems var="ciu" itemValue="#{clienteWeb.ciudadSeleccionada}" itemLabel="#{ciu.nombre}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="#{msj['usuario.telefono']}" for="telefono" />
+				<h:inputText value="" id="telefono" required="true" />
+
+				<p:messages for="cedula" style="color:red"/>
+				<p:messages for="nombre" style="color:red"/>
+				<p:messages for="apellido" style="color:red"/>
+				<p:messages for="gen" style="color:red"/>
+
+
+
+
+
+
+
+			</h:panelGrid>
+			<br />
+			<p:commandButton action="#" value="Registrar" update="form2"
+				id="registrar" />
+
+		</h:form>
+	</ui:define>
+</ui:composition>

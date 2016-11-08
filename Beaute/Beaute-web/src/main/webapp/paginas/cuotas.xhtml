@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:q="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/default.xhtml">
+
+	<ui:define name="contenido">
+		<h:form id="form2" prependId="false"
+			style="display: flex; justify-content:center; align-items:center; flex-direction:column;">
+
+			<h1>Resgistrar Cuotas</h1>
+
+
+			<br />
+			<br />
+			<h:panelGrid columns="2" id="contenedor">
+
+				<p:outputLabel value="Cédula" for="cedula" />
+				<h:inputText value="" id="cedula" required="true" />
+
+				<p:outputLabel value="Pago" for="pago" />
+				<h:inputText value="" id="pago" required="true" />
+
+
+			</h:panelGrid>
+			<br />
+			<p:commandButton action="#" value="Registrar" update="form2"
+				id="registrar" />
+
+		</h:form>
+	</ui:define>
+</ui:composition>

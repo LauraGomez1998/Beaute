@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:q="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/default.xhtml">
+<head>
+<link id="template-file" href="/WEB-INF/templates/default.xhtml"
+	rel="default" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+	<div class=container ng-controller="#">
+
+
+
+		<em>
+			<h3 class="text-center">Categorias</h3>
+		</em>
+		<div class="row" align="center">
+			<div class="col-md-3">
+				<p>Salud</p>
+				<img src="../../resources/productos/limpieza.jpg" alt="Pulpit Rock"
+					style="width: 100px; height: 100px">
+			</div>
+			<div class="col-md-3">
+				<p>Maquillaje</p>
+				<img src="../../resources/productos/maquillaje.jpg"
+					alt="Moustiers Sainte Marie" style="width: 100px; height: 100px">
+			</div>
+
+			<div class="col-md-3">
+				<p>Ropa</p>
+				<img src="../../resources/productos/ropaa.jpg" alt="Cinque Terre"
+					style="width: 100px; height: 100px">
+			</div>
+			<div class="col-md-3">
+				<p>Accesorios</p>
+				<img src="../../resources/productos/acce.jpg" alt="Cinque Terre"
+					style="width: 100px; height: 100px">
+			</div>
+
+		</div>
+
+		<div class="row">
+			<label for="sel1">Categoria 1</label> <select class="form-control"
+				id="sel1">
+				<option>1</option>
+				<option>2</option>
+				<option>3</option>
+				<option>4</option>
+			</select> <label for="sel1">Categoria 2</label> <select class="form-control"
+				id="sel1">
+				<option>1</option>
+				<option>2</option>
+				<option>3</option>
+				<option>4</option>
+			</select> <label for="sel1">Categoria 3</label> <select class="form-control"
+				id="sel1">
+				<option>1</option>
+				<option>2</option>
+				<option>3</option>
+				<option>4</option>
+			</select> <label for="sel1">Categoria 4</label> <select class="form-control"
+				id="sel1">
+				<option>1</option>
+				<option>2</option>
+				<option>3</option>
+				<option>4</option>
+			</select> <br />
+			<div class="form-group">
+				<label for="usr" class="control-label col-sm-2">Cantidad</label> <input
+					type="text" id="usr">
+			</div>
+		</div>
+
+		<h3 class="text-center">Productos Agregados</h3>
+		<div class="panel panel-primary">
+			<div class="panel-heading">Productos</div>
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Codigo</th>
+						<th>Nombre</th>
+						<th>Cantidad</th>
+
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr ng-repeat="p in productos">
+						<td>{{p.codigo}}</td>
+						<td>{{p.nombre}}</td>
+						<td>{{p.cantidad}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<button type="button" class="btn btn-primary center-block">Pedir</button>
+		<br />
+	</div>
+
+
+</body>
+</html>

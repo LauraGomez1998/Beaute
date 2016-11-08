@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:q="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/default.xhtml">
+
+	<ui:define name="contenido">
+		<h:form id="form2" prependId="false"
+			style="display: flex; justify-content:center; align-items:center; flex-direction:column;">
+			<h1>Resgistrar Afiliado</h1>
+			<h2>Datos Afiliador</h2>
+			<p:panelGrid columns="2" id="datos">
+
+				<p:outputLabel value="Cédula afiliador" for="cedulaAfiliado" />
+				<p:inputText value="#{afiliadoaWeb.cedulaAfiliador}"
+					id="cedulaAfiliado" required="true" />
+			</p:panelGrid>
+			<br />
+			<h2>Datos Afiliado</h2>
+			<h:panelGrid columns="2" id="contenedor">
+
+				<p:outputLabel value="Cédula" for="cedula" />
+				<h:inputText value="#{afiliadoaWeb.cedulaAfiliado}" id="cedula"
+					required="true" />
+
+				<p:outputLabel value="Nombre" for="nombre" />
+				<h:inputText value="#{afiliadoaWeb.nombre}" id="nombre"
+					required="true" />
+
+				<p:outputLabel value="Apellido" for="apellido" />
+				<h:inputText value="#{afiliadoaWeb.apellido}" id="apellido"
+					required="true" />
+
+				<p:outputLabel value="Genero" for="genero" />
+
+				<p:selectOneMenu id="genero" value="#{afiliadoaWeb.genero}">
+					<f:selectItems value="#{afiliadoaWeb.listaGeneros}" var="gen"
+						itemValue="#{gen}" itemLabel="#{gen}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Ciudad" for="ciudad" />
+				<p:selectOneMenu converter="#{ciudadConverter}" id="ciudad"
+					value="#{afiliadoaWeb.ciudadSeleccionada}">
+					<f:selectItems value="#{afiliadoaWeb.listaCiudades}" var="ciu"
+						itemValue="#{ciu}" itemLabel="#{ciu.nombre}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Teléfono" for="telefono" />
+				<h:inputText value="#{afiliadoaWeb.telefono}" id="telefono"
+					required="true" />
+
+				<p:outputLabel value="Usuario" for="usuario" />
+				<h:inputText value="#{afiliadoaWeb.usuario}" id="usuario"
+					required="true" />
+
+				<p:outputLabel value="Contraseña" for="contrasenia" />
+				<h:inputSecret value="#{afiliadoaWeb.contrasenia}" id="contrasenia"
+					required="true" />
+
+			</h:panelGrid>
+			<br />
+			<p:commandButton action="#{afiliadoaWeb.registrarAfiliado()}"
+				value="Registrar" update="form2" id="registrar"
+				style="background-color: #609dff !important;" />
+
+		</h:form>
+	</ui:define>
+</ui:composition>

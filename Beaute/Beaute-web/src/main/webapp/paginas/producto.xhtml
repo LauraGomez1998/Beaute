@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:q="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/default.xhtml">
+
+	<ui:define name="contenido">
+		<h:form id="form2" prependId="false"
+			style="display: flex; justify-content:center; align-items:center; flex-direction:column;">
+
+			<h1>Resgistrar Productos</h1>
+
+
+			<br />
+			<br />
+			<h:panelGrid columns="2" id="contenedor">
+
+				<p:outputLabel value="Codigo" for="cod" />
+				<h:inputText value="" id="cod" required="true" />
+
+				<p:outputLabel value="Nombre" for="nombre" />
+				<h:inputText value="" id="nombre" required="true" />
+
+				<p:outputLabel value="Categoria" for="catProd" />
+				<p:selectOneMenu id="catProd" value="CategoriaProducto">
+					<f:selectItem itemValue="a" itemLabel="Maquillaje" />
+					<f:selectItem itemValue="a" itemLabel="Utileria" />
+					<f:selectItem itemValue="a" itemLabel="Otro.." />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Precio" for="precio" />
+				<h:inputText value="" id="precio" required="true" />
+
+				<p:outputLabel value="Descripción" for="desc" />
+				<h:inputTextarea value="" id="desc" required="true" />
+
+				<p:outputLabel value="Estado" for="est" />
+				<p:selectOneMenu id="est" value="estadoProd">
+					<f:selectItem itemValue="a" itemLabel="Activo" />
+					<f:selectItem itemValue="a" itemLabel="Inactivo" />
+					<f:selectItem itemValue="a" itemLabel="Otro.." />
+				</p:selectOneMenu>
+			</h:panelGrid>
+			<br />
+			<p:commandButton action="#" value="Registrar" update="form2"
+				id="registrar" />
+
+		</h:form>
+	</ui:define>
+</ui:composition>

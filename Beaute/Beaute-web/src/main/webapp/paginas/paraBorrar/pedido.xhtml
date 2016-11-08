@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:q="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/default.xhtml">
+
+	<ui:define name="contenido">
+		<h:form id="form2" prependId="false"
+			style="display: flex; justify-content:center; align-items:center; flex-direction:column;">
+			<h1>Registro de Pedidos</h1>
+			<h4>Categorias</h4>
+			<h:panelGrid columns="8" id="contenedor">
+
+				<h:graphicImage value="../resources/pics/cat1.png" />
+				<br />
+				<h:graphicImage value="../resources/pics/cat2.png" />
+				<br />
+				<h:graphicImage value="../resources/pics/cat3.png" />
+				<br />
+				<h:graphicImage value="../resources/pics/cat4.png" />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<p:selectOneMenu id="cat1" value="Categoria1">
+					<f:selectItem itemValue="a" itemLabel="Notas" />
+					<f:selectItem itemValue="a" itemLabel="Manual" />
+					<f:selectItem itemValue="a" itemLabel="Otro.." />
+				</p:selectOneMenu>
+				<br />
+				<p:selectOneMenu id="cat2" value="Categoria2">
+					<f:selectItem itemValue="a" itemLabel="Tacones" />
+					<f:selectItem itemValue="a" itemLabel="Blusas" />
+					<f:selectItem itemValue="a" itemLabel="Otro.." />
+				</p:selectOneMenu>
+				<br />
+
+				<p:selectOneMenu id="cat3" value="Categoria3">
+					<f:selectItem itemValue="a" itemLabel="Gafas" />
+					<f:selectItem itemValue="a" itemLabel="Reloj" />
+					<f:selectItem itemValue="a" itemLabel="Otro.." />
+				</p:selectOneMenu>
+				<br />
+				<p:selectOneMenu id="cat4" value="Categoria4">
+					<f:selectItem itemValue="a" itemLabel="Collares" />
+					<f:selectItem itemValue="a" itemLabel="Pulceras" />
+					<f:selectItem itemValue="a" itemLabel="Otro.." />
+				</p:selectOneMenu>
+			</h:panelGrid>
+			<br />
+			<h:panelGrid columns="2" id="ped">
+				<p:outputLabel value="Cantidad" for="cant" />
+				<h:inputText value="" id="cant" required="true" />
+				
+			</h:panelGrid>
+			<br />
+			<p:commandButton action="#" value="Agregar"  id="agregar" />
+			
+			<br />
+			<h4>Productos Agregados</h4>
+			<p:dataTable var="car" value="Productos Agregados">
+				<p:column headerText="Codigo">
+					<h:outputText value="#" />
+				</p:column>
+
+				<p:column headerText="Nombre">
+					<h:outputText value="#" />
+				</p:column>
+
+				<p:column headerText="Cantidad">
+					<h:outputText value="#" />
+				</p:column>
+
+			</p:dataTable>
+
+
+			<br />
+			<p:commandButton action="#" value="Pedir" update="form2" id="pedir" />
+
+		</h:form>
+	</ui:define>
+</ui:composition>
