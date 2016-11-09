@@ -19,34 +19,43 @@
 			<h:panelGrid columns="2" id="contenedor">
 
 				<p:outputLabel value="Codigo" for="cod" />
-				<h:inputText value="" id="cod" required="true" />
+				<h:inputText value="#{productoWeb.codigo}" id="cod" required="true" />
 
 				<p:outputLabel value="Nombre" for="nombre" />
-				<h:inputText value="" id="nombre" required="true" />
+				<h:inputText value="#{productoWeb.nombre}" id="nombre"
+					required="true" />
 
 				<p:outputLabel value="Categoria" for="catProd" />
-				<p:selectOneMenu id="catProd" value="CategoriaProducto">
-					<f:selectItem itemValue="a" itemLabel="Maquillaje" />
-					<f:selectItem itemValue="a" itemLabel="Utileria" />
-					<f:selectItem itemValue="a" itemLabel="Otro.." />
+				<p:selectOneMenu id="catProd" value="#{productoWeb.categoria}">
+					<f:selectItems value="#{productoWeb.listaCategorias}" var="cat"
+						itemValue="#{cat}" itemLabel="#{cat}" />
 				</p:selectOneMenu>
 
+
 				<p:outputLabel value="Precio" for="precio" />
-				<h:inputText value="" id="precio" required="true" />
+				<h:inputText value="#{productoWeb.precio}" id="precio"
+					required="true" />
+
+
+				<p:outputLabel value="Cantidad" for="cantidad" />
+				<h:inputText value="#{productoWeb.cantidad}" id="cantidad"
+					required="true" />
 
 				<p:outputLabel value="Descripción" for="desc" />
-				<h:inputTextarea value="" id="desc" required="true" />
+				<h:inputTextarea value="#{productoWeb.caracteristica}" id="desc"
+					required="true" />
 
 				<p:outputLabel value="Estado" for="est" />
 				<p:selectOneMenu id="est" value="estadoProd">
-					<f:selectItem itemValue="a" itemLabel="Activo" />
-					<f:selectItem itemValue="a" itemLabel="Inactivo" />
-					<f:selectItem itemValue="a" itemLabel="Otro.." />
+					<f:selectItem itemValue="0" itemLabel="Activo" />
+					<f:selectItem itemValue="1" itemLabel="Inactivo" />
 				</p:selectOneMenu>
+
+
 			</h:panelGrid>
 			<br />
-			<p:commandButton action="#" value="Registrar" update="form2"
-				id="registrar" />
+			<p:commandButton action="#{productoWeb.registrarProducto()}"
+				value="Registrar" update="form2" id="registrar" />
 
 		</h:form>
 	</ui:define>

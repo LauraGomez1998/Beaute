@@ -20,7 +20,7 @@ public class Producto implements Serializable {
 
 	@Id
 	@Column(name = "CODIGO", length = 20)
-	private int codigo;
+	private String codigo;
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "CATEGORIA", length = 10, nullable = false)
@@ -44,7 +44,7 @@ public class Producto implements Serializable {
 	public Producto() {
 	}
 
-	public Producto(int codigo, CategoriaProductoEnum categoria, int cantidad, double precio, boolean estado,
+	public Producto(String codigo, CategoriaProductoEnum categoria, int cantidad, double precio, boolean estado,
 			String nombre, String caracteristica) {
 		super();
 		this.codigo = codigo;
@@ -56,11 +56,11 @@ public class Producto implements Serializable {
 		this.caracteristica = caracteristica;
 	}
 
-	public int getCodigo() {
+	public String getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(int codigo) {
+	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
 
@@ -112,4 +112,19 @@ public class Producto implements Serializable {
 		this.caracteristica = caracteristica;
 	}
 
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Producto) {
+			Producto tmpCiudad = (Producto) obj;
+			if (this.codigo.equals(tmpCiudad.codigo)
+					&& this.nombre.equals(tmpCiudad.nombre)) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
 }
