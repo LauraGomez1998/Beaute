@@ -2,5 +2,5 @@ package co.edu.eam.ingesoft.pa2.beaute.enumeraciones;
 
 public enum CategoriaProductoEnum {
 
-	POLVOS, LABIAL, JABONES
+	SALUD, MAQUILLAJE, ROPA, ACCESORIOS
 }

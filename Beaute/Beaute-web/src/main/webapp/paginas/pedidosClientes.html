@@ -17,10 +17,12 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	<script type="text/javascript" src="../controlador/pedidosController.js"></script>
 </head>
 <body>
 
-	<div class=container ng-controller="#">
+	<div class=container ng-controller="pedidosClientes">
 
 
 
@@ -29,11 +31,11 @@
 		</em>
 		<div class="row" align="center">
 			<div class="col-md-3">
-				<p>Salud</p>
+				<p ng-model="categoria">SALUD</p>
 				<img src="../resources/productos/limpieza.jpg" alt="Pulpit Rock"
 					style="width: 100px; height: 100px">
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-3" onclick="">
 				<p>Maquillaje</p>
 				<img src="../resources/productos/maquillaje.jpg"
 					alt="Moustiers Sainte Marie" style="width: 100px; height: 100px">
@@ -67,7 +69,7 @@
 		</div>
 
 		<div>
-			<label for="usr" class="control-label ">Cantidad</label> <input
+			<label for="usr" class="control-label">Cantidad</label> <input
 				type="text" id="usr">
 			<button type="button" class="btn btn-primary">Agregar</button>
 
