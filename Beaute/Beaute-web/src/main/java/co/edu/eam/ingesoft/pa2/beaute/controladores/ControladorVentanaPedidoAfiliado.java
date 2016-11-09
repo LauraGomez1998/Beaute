@@ -42,6 +42,10 @@ public class ControladorVentanaPedidoAfiliado implements Serializable {
 		}
 	}
 
+	
+	
+	
+	
 	public List<Producto> getListaProductos() {
 		return listaProductos;
 	}

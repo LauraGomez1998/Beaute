@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class PedidoProductoPk implements Serializable {
 
 	private int codigo;
-	private int producto;
+	private String producto;
 
 	public PedidoProductoPk() {
 	}
@@ -15,7 +15,7 @@ public class PedidoProductoPk implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + codigo;
-		result = prime * result + producto;
+		result = prime * result + ((producto == null) ? 0 : producto.hashCode());
 		return result;
 	}
 
@@ -30,7 +30,10 @@ public class PedidoProductoPk implements Serializable {
 		PedidoProductoPk other = (PedidoProductoPk) obj;
 		if (codigo != other.codigo)
 			return false;
-		if (producto != other.producto)
+		if (producto == null) {
+			if (other.producto != null)
+				return false;
+		} else if (!producto.equals(other.producto))
 			return false;
 		return true;
 	}
