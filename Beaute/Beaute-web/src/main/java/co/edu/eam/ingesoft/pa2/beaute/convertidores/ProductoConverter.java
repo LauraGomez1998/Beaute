@@ -11,11 +11,11 @@ import co.edu.eam.ingesoft.pa2.beaute.bos.PremioEJB;
 import co.edu.eam.ingesoft.pa2.beaute.bos.ProductoEJB;
 import co.edu.eam.ingesoft.pa2.beaute.entidades.Premio;
 import co.edu.eam.ingesoft.pa2.beaute.entidades.Producto;
-
+ 
 @Named
-@FacesConverter(value = "premio", forClass = Premio.class)
+@FacesConverter(value = "premio", forClass = Producto.class)
 public class ProductoConverter implements Converter {
-
+  
 	@EJB
 	private ProductoEJB premioEJB;
 

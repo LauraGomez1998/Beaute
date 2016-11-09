@@ -44,7 +44,7 @@ public class PruebaEJBProducto {
 			pro.setCantidad(5);
 			pro.setCaracteristica("caracteristica_prueba");
 			pro.setCodigo("716523");
-			pro.setEstado(true);
+			pro.setEstado(true);  
 			pro.setNombre("producto_prueba");
 			pro.setPrecio(300);
 			productoEJB.crear(pro);

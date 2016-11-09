@@ -15,7 +15,7 @@ import org.omnifaces.cdi.ViewScoped;
 import co.edu.eam.ingesoft.pa2.beaute.bos.ProductoEJB;
 import co.edu.eam.ingesoft.pa2.beaute.entidades.Producto;
 import co.edu.eam.ingesoft.pa2.beaute.enumeraciones.CategoriaProductoEnum;
-
+ 
 @Named("productoWeb")
 @ViewScoped
 public class ControladorVentanaProducto implements Serializable {

@@ -12,7 +12,7 @@ import org.omnifaces.cdi.ViewScoped;
 import co.edu.eam.ingesoft.pa2.beaute.bos.CatalogoProductoEJB;
 import co.edu.eam.ingesoft.pa2.beaute.entidades.Producto;
 import co.edu.eam.ingesoft.pa2.beaute.enumeraciones.CategoriaProductoEnum;
-
+ 
 @Named("pedidoAfiliadoWeb")
 @ViewScoped
 public class ControladorVentanaPedidoAfiliado implements Serializable {
@@ -29,7 +29,7 @@ public class ControladorVentanaPedidoAfiliado implements Serializable {
 	 * 
 	 * @param seleccion
 	 *            el valor seccionado
-	 */
+	 */ 
 	public void mostrarProductos(int seleecionado) {
 		if (seleecionado == 0) {
 			listaProductos = catalogoProductoEJB.listarProductosCatalogo(CategoriaProductoEnum.POLVOS);

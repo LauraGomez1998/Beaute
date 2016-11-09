@@ -16,9 +16,9 @@ import javax.persistence.Table;
 @Inheritance(strategy = InheritanceType.JOINED)
 @NamedQueries({ @NamedQuery(name = Premio.LISTAR_PREMIOS, query = "select p from Premio p") })
 public class Premio implements Serializable {
-
+ 
 	public final static String LISTAR_PREMIOS = "Premio.listar";
-	@Id
+	@Id 
 	@Column(name = "CODIGO", length = 10)
 	protected String codigo;
 

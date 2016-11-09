@@ -15,7 +15,7 @@ import co.edu.eam.ingesoft.pa2.beaute.implementacion.EJBGenerico;
 @Stateless
 @LocalBean
 public class PremioEJB extends EJBGenerico<Premio> {
-
+  
 	@Override
 	public Class getClase() {
 		// TODO Auto-generated method stub

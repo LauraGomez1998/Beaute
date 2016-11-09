@@ -9,11 +9,11 @@ import javax.inject.Named;
 
 import co.edu.eam.ingesoft.pa2.beaute.bos.PremioEJB;
 import co.edu.eam.ingesoft.pa2.beaute.entidades.Premio;
-
+ 
 @Named
 @FacesConverter(value = "premio", forClass = Premio.class)
 public class PremioConverter implements Converter {
-
+ 
 	@EJB
 	private PremioEJB premioEJB;
 

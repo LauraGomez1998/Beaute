@@ -9,12 +9,12 @@ import javax.inject.Named;
 
 import co.edu.eam.ingesoft.pa2.beaute.bos.CiudadEJB;
 import co.edu.eam.ingesoft.pa2.beaute.entidades.Ciudad;
-
+ 
 @Named
 @FacesConverter(value = "programa", forClass = Ciudad.class)
 public class CiudadConverter implements Converter {
 
-	@EJB
+	@EJB 
 	private CiudadEJB ciudadEJB;
 
 	@Override

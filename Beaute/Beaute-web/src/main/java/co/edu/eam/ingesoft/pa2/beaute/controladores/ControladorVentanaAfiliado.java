@@ -25,7 +25,7 @@ import co.edu.eam.ingesoft.pa2.beaute.entidades.Departamento;
 import co.edu.eam.ingesoft.pa2.beaute.entidades.Pais;
 import co.edu.eam.ingesoft.pa2.beaute.enumeraciones.GeneroAfiliadoEnum;
 import co.edu.eam.ingesoft.pa2.beaute.excepciones.ExcepcionNegocio;
-
+ 
 @Named("afiliadoaWeb")
 @ViewScoped
 public class ControladorVentanaAfiliado implements Serializable {

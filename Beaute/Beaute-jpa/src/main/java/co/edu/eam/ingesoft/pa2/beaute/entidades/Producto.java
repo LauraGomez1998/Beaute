@@ -18,9 +18,9 @@ import co.edu.eam.ingesoft.pa2.beaute.enumeraciones.CategoriaProductoEnum;
 @Table(name = "PRODUCTOS")
 public class Producto implements Serializable {
 
-	@Id
+	@Id 
 	@Column(name = "CODIGO", length = 20)
-	private String codigo;
+	private String codigo; 
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "CATEGORIA", length = 10, nullable = false)
