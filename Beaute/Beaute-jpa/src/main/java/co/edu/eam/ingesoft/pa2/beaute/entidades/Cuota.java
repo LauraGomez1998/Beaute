@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -14,6 +16,7 @@ import javax.persistence.Table;
 public class Cuota implements Serializable {
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "CODIGO", length = 50)
 	private int codigo;
 
@@ -27,9 +30,8 @@ public class Cuota implements Serializable {
 	public Cuota() {
 	}
 
-	public Cuota(int codigo, PedidoCatalogo pedidoCatalogo, int numeroCuotas) {
+	public Cuota(PedidoCatalogo pedidoCatalogo, int numeroCuotas) {
 		super();
-		this.codigo = codigo;
 		this.pedidoCatalogo = pedidoCatalogo;
 		this.numeroCuotas = numeroCuotas;
 	}
