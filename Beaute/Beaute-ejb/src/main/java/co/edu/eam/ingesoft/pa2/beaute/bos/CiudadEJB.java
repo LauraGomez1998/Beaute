@@ -14,7 +14,7 @@ import co.edu.eam.ingesoft.pa2.beaute.implementacion.EJBGenerico;
 
 @Stateless
 @LocalBean
-public class CiudadEJB extends EJBGenerico<Ciudad> {
+public class CiudadEJB extends EJBGenerico<Ciudad> { 
 
 	@Override
 	public Class getClase() {

@@ -21,7 +21,7 @@ import co.edu.eam.ingesoft.pa2.beaute.implementacion.EJBGenerico;
  */
 @Stateless
 @LocalBean
-public class ProductoEJB extends EJBGenerico<Producto> {
+public class ProductoEJB extends EJBGenerico<Producto> { 
 
 	@Override
 	public Class getClase() {

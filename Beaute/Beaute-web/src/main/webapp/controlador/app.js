@@ -4,8 +4,8 @@ app.config(function($routeProvider) {
 	$routeProvider.when("/", {
 		controller : "menuController",
 		controllerAs : "m1",
-	}).when("/pedidosClientes", {
-		controller : "pedidosClientes",
+	}).when("/pedidos", {
+		controller : "pedidosController",
 		templateUrl : "paginas/pedidosClientes.html"
 	});
 });

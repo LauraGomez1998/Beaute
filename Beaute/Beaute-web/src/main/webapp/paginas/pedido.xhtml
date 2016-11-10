@@ -3,7 +3,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:q="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:q="http://xmlns.jcp.org/jsf/passthrough"  
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/templates/default.xhtml">
 
@@ -12,58 +12,64 @@
 			style="display: flex; justify-content:center; align-items:center; flex-direction:column;">
 			<h1>Registro de Pedidos</h1>
 			<h4>Categorias</h4>
-			<h:panelGrid columns="8" id="contenedor">
 
-				<h:graphicImage value="../resources/productos/limpieza.jpg" />
-				<br />
-				<h:graphicImage value="../resources/productos/maquillaje.jpg" />
-				<br />
-				<h:graphicImage value="../resources/productos/ropaa.jpg" />
-				<br />
-				<h:graphicImage value="../resources/productos/acce.jpg" />
-				<br />
-				<br />
-				<br />
-				<br />
-				<br />
-				<br />
-				<br />
-				<br />
-				<br />
-				<p:selectOneMenu id="cat1" value="Categoria1">
-					<f:selectItem itemValue="a" itemLabel="Notas" />
-					<f:selectItem itemValue="a" itemLabel="Manual" />
-					<f:selectItem itemValue="a" itemLabel="Otro.." />
-				</p:selectOneMenu>
-				<br />
-				<p:selectOneMenu id="cat2" value="Categoria2">
-					<f:selectItem itemValue="a" itemLabel="Tacones" />
-					<f:selectItem itemValue="a" itemLabel="Blusas" />
-					<f:selectItem itemValue="a" itemLabel="Otro.." />
-				</p:selectOneMenu>
-				<br />
+			<div class="row">
 
-				<p:selectOneMenu id="cat3" value="Categoria3">
-					<f:selectItem itemValue="a" itemLabel="Gafas" />
-					<f:selectItem itemValue="a" itemLabel="Reloj" />
-					<f:selectItem itemValue="a" itemLabel="Otro.." />
-				</p:selectOneMenu>
-				<br />
-				<p:selectOneMenu id="cat4" value="Categoria4">
-					<f:selectItem itemValue="a" itemLabel="Collares" />
-					<f:selectItem itemValue="a" itemLabel="Pulceras" />
-					<f:selectItem itemValue="a" itemLabel="Otro.." />
-				</p:selectOneMenu>
-			</h:panelGrid>
+				<p:outputLabel value="Categorias">
+				</p:outputLabel>
+				<h:panelGrid columns="2">
+					<p:outputLabel value="Salud" />
+					<p:graphicImage value="../resources/productos/limpieza.jpg" />
+
+					<f:ajax event="click" render="panelGroup" execute="@this"
+						listener="#{pedidoAfiliadoWeb.mostrarProductos(0)}" />
+				</h:panelGrid>
+
+				<h:panelGrid columns="2">
+					<p:outputLabel value="Belleza" />
+					<p:graphicImage value="../resources/productos/maquillaje.jpg" />
+
+					<f:ajax event="click" render="panelGroup" execute="@this"
+						listener="#{pedidoAfiliadoWeb.mostrarProductos(1)}" />
+				</h:panelGrid>
+
+				<h:panelGrid columns="2">
+					<p:outputLabel value="Ropa" />
+					<p:graphicImage value="../resources/productos/ropaa.jpg" />
+
+					<f:ajax event="click" render="panelGroup" execute="@this"
+						listener="#{pedidoAfiliadoWeb.mostrarProductos(2)}" />
+				</h:panelGrid>
+
+				<h:panelGrid columns="2">
+					<p:outputLabel value="Accesorios" />
+					<p:graphicImage value="../resources/productos/acce.jpg" />
+					<f:ajax event="click" render="panelGroup" execute="@this"
+						listener="#{pedidoAfiliadoWeb.mostrarProductos(3)}" />
+				</h:panelGrid>
+			</div>
+
+			<div>
+				<h:panelGroup id="panelGroup">
+					<p:selectOneMenu converter="#{productoConverter}"
+						id="comboProducto"
+						value="#{pedidoAfiliadoWeb.productoSeleccionado}">
+						<f:selectItems value="#{pedidoAfiliadoWeb.listaProductos}"
+							var="prod" itemValue="#{prod}" itemLabel="#{prod.nombre}" />
+					</p:selectOneMenu>
+
+				</h:panelGroup>
+
+			</div>
 			<br />
 			<h:panelGrid columns="2" id="ped">
 				<p:outputLabel value="Cantidad" for="cant" />
 				<h:inputText value="" id="cant" required="true" />
-				
+
 			</h:panelGrid>
 			<br />
-			<p:commandButton action="#" value="Agregar"  id="agregar" />
-			
+			<p:commandButton action="#" value="Agregar" id="agregar" />
+
 			<br />
 			<h4>Productos Agregados</h4>
 			<p:dataTable var="car" value="Productos Agregados">
