@@ -3,8 +3,9 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:q="http://xmlns.jcp.org/jsf/passthrough"  
+	xmlns:q="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	template="/WEB-INF/templates/default.xhtml">
 
 	<ui:define name="contenido">
@@ -50,6 +51,7 @@
 			</div>
 
 			<div>
+
 				<h:panelGroup id="panelGroup">
 					<p:selectOneMenu converter="#{productoConverter}"
 						id="comboProducto"
@@ -57,39 +59,46 @@
 						<f:selectItems value="#{pedidoAfiliadoWeb.listaProductos}"
 							var="prod" itemValue="#{prod}" itemLabel="#{prod.nombre}" />
 					</p:selectOneMenu>
-
 				</h:panelGroup>
 
 			</div>
 			<br />
 			<h:panelGrid columns="2" id="ped">
 				<p:outputLabel value="Cantidad" for="cant" />
-				<h:inputText value="" id="cant" required="true" />
-
+				<h:inputText value="#{pedidoAfiliadoWeb.cantidad}" id="cant"
+					required="true" />
 			</h:panelGrid>
 			<br />
-			<p:commandButton action="#" value="Agregar" id="agregar" />
+			<div>
+				<p:commandButton action="#{pedidoAfiliadoWeb.agregarProducto()}"
+					value="Agregar" id="agregar" />
+				<f:ajax event="click" render="productosAgregados" execute="@this" />
+			</div>
 
 			<br />
 			<h4>Productos Agregados</h4>
-			<p:dataTable var="car" value="Productos Agregados">
-				<p:column headerText="Codigo">
-					<h:outputText value="#" />
-				</p:column>
 
-				<p:column headerText="Nombre">
-					<h:outputText value="#" />
-				</p:column>
+			<h:panelGroup id="productosAgregados">
+				<p:dataTable var="prod"
+					value="#{pedidoAfiliadoWeb.listaProductoPedido}">
 
-				<p:column headerText="Cantidad">
-					<h:outputText value="#" />
-				</p:column>
+					<p:column headerText="Codigo">
+						<p:outputLabel value="#{prod.producto.codigo}" />
+					</p:column>
 
-			</p:dataTable>
+					<p:column headerText="Nombre">
+						<p:outputLabel value="#{prod.producto.nombre}" />
+					</p:column>
+
+					<p:column headerText="Cantidad">
+						<p:outputLabel value="#{prod.cantidad}" />
+					</p:column>
+				</p:dataTable>
+			</h:panelGroup>
 
 
 			<br />
-			<p:commandButton action="#" value="Pedir" update="form2" id="pedir" />
+			<p:commandButton action="#{pedidoAfiliadoWeb.pedir()}" value="Pedir" update="form2" id="pedir" />
 
 		</h:form>
 	</ui:define>

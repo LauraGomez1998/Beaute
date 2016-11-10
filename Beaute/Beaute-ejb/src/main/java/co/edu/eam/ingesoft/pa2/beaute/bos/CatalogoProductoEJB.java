@@ -25,8 +25,12 @@ public class CatalogoProductoEJB extends EJBGenerico<CatalogoProducto> {
 		dao.crear(catalogoProducto);
 	}
 
-	public List<CatalogoProducto> buscarCatalogoProducto(int codigo) {
-		return dao.ejecutarNamedQuery(CatalogoProducto.BUSCAR_CATALOGO_PRODUCTO, codigo);
+	public CatalogoProducto buscarCatalogoProducto(String codigo) {
+		List<CatalogoProducto> catalogo = dao.ejecutarNamedQuery(CatalogoProducto.BUSCAR_CATALOGO_PRODUCTO, codigo);
+		if (!catalogo.isEmpty()) {
+			return catalogo.get(0);
+		}
+		return null;
 	}
 
 	public List<Producto> listarProductosCatalogo(CategoriaProductoEnum categoria) {
