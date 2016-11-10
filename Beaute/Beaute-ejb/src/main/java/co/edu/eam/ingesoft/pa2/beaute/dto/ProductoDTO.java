@@ -1,4 +1,4 @@
-package co.edu.eam.ingesoft.pa2.beaute.dtos;
+package co.edu.eam.ingesoft.pa2.beaute.dto;
 
 import co.edu.eam.ingesoft.pa2.beaute.entidades.Producto;
 

@@ -11,7 +11,9 @@ import javax.inject.Named;
 import org.omnifaces.cdi.ViewScoped;
 
 import co.edu.eam.ingesoft.pa2.beaute.bos.CatalogoProductoEJB;
-import co.edu.eam.ingesoft.pa2.beaute.dtos.ProductoDTO;
+import co.edu.eam.ingesoft.pa2.beaute.bos.PedidoEJB;
+import co.edu.eam.ingesoft.pa2.beaute.dto.PedidoAfiliadoDTO;
+import co.edu.eam.ingesoft.pa2.beaute.dto.ProductoDTO;
 import co.edu.eam.ingesoft.pa2.beaute.entidades.Producto;
 import co.edu.eam.ingesoft.pa2.beaute.enumeraciones.CategoriaProductoEnum;
 
@@ -21,6 +23,9 @@ public class ControladorVentanaPedidoAfiliado implements Serializable {
 
 	@EJB
 	private CatalogoProductoEJB catalogoProductoEJB;
+
+	@EJB
+	private PedidoEJB pedidoEJB;
 
 	private int cantidad;
 
@@ -51,6 +56,11 @@ public class ControladorVentanaPedidoAfiliado implements Serializable {
 		} else {
 			listaProductos = catalogoProductoEJB.listarProductosCatalogo(CategoriaProductoEnum.OTROS);
 		}
+	}
+
+	public void pedir() {
+		PedidoAfiliadoDTO pedidoAfiliado = new PedidoAfiliadoDTO(listaProductoPedido, 123);
+		pedidoEJB.crearPedido(pedidoAfiliado);
 	}
 
 	public void agregarProducto() {
