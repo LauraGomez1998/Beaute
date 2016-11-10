@@ -7,32 +7,32 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.inject.Named;
 
-import co.edu.eam.ingesoft.pa2.beaute.bos.PremioEJB;
 import co.edu.eam.ingesoft.pa2.beaute.bos.ProductoEJB;
-import co.edu.eam.ingesoft.pa2.beaute.entidades.Premio;
 import co.edu.eam.ingesoft.pa2.beaute.entidades.Producto;
- 
+
 @Named
-@FacesConverter(value = "premio", forClass = Producto.class)
+@FacesConverter(value = "producto", forClass = Producto.class)
 public class ProductoConverter implements Converter {
-  
+
 	@EJB
-	private ProductoEJB premioEJB;
+	private ProductoEJB productoEJB;
 
 	@Override
 	public Object getAsObject(FacesContext arg0, UIComponent arg1, String string) {
 		if (string == null || string.trim().length() == 0) {
 			return null;
 		}
-		return premioEJB.buscar(string);
+		return productoEJB.buscar(string);
+
 	}
 
 	@Override
 	public String getAsString(FacesContext arg0, UIComponent arg1, Object arg2) {
-		if (arg2 instanceof Premio) {
-			Producto premio = (Producto) arg2;
-			return premio.getCodigo();
+		if (arg2 instanceof Producto) {
+			Producto producto = (Producto) arg2;
+			return producto.getCodigo();
 		}
 		return null;
 	}
+
 }

@@ -18,9 +18,9 @@ import co.edu.eam.ingesoft.pa2.beaute.enumeraciones.CategoriaProductoEnum;
 @Table(name = "PRODUCTOS")
 public class Producto implements Serializable {
 
-	@Id 
+	@Id
 	@Column(name = "CODIGO", length = 20)
-	private String codigo; 
+	private String codigo;
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "CATEGORIA", length = 10, nullable = false)
@@ -112,13 +112,11 @@ public class Producto implements Serializable {
 		this.caracteristica = caracteristica;
 	}
 
-	
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof Producto) {
-			Producto tmpCiudad = (Producto) obj;
-			if (this.codigo.equals(tmpCiudad.codigo)
-					&& this.nombre.equals(tmpCiudad.nombre)) {
+			Producto tmpProducto = (Producto) obj;
+			if (this.codigo.equals(tmpProducto.codigo)) {
 				return true;
 			} else {
 				return false;

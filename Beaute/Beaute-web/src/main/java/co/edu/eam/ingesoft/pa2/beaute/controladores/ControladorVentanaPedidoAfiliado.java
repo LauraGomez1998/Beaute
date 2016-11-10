@@ -1,6 +1,7 @@
 package co.edu.eam.ingesoft.pa2.beaute.controladores;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -10,9 +11,10 @@ import javax.inject.Named;
 import org.omnifaces.cdi.ViewScoped;
 
 import co.edu.eam.ingesoft.pa2.beaute.bos.CatalogoProductoEJB;
+import co.edu.eam.ingesoft.pa2.beaute.dtos.ProductoDTO;
 import co.edu.eam.ingesoft.pa2.beaute.entidades.Producto;
 import co.edu.eam.ingesoft.pa2.beaute.enumeraciones.CategoriaProductoEnum;
- 
+
 @Named("pedidoAfiliadoWeb")
 @ViewScoped
 public class ControladorVentanaPedidoAfiliado implements Serializable {
@@ -20,16 +22,25 @@ public class ControladorVentanaPedidoAfiliado implements Serializable {
 	@EJB
 	private CatalogoProductoEJB catalogoProductoEJB;
 
+	private int cantidad;
+
 	private List<Producto> listaProductos;
 
 	private Producto productoSeleccionado;
+
+	private List<ProductoDTO> listaProductoPedido;
+
+	@PostConstruct
+	public void iniciar() {
+		listaProductoPedido = new ArrayList<>();
+	}
 
 	/**
 	 * muestra los productos de la categoria seleccionada
 	 * 
 	 * @param seleccion
 	 *            el valor seccionado
-	 */ 
+	 */
 	public void mostrarProductos(int seleecionado) {
 		if (seleecionado == 0) {
 			listaProductos = catalogoProductoEJB.listarProductosCatalogo(CategoriaProductoEnum.POLVOS);
@@ -42,10 +53,13 @@ public class ControladorVentanaPedidoAfiliado implements Serializable {
 		}
 	}
 
-	
-	
-	
-	
+	public void agregarProducto() {
+		if (productoSeleccionado != null && cantidad > 0) {
+			ProductoDTO productoAgregar = new ProductoDTO(productoSeleccionado, cantidad);
+			listaProductoPedido.add(productoAgregar);
+		}
+	}
+
 	public List<Producto> getListaProductos() {
 		return listaProductos;
 	}
@@ -60,5 +74,21 @@ public class ControladorVentanaPedidoAfiliado implements Serializable {
 
 	public void setProductoSeleccionado(Producto productoSeleccionado) {
 		this.productoSeleccionado = productoSeleccionado;
+	}
+
+	public List<ProductoDTO> getListaProductoPedido() {
+		return listaProductoPedido;
+	}
+
+	public void setListaProductoPedido(List<ProductoDTO> listaProductoPedido) {
+		this.listaProductoPedido = listaProductoPedido;
+	}
+
+	public int getCantidad() {
+		return cantidad;
+	}
+
+	public void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
 	}
 }

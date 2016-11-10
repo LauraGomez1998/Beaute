@@ -23,7 +23,7 @@ import co.edu.eam.ingesoft.pa2.beaute.entidades.AfiliadoPremio;
 import co.edu.eam.ingesoft.pa2.beaute.entidades.Premio;
 import co.edu.eam.ingesoft.pa2.beaute.entidades.PremioAfiliado;
 import co.edu.eam.ingesoft.pa2.beaute.entidades.PremioVenta;
- 
+
 @Named("afiliadopremioWeb")
 @ViewScoped
 public class ControladorVentanaAfiliadoPremio implements Serializable {
