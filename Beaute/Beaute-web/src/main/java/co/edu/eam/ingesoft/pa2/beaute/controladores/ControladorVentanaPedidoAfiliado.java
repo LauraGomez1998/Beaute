@@ -58,15 +58,39 @@ public class ControladorVentanaPedidoAfiliado implements Serializable {
 		}
 	}
 
+	/**
+	 * crea el pedido del afiliado
+	 */
 	public void pedir() {
 		PedidoAfiliadoDTO pedidoAfiliado = new PedidoAfiliadoDTO(listaProductoPedido, 123);
 		pedidoEJB.crearPedido(pedidoAfiliado);
+		listaProductoPedido = null;
+		listaProductoPedido = new ArrayList<>();
 	}
 
+	/**
+	 * agrega un producto a un pedido
+	 */
 	public void agregarProducto() {
 		if (productoSeleccionado != null && cantidad > 0) {
-			ProductoDTO productoAgregar = new ProductoDTO(productoSeleccionado, cantidad);
-			listaProductoPedido.add(productoAgregar);
+			if (listaProductoPedido.isEmpty()) {
+				ProductoDTO productoAgregar = new ProductoDTO(productoSeleccionado, cantidad);
+				listaProductoPedido.add(productoAgregar);
+			} else {
+				boolean encontro = false;
+				for (int i = 0; i < listaProductoPedido.size(); i++) {
+					if (listaProductoPedido.get(i).getProducto().getCodigo()
+							.equalsIgnoreCase(productoSeleccionado.getCodigo())) {
+						int cant = listaProductoPedido.get(i).getCantidad();
+						listaProductoPedido.get(i).setCantidad(cant + cantidad);
+						encontro = true;
+					}
+				}
+				if (!encontro) {
+					ProductoDTO productoAgregar = new ProductoDTO(productoSeleccionado, cantidad);
+					listaProductoPedido.add(productoAgregar);
+				}
+			}
 		}
 	}
 

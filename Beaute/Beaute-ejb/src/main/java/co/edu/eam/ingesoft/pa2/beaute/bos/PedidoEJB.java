@@ -35,9 +35,15 @@ public class PedidoEJB extends EJBGenerico<Pedido> {
 		return Pedido.class;
 	}
 
+	/**
+	 * metodo que crea el pedido del afiliado
+	 * 
+	 * @param pedidoAfiliado
+	 *            dto con datos necesarios para realizar el pedido
+	 */
 	public void crearPedido(PedidoAfiliadoDTO pedidoAfiliado) {
 		Afiliado afiliado = afiliadoEJB.buscar(pedidoAfiliado.getCedulaAfiliado());
-		Pedido pedido = new Pedido(1, afiliado, Calendar.getInstance().getTime(), Calendar.getInstance().getTime());
+		Pedido pedido = new Pedido(4, afiliado, Calendar.getInstance().getTime(), Calendar.getInstance().getTime());
 		crear(pedido);
 		for (int i = 0; i < pedidoAfiliado.getProductosPedidos().size(); i++) {
 			CatalogoProducto catalogoP = catalogoProductoEJB

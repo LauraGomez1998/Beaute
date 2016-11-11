@@ -98,8 +98,11 @@
 
 
 			<br />
-			<p:commandButton action="#{pedidoAfiliadoWeb.pedir()}" value="Pedir" update="form2" id="pedir" />
-
+			<div>
+				<p:commandButton action="#{pedidoAfiliadoWeb.pedir()}" value="Pedir"
+					update="form2" id="pedir" />
+				<f:ajax event="click" render="productosAgregados" execute="@this" />
+			</div>
 		</h:form>
 	</ui:define>
 </ui:composition>
