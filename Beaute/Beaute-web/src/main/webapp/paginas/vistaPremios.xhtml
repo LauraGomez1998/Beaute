@@ -12,29 +12,22 @@
 			style="display: flex; justify-content:center; align-items:center; flex-direction:column;">
 
 			<h1>Vista de Premios</h1>
-			<p:dataTable var="car" value="Premios">
+			<p:dataTable var="pre" value="#{vistaPremiosWeb.listaPremios}">
 				<p:column headerText="Cedula">
-					<h:outputText value="#" />
+					<p:outputLabel value="#{pre.afiliado.cedulaAfiliado}" />
 				</p:column>
 
 				<p:column headerText="Nombre">
-					<h:outputText value="#" />
+					<p:outputLabel
+						value="#{pre.afiliado.nombre} #{pre.afiliado.apellido}" />
 				</p:column>
 
-				<p:column headerText="Categoria">
-					<h:outputText value="#" />
-				</p:column>
-				
-				<p:column headerText="Tipo Premio">
-					<h:outputText value="#" />
-				</p:column>
-				
 				<p:column headerText="Descripción">
-					<h:outputText value="#" />
+					<p:outputLabel value="#{pre.premio.descripcion}" />
 				</p:column>
-				
+
 				<p:column headerText="Fecha">
-					<h:outputText value="#" />
+					<p:outputLabel value="#{pre.fecha}" />
 				</p:column>
 
 			</p:dataTable>

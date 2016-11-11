@@ -1,6 +1,7 @@
 package co.edu.eam.ingesoft.pa2.beaute.bos;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.ejb.LocalBean;
 
@@ -20,13 +21,13 @@ public class PremioAfiliadoEJB extends EJBGenerico<PremioAfiliado> {
 		// TODO Auto-generated method stub
 		return PremioAfiliado.class;
 	}
-	
-	public void crear(PremioAfiliado premioAfiliado){
+
+	public void crear(PremioAfiliado premioAfiliado) {
 		dao.crear(premioAfiliado);
 
 	}
-	
-	public PremioAfiliado buscar(Object pk){
+
+	public PremioAfiliado buscar(Object pk) {
 		return dao.buscar(pk);
 	}
 

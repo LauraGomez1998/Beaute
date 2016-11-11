@@ -8,13 +8,19 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "AFILIADOS_PREMIOS")
+@NamedQueries({
+		@NamedQuery(name = AfiliadoPremio.LISTAR_PREMIO_AFILIADO, query = "select p from AfiliadoPremio p where p.afiliado.cedulaAfiliado=?1") })
 public class AfiliadoPremio implements Serializable {
+
+	public static final String LISTAR_PREMIO_AFILIADO = "AfiliadoPremio.listar";
 
 	@Id
 	@Column(name = "CODIGO", length = 50, nullable = false)

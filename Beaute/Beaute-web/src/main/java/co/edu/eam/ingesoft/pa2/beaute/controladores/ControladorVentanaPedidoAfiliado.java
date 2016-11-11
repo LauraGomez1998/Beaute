@@ -20,21 +20,36 @@ import co.edu.eam.ingesoft.pa2.beaute.enumeraciones.CategoriaProductoEnum;
 @Named("pedidoAfiliadoWeb")
 @ViewScoped
 public class ControladorVentanaPedidoAfiliado implements Serializable {
-
+	/**
+	 * EJB de la clase catalogo producto
+	 */
 	@EJB
 	private CatalogoProductoEJB catalogoProductoEJB;
-
+	/**
+	 * EJB de la clase pedido
+	 */
 	@EJB
 	private PedidoEJB pedidoEJB;
-
+	/**
+	 * cantidad del producto
+	 */
 	private int cantidad;
-
+	/**
+	 * lista de productos
+	 */
 	private List<Producto> listaProductos;
-
+	/**
+	 * producto seleccionado
+	 */
 	private Producto productoSeleccionado;
-
+	/**
+	 * lista de productos pedidos
+	 */
 	private List<ProductoDTO> listaProductoPedido;
 
+	/**
+	 * metodo de inicializar
+	 */
 	@PostConstruct
 	public void iniciar() {
 		listaProductoPedido = new ArrayList<>();
@@ -94,6 +109,9 @@ public class ControladorVentanaPedidoAfiliado implements Serializable {
 		}
 	}
 
+	/**
+	 * Accesores y modificadores
+	 */
 	public List<Producto> getListaProductos() {
 		return listaProductos;
 	}

@@ -28,37 +28,59 @@ import co.edu.eam.ingesoft.pa2.beaute.entidades.PremioVenta;
 @ViewScoped
 public class ControladorVentanaAfiliadoPremio implements Serializable {
 
+	/**
+	 * EJB de la clase premio
+	 */
 	@EJB
 	private PremioEJB premioEJB;
-
+	/**
+	 * EJB de la clase Afiliado
+	 */
 	@EJB
 	private AfiliadoEJB afiliadoEJB;
-
+	/**
+	 * EJB de la clase afiliado premio
+	 */
 	@EJB
 	private AfiliadoPremioEJB afiliadoPremioEJB;
-
+	/**
+	 * lista de premios por afiliado
+	 */
 	private List<PremioAfiliado> premiosAfiliados;
-
+	/**
+	 * lista de premios por ventas
+	 */
 	private List<PremioVenta> premiosVentas;
-
+	/**
+	 * activador de combo afiliado
+	 */
 	private boolean activarAfiliado;
-
+	/**
+	 * activador de combo ventas
+	 */
 	private boolean activarVentas;
-
+	/**
+	 * codigo del premio
+	 */
 	private int codigo;
-
+	/**
+	 * cedula del afiliado
+	 */
 	private int afiliado;
-
+	/**
+	 * tipo de premio seleccionado
+	 */
 	private String tipoPremioSeleccionado;
-
+	/**
+	 * premio seleccionado
+	 */
 	private Premio premioSeleccionado;
 
+	/**
+	 * metodo que inicializa
+	 */
 	@PostConstruct
 	public void iniciar() {
-		PremioAfiliado p = new PremioAfiliado("1", "Ni idea", 12, "afiliado");
-		premioEJB.crear(p);
-		PremioVenta pre = new PremioVenta("2", "Ni idea", 12, "venta");
-		premioEJB.crear(pre);
 		listarPremiosA();
 		activarAfiliado = true;
 		activarVentas = false;
@@ -77,7 +99,6 @@ public class ControladorVentanaAfiliadoPremio implements Serializable {
 			} else {
 				premiosVentas.add((PremioVenta) lista.get(i));
 			}
-
 		}
 	}
 
@@ -105,6 +126,9 @@ public class ControladorVentanaAfiliadoPremio implements Serializable {
 		}
 	}
 
+	/**
+	 * metodo para saber que tipo de premio fue seleccionado
+	 */
 	public void tipoPremioSelect() {
 		if (tipoPremioSeleccionado.equals("0")) {
 			activarAfiliado = true;
@@ -115,6 +139,9 @@ public class ControladorVentanaAfiliadoPremio implements Serializable {
 		}
 	}
 
+	/**
+	 * accesores y modificadores
+	 */
 	public boolean isActivarAfiliado() {
 		return activarAfiliado;
 	}

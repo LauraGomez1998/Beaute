@@ -14,7 +14,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "CIUDADES")
 @NamedQueries({ @NamedQuery(name = Ciudad.LISTAR_CIUDADES, query = "select c from Ciudad c") })
-
 public class Ciudad implements Serializable {
  
 	public static final String LISTAR_CIUDADES = "Ciudad.listar"; 

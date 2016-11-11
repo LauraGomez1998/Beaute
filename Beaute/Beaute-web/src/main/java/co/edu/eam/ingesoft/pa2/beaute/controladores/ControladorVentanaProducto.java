@@ -15,35 +15,60 @@ import org.omnifaces.cdi.ViewScoped;
 import co.edu.eam.ingesoft.pa2.beaute.bos.ProductoEJB;
 import co.edu.eam.ingesoft.pa2.beaute.entidades.Producto;
 import co.edu.eam.ingesoft.pa2.beaute.enumeraciones.CategoriaProductoEnum;
- 
+
 @Named("productoWeb")
 @ViewScoped
 public class ControladorVentanaProducto implements Serializable {
 
+	/**
+	 * EJB de la clase producto
+	 */
 	@EJB
 	private ProductoEJB productoEJB;
-
+	/**
+	 * Lista de categorias
+	 */
 	private List<CategoriaProductoEnum> listaCategorias;
-
+	/**
+	 * Codigo del producto
+	 */
 	private String codigo;
-
+	/**
+	 * categoria del producto
+	 */
 	private CategoriaProductoEnum categoria;
-
+	/**
+	 * cantidad del producto
+	 */
 	private int cantidad;
-
+	/**
+	 * precio del producto
+	 */
 	private double precio;
-
+	/**
+	 * estado del producto
+	 */
 	private int estadoSeleccionado;
-
+	/**
+	 * nombre del producto
+	 */
 	private String nombre;
-
+	/**
+	 * caracteristicas del producto
+	 */
 	private String caracteristica;
 
+	/**
+	 * metodo de inicializar
+	 */
 	@PostConstruct
 	public void inicializar() {
 		listaCategorias();
 	}
 
+	/**
+	 * metodo para listar las categorias
+	 */
 	public void listaCategorias() {
 		listaCategorias = new ArrayList<>();
 		CategoriaProductoEnum[] listaCatagoria = CategoriaProductoEnum.values();
@@ -131,6 +156,9 @@ public class ControladorVentanaProducto implements Serializable {
 		}
 	}
 
+	/**
+	 * accesores y modificadores
+	 */
 	public List<CategoriaProductoEnum> getListaCategorias() {
 		return listaCategorias;
 	}

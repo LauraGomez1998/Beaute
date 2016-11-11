@@ -25,42 +25,74 @@ import co.edu.eam.ingesoft.pa2.beaute.entidades.Departamento;
 import co.edu.eam.ingesoft.pa2.beaute.entidades.Pais;
 import co.edu.eam.ingesoft.pa2.beaute.enumeraciones.GeneroAfiliadoEnum;
 import co.edu.eam.ingesoft.pa2.beaute.excepciones.ExcepcionNegocio;
- 
+
 @Named("afiliadoaWeb")
 @ViewScoped
 public class ControladorVentanaAfiliado implements Serializable {
-
+	/**
+	 * EJB de la clase afiliado
+	 */
 	@EJB
 	private AfiliadoEJB afiliadoEJB;
-
+	/**
+	 * EJB de la clase Ciudad
+	 */
 	@EJB
 	private CiudadEJB ciudadEJB;
-
+	/**
+	 * cedula del afiliador
+	 */
 	private int cedulaAfiliador;
-
+	/**
+	 * genero del afiliado
+	 */
 	private GeneroAfiliadoEnum genero;
-
+	/**
+	 * cedula del afiliado
+	 */
 	private int cedulaAfiliado;
-
+	/**
+	 * ciudad del afiliado
+	 */
 	private Ciudad ciudadSeleccionada;
-
+	/**
+	 * telefono del afiliado
+	 */
 	private int telefono;
-
+	/**
+	 * usuario del afiliado
+	 */
 	private String usuario;
-
+	/**
+	 * contrasenia del afiliado
+	 */
 	private String contrasenia;
-
+	/**
+	 * nombre del afiliado
+	 */
 	private String nombre;
-
+	/**
+	 * apellido del afiliado
+	 */
 	private String apellido;
-
+	/**
+	 * lista de ciudades
+	 */
 	private List<Ciudad> listaCiudades;
-
+	/**
+	 * lista de generos
+	 */
 	private List<GeneroAfiliadoEnum> listaGeneros;
 
+	/**
+	 * constructor vacio
+	 */
 	public ControladorVentanaAfiliado() {
 	}
 
+	/**
+	 * metodo de inicializar
+	 */
 	@PostConstruct
 	public void inicializar() {
 		listaCiudades = ciudadEJB.listarCiudades();
@@ -96,6 +128,9 @@ public class ControladorVentanaAfiliado implements Serializable {
 		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 
+	/**
+	 * metodo que busca un afiliado
+	 */
 	public void buscarAfiliado() {
 		Afiliado afiliado = afiliadoEJB.buscar(cedulaAfiliado);
 		if (afiliado != null) {
@@ -158,6 +193,10 @@ public class ControladorVentanaAfiliado implements Serializable {
 		}
 	}
 
+	/**
+	 * accesores y modificadores
+	 * 
+	 */
 	public int getCedulaAfiliador() {
 		return cedulaAfiliador;
 	}
