@@ -29,11 +29,18 @@ public class PaisEJB extends EJBGenerico<Pais> {
 		try {
 
 			dao.crear(pais);
-		
-
-		} catch (Exception e) {
-			System.out.println("EJB----------------------------------------------");
+		}catch(Exception e){
+			Throwable t=e;
+			System.out.println("EN EL EJB:"+e.getClass()+"-"+e.getMessage());
+			while(t.getCause() instanceof java.sql.SQLException){
+				t=e.getCause();
+				if(t==null){
+					break;
+				}
+			}
 		}
+
+		
 	}
 
 }
