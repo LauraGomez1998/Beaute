@@ -1,0 +1,44 @@
+
+<div class=container ng-controller="clienteController">
+
+	<div class="row" align="center">
+		<h3 class="text-center">Datos Cliente</h3>
+
+		<div class="form-group">
+			<label class="control-label col-sm-2">Cedula</label> <input
+				type="number" align="center" ng-model="cedula"> <br /> <label
+				class="control-label col-sm-2">Nombre</label> <input type="text"
+				align="center" ng-model="nombre"> <br /> <label
+				class="control-label col-sm-2">Apellido</label> <input type="text"
+				ng-model="apellido"> <br /> <label
+				class="control-label col-sm-2">Ciudad</label> <select
+				id="sel1" ng-model="ciudad"
+				ng-options="c as c.nombre for c in ciudades">
+				<option value="">Seleccione una opcion</option>
+			</select> <br /> <label class="control-label col-sm-2">Telefono</label> <input
+				type="number" ng-model="telefono"> <br /> <label
+				class="control-label col-sm-2">Genero</label> <select
+				id="sel1" ng-model="genero">
+				
+				<option value="MASCULINO">MASCULINO</option>
+				<option value="FEMENINO">FEMENINO</option>
+			</select> <br /> <label class="control-label col-sm-2">Usuario</label> <input
+				type="text" align="center" ng-model="usuario"> <br /> <label
+				class="control-label col-sm-2" >contrasenia</label> <input
+				type="password" align="center" ng-model="contrasenia"> <br>
+				<table><tr><td>
+			<button type="button" class="btn btn-primary center-block"
+				ng-click="crear()">Crear</button></td><td>
+			<button type="button" class="btn btn-primary center-block"
+				ng-click="buscar()">Buscar</button></td><td>
+			<button type="button" class="btn btn-primary center-block"
+				ng-click="editar()">Editar</button></td><td>
+			<button type="button" class="btn btn-primary center-block"
+				ng-click="eliminar()">Elimnar</button></td>
+				</tr>
+				</table>
+		</div>
+
+
+	</div>
+</div>
