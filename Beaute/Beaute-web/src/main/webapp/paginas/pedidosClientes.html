@@ -1,26 +1,5 @@
-<!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:q="http://xmlns.jcp.org/jsf/passthrough"
-	xmlns:p="http://primefaces.org/ui"
-	template="/WEB-INF/templates/default.xhtml">
-<head>
-<link id="template-file" href="/WEB-INF/templates/default.xhtml"
-	rel="default" />
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
-<body>
 
-	<div class=container ng-controller="#">
+	<div class=container ng-controller="pedidosController">
 
 
 
@@ -28,17 +7,16 @@
 			<h3 class="text-center">Categorias</h3>
 		</em>
 		<div class="row" align="center">
-			<div class="col-md-3">
-				<p>Salud</p>
+			<div class="col-md-3" ng-click="listarProductos()">
+				<p ng-model="categoria">SALUD</p>
 				<img src="../resources/productos/limpieza.jpg" alt="Pulpit Rock"
 					style="width: 100px; height: 100px">
 			</div>
-			<div class="col-md-3">
-				<p>Maquillaje</p>
+			<div class="col-md-3" >
+				<p ng-model="categoria">POLVOS</p>
 				<img src="../resources/productos/maquillaje.jpg"
-					alt="Moustiers Sainte Marie" style="width: 100px; height: 100px">
+					alt="Moustiers Sainte Marie" style="width: 100px; height: 100px" ng-click="listarProductos('POLVOS')">
 			</div>
-
 			<div class="col-md-3">
 				<p>Ropa</p>
 				<img src="../resources/productos/ropaa.jpg" alt="Cinque Terre"
@@ -53,23 +31,21 @@
 		</div>
 
 		<div class="row">
-			<label for="sel1">Categoria 1</label> <select class="form-control"
-				id="sel1">
-				<option>1</option>
-				<option>2</option>
-				<option>3</option>
-				<option>4</option>
+			<label for="sel1">Categoria 1</label>
+			 <select class="form-control" id="sel1" ng-model="seleccionado" ng-options="p as p.nombre for p in productos" >
+			<option value="">Seleccione una opcion</option>
 			</select>
 			<div class="form-group">
 				<br />
 
 			</div>
 		</div>
+		
 
 		<div>
-			<label for="usr" class="control-label ">Cantidad</label> <input
-				type="text" id="usr">
-			<button type="button" class="btn btn-primary">Agregar</button>
+			<label for="usr" class="control-label">Cantidad</label> <input
+				type="number" step="any" id="usr" min="0" ng-model="cantidad">
+			<button type="button" class="btn btn-primary" ng-click="llenarTabla()">Agregar</button>
 
 		</div>
 
@@ -85,7 +61,7 @@
 			<table class="table">
 				<thead>
 					<tr>
-						<th>Codigo</th>
+					<th>Codigo</th>
 						<th>Nombre</th>
 						<th>Cantidad</th>
 
@@ -93,16 +69,16 @@
 				</thead>
 				<tbody>
 
-					<tr ng-repeat="p in productos">
-						<td>{{p.codigo}}</td>
-						<td>{{p.nombre}}</td>
-						<td>{{p.cantidad}}</td>
+					<tr ng-repeat="l in listaTabla" ng-click="eliminarTarea(l)">
+						<td>{{l.codigo}}</td>
+						<td>{{l.nombre}}</td>
+						<td>{{l.cantidad}}</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 
-		<button type="button" class="btn btn-primary center-block">Pedir</button>
+		<button type="button" class="btn btn-primary center-block" ng-click="realizarPedido()">Pedir</button>
 		<br /> <br />
 		<div class="row" align="center">
 			<h3 class="text-center">Datos Cliente</h3>
@@ -130,7 +106,3 @@
 
 		</div>
 	</div>
-
-
-</body>
-</html>

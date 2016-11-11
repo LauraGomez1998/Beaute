@@ -7,6 +7,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -22,6 +24,7 @@ import javax.persistence.Temporal;
 public class PedidoCatalogo implements Serializable {
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "CODIGO", length = 20)
 	private int codigo;
 
@@ -44,9 +47,8 @@ public class PedidoCatalogo implements Serializable {
 	public PedidoCatalogo() {
 	}
 
-	public PedidoCatalogo(int codigo, Afiliado afiliado, Cliente cliente, Date fechaPedido, TipoPagoEnum tipoPago) {
+	public PedidoCatalogo(Afiliado afiliado, Cliente cliente, Date fechaPedido, TipoPagoEnum tipoPago) {
 		super();
-		this.codigo = codigo;
 		this.afiliado = afiliado;
 		this.cliente = cliente;
 		this.fechaPedido = fechaPedido;

@@ -40,7 +40,7 @@ public class PruebaEJBProducto {
 		try {
 			Producto pro = new Producto();
 
-			pro.setCategoria(CategoriaProductoEnum.JABONES);
+			//pro.setCategoria(CategoriaProductoEnum.JABONES);
 			pro.setCantidad(5);
 			pro.setCaracteristica("caracteristica_prueba");
 			pro.setCodigo("716523");
