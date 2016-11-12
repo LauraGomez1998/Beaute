@@ -40,7 +40,34 @@
 
 			</div>
 		</div>
+		<div style="float: right;">
+		<div class="row">
+			<label for="sel1">Ciudad</label>
+			 <select class="form-control" id="sel1" ng-model="ciudad"
+				ng-options="c as c.nombre for c in ciudades"  ng-change="listarAfiliados(ciudad)">
+			<option value="">Seleccione una opcion</option>
+			</select>
+			<div class="form-group">
+				<br />
+
+			</div>
+		</div>
 		
+		<div class="row">
+			<label for="sel1">Vendedor</label>
+			 <select class="form-control" id="sel1" ng-model="afiliado"
+				ng-options="c as c.nombre for c in afiliados" >
+			<option value="">Seleccione una opcion</option>
+			</select>
+			<div class="form-group">
+				<br />
+
+			</div>
+		</div>
+		
+		<label for="usr" class="control-label">Cuotas</label> <input
+				type="number" step="any" id="usr" min="1" max="6" ng-model="cuotas">
+		</div>
 
 		<div>
 			<label for="usr" class="control-label">Cantidad</label> <input
@@ -84,24 +111,6 @@
 			<h3 class="text-center">Datos Cliente</h3>
 
 
-			<div class="form-group">
-				<label for="usr" class="control-label col-sm-2">Cedula</label> 
-				<input type="text" id="usr" align="center">
-				<br/>
-				<label for="usr" class="control-label col-sm-2">Nombre</label> 
-				<input type="text" id="usr">
-				<br/>
-				<label for="usr" class="control-label col-sm-2">Apellido</label> 
-				<input type="text" id="usr">
-				<br/>
-				<label for="usr" class="control-label col-sm-2">Ciudad</label> 
-				<input type="text" id="usr">
-				<br/>
-				<label for="usr" class="control-label col-sm-2">Telefono</label> 
-				<input type="text" id="usr">
-				<br/>
-
-			</div>
 
 
 		</div>

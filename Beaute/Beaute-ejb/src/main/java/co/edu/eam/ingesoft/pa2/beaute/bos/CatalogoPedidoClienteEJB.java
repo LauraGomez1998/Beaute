@@ -1,11 +1,14 @@
 package co.edu.eam.ingesoft.pa2.beaute.bos;
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+import co.edu.eam.ingesoft.pa2.beaute.dto.ProductoDTO;
 import co.edu.eam.ingesoft.pa2.beaute.entidades.Afiliado;
 import co.edu.eam.ingesoft.pa2.beaute.entidades.CatalogoPedidoCliente;
 import co.edu.eam.ingesoft.pa2.beaute.entidades.CatalogoProducto;
@@ -32,6 +35,9 @@ public class CatalogoPedidoClienteEJB extends EJBGenerico<CatalogoPedidoCliente>
 
 	@EJB
 	private AfiliadoEJB AfiliadoEjb;
+	
+	@EJB
+	private CuotasEJB cuotaEjb;
 
 	@EJB
 	private CatalogoProductoEJB cataProductoEjb;
@@ -39,7 +45,36 @@ public class CatalogoPedidoClienteEJB extends EJBGenerico<CatalogoPedidoCliente>
 	@EJB
 	private PedidoCatalogoEJB pedidoCatalogoEjb;
 
+	private List<ListaProductoPedidoDTO> listaProductoPedido;
+
 	public boolean RealizarPedidoCliente(PedidoClienteDTO dto) {
+		listaProductoPedido =  new ArrayList<>();
+		
+		for (ListaProductoPedidoDTO lista : dto.getListaProductoPedidoDTO()) {
+
+			if (lista != null && lista.getCantidad() > 0) {
+				if (listaProductoPedido.isEmpty()) {
+					ListaProductoPedidoDTO productoAgregar = new ListaProductoPedidoDTO(lista.getCodigo(),
+							lista.getCantidad());
+					listaProductoPedido.add(productoAgregar);
+				} else {
+					boolean encontro = false;
+					for (int i = 0; i < listaProductoPedido.size(); i++) {
+						if (listaProductoPedido.get(i).getCodigo().equalsIgnoreCase(lista.getCodigo())) {
+							int cant = listaProductoPedido.get(i).getCantidad();
+							listaProductoPedido.get(i).setCantidad(cant + lista.getCantidad());
+							encontro = true;
+						}
+					}
+					if (!encontro) {
+						ListaProductoPedidoDTO productoAgregar = new ListaProductoPedidoDTO(lista.getCodigo(),
+								lista.getCantidad());
+						listaProductoPedido.add(productoAgregar);
+					}
+				}
+			}
+		}
+
 		if (dto != null) {
 			Cliente cliente = clienteEjb.buscar(dto.getCliente());
 			Afiliado afiliado = AfiliadoEjb.buscar(dto.getAfiliado());
@@ -47,13 +82,16 @@ public class CatalogoPedidoClienteEJB extends EJBGenerico<CatalogoPedidoCliente>
 			if (dto.getCuotas() == 1) {
 				pedidoCatalogo = new PedidoCatalogo(afiliado, cliente, GregorianCalendar.getInstance().getTime(),
 						TipoPagoEnum.CONTADO);
+				pedidoCatalogoEjb.crear(pedidoCatalogo);
 			} else {
 				pedidoCatalogo = new PedidoCatalogo(afiliado, cliente, GregorianCalendar.getInstance().getTime(),
 						TipoPagoEnum.CREDITO);
+				pedidoCatalogoEjb.crear(pedidoCatalogo);
 				Cuota cuota = new Cuota(pedidoCatalogo, dto.getCuotas());
+				cuotaEjb.crear(cuota);
 			}
 
-			for (ListaProductoPedidoDTO lista : dto.getListaProductoPedidoDTO()) {
+			for (ListaProductoPedidoDTO lista : listaProductoPedido) {
 				CatalogoProducto catalogo = cataProductoEjb.buscarCatalogoProducto(lista.getCodigo());
 				cataProductoEjb.crear(catalogo);
 				CatalogoPedidoCliente catalogoCliente = new CatalogoPedidoCliente(catalogo, pedidoCatalogo,

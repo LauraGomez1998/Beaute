@@ -10,9 +10,11 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import co.edu.eam.ingesoft.pa2.beaute.bos.AfiliadoEJB;
 import co.edu.eam.ingesoft.pa2.beaute.bos.CatalogoPedidoClienteEJB;
 import co.edu.eam.ingesoft.pa2.beaute.bos.CatalogoProductoEJB;
-
+import co.edu.eam.ingesoft.pa2.beaute.entidades.Afiliado;
+import co.edu.eam.ingesoft.pa2.beaute.entidades.Ciudad;
 import co.edu.eam.ingesoft.pa2.beaute.entidades.Producto;
 import co.edu.eam.ingesoft.pa2.beaute.enumeraciones.CategoriaProductoEnum;
 import co.edu.eam.ingesoft.pa2.beaute.util.PedidoClienteDTO;
@@ -29,6 +31,9 @@ public class PedidoRest {
 	
 	@EJB
 	private CatalogoPedidoClienteEJB catapedEjb;
+	
+	@EJB
+	private AfiliadoEJB afiliadoEjb;
 
 	public PedidoRest() {
 		// TODO Auto-generated constructor stub
@@ -70,6 +75,22 @@ public class PedidoRest {
 			return new RespuestaDTO(lista);
 		} else {
 			return new RespuestaDTO(null, "No hay prodcutos con esa categoria", "-2");
+		}
+
+	}
+	
+	
+	@Path("/listarAfiliados")
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	public RespuestaDTO listarAfiliados(@FormParam(value = "codigo") String codigo) {
+		
+		List<Afiliado> lista = afiliadoEjb.listarAfiliados(codigo);
+		if (!lista.isEmpty()) {
+			return new RespuestaDTO(lista);
+		} else {
+			return new RespuestaDTO(null, "No hay vendedores en esta ciudad", "-2");
 		}
 
 	}

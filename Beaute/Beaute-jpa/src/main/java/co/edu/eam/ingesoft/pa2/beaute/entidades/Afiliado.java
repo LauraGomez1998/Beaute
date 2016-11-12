@@ -11,6 +11,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -20,8 +22,11 @@ import co.edu.eam.ingesoft.pa2.beaute.enumeraciones.NivelAfiliadoEnum;
 
 @Entity
 @Table(name = "AFILIADOS")
+@NamedQueries({ @NamedQuery(name = Afiliado.LISTAR_AFILADOS_CIUDAD, query = "select a from Afiliado a where a.ciudad.codigo =?1") }) 	
 public class Afiliado implements Serializable {
 
+	public static final String LISTAR_AFILADOS_CIUDAD = "Afiliado.listarAfiliado"; 
+	
 	@Id
 	@Column(name = "CEDULA_AFILIADO", length = 50)
 	private int cedulaAfiliado;

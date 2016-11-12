@@ -1,19 +1,20 @@
 app.controller("pedidosController", function($scope,$http,$sessionStorage) {
-	
+	$scope.cantidad=1;
 	$scope.cuotas=1;
 	$scope.cliente=1;
-	$scope.afiliado=1;
-	$scope.cantidad=0;
+	$scope.afiliado=0;
+	$scope.ciudad = '';
 	$scope.seleccionado='';
 	$scope.productos= [];
 	$scope.listaTabla= [];
 	$scope.lista= [];
 	$sessionStorage = $scope.cliente;
+	$scope.ciudades = [];
+	$scope.afiliados = [];
 	
 	
 	$scope.listarProductos = function(VALOR) {
 		
-		alert("entro 22");
 		
 		var dato2 = $.param({
 			categoria : VALOR
@@ -41,12 +42,74 @@ app.controller("pedidosController", function($scope,$http,$sessionStorage) {
 
 	}
 	
+	
+	
+	
+$scope.listarAfiliados = function(ciudad) {
+		
+		
+		var dato2 = $.param({
+			codigo : ciudad.codigo
+		});
+		alert(dato2);
+		$http({
+			url : 'rest/pedido/listarAfiliados',
+			method : "POST",
+
+			data : dato2,
+			headers : {
+				"Content-Type" : "application/x-www-form-urlencoded"
+			}
+		}).success(function(data, status, headers, config) {
+			if (data.codigo == '00') {
+				$scope.afiliados = data.obj;
+			} else {
+				alert(data.mensaje);
+			}
+
+		}).error(function(data, status, headers, config) {
+			
+			alert('error::' + data.mensaje);
+		});
+
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	$scope.listarCiudades = function() {
+
+		$http({
+			url : 'rest/cliente/listarCiudades',
+			method : "GET",
+		}).success(function(data, status, headers, config) {
+			if (data.codigo == '00') {
+				$scope.ciudades = data.obj;
+			} else {
+				alert(data.mensaje);
+			}
+
+		}).error(function(data, status, headers, config) {
+
+			alert('error::' + data.mensaje);
+		});
+
+	}
+	
+	
+	
+	
 $scope.realizarPedido = function() {
 		
 	alert("entroo");
 		var dato3 = JSON.stringify({
 			listaProductoPedidoDTO : $scope.lista,
-			afiliado : $scope.afiliado,
+			afiliado : $scope.afiliado.cedulaAfiliado,
 			cliente : $scope.cliente,
 			cuotas : $scope.cuotas
 		});
@@ -63,6 +126,8 @@ $scope.realizarPedido = function() {
 		}).success(function(data, status, headers, config) {
 			if (data.codigo == '00') {
 				alert(data.mensaje);
+				$scope.listaTabla= [];
+				$scope.lista= [];
 			} else {
 				alert(data.mensaje);
 			}
@@ -83,7 +148,11 @@ $scope.realizarPedido = function() {
 			nombre : $scope.seleccionado.nombre,
 			cantidad : $scope.cantidad
 		});
-			$scope.listaTabla.push(dato);	
+		
+		
+				$scope.listaTabla.push(dato);
+			
+				
 			
 			var dato2 = ({
 				codigo : $scope.seleccionado.codigo,
@@ -100,6 +169,11 @@ $scope.realizarPedido = function() {
     }*/
 	
 	
+	$scope.iniciar = function(){
+		$scope.listarCiudades();
+	}
+
+	$scope.iniciar();
 	
 	
 });

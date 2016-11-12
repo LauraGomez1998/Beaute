@@ -13,13 +13,11 @@ app.controller("clienteController", function($scope, $http, $sessionStorage) {
 	
 	$scope.listarCiudades = function() {
 
-		alert("entro 22");
 		$http({
 			url : 'rest/cliente/listarCiudades',
 			method : "GET",
 		}).success(function(data, status, headers, config) {
 			if (data.codigo == '00') {
-				alert("entro 2");
 				$scope.ciudades = data.obj;
 			} else {
 				alert(data.mensaje);
