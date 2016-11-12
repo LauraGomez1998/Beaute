@@ -22,12 +22,16 @@ public class PedidoCatalogoEJB extends EJBGenerico<PedidoCatalogo> {
 		return PedidoCatalogo.class;
 	}
 
-	public void crear(PedidoCatalogo catalogo){
+	public void crear(PedidoCatalogo catalogo) {
 		dao.crear(catalogo);
 
 	}
-	
-	public PedidoCatalogo buscar(Object pk){
+
+	public void editar(PedidoCatalogo catalogo) {
+		dao.editar(catalogo);
+	}
+
+	public PedidoCatalogo buscar(Object pk) {
 		return dao.buscar(pk);
 	}
 }

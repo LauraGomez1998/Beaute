@@ -10,57 +10,72 @@
 	<ui:define name="contenido">
 		<h:form id="form2" prependId="false"
 			style="display: flex; justify-content:center; align-items:center; flex-direction:column;">
-	<h1>Pedidos por hacer</h1>
+			<h1>Pedidos por hacer</h1>
 			<br />
-			<p:dataTable var="car" value="pedidos">
+			<p:dataTable var="pedido"
+				value="#{aprobarPedidoWeb.pedidosPorAprobar}">
 				<p:column headerText="Cedula">
-					<h:outputText value="#" />
+					<h:outputText value="#{pedido.pedido.cliente.cedula}" />
 				</p:column>
 
 				<p:column headerText="Nombre">
-					<h:outputText value="#" />
+					<h:outputText
+						value="#{pedido.pedido.cliente.nombre} #{pedido.pedido.cliente.apellido}" />
 				</p:column>
 
 				<p:column headerText="Fecha">
-					<h:outputText value="#" />
+					<h:outputText value="#{pedido.pedido.fechaPedido}" />
 				</p:column>
 
 				<p:column headerText="Codigo Pedido">
-					<h:outputText value="#" />
+					<h:outputText value="#{pedido.pedido.codigo}" />
 				</p:column>
 
 				<p:column headerText="Cuotas">
-					<h:outputText value="#" />
+					<h:outputText value="#{pedido.cuota.numeroCuotas}" />
 				</p:column>
 
 
 			</p:dataTable>
 			<br />
-			<p:commandButton action="#" value="Ver Productos" update="form2"
-				id="ver" />
+			<p:panelGrid columns="2">
+				<h:outputLabel value="Codigo del pedido" />
+				<h:inputText value="#{aprobarPedidoWeb.codigoPedido}" />
+			</p:panelGrid>
+
+			<div>
+				<f:ajax event="click" render="panelGroup" execute="@this" />
+				<p:commandButton action="#{aprobarPedidoWeb.verProductos()}"
+					value="Ver Productos" update="form2" id="ver" />
+			</div>
+
 
 			<br />
 			<br />
 			<h4>Productos</h4>
-			<p:dataTable var="car" value="Productos">
-				<p:column headerText="Codigo">
-					<h:outputText value="#" />
-				</p:column>
+			<h:panelGroup id="panelGroup">
+				<p:dataTable var="catalogo"
+					value="#{aprobarPedidoWeb.listaPedidoCatalogo()}">
+					<p:column headerText="Codigo">
+						<h:outputText value="#{catalogo.catalogo.producto.codigo}" />
+					</p:column>
 
-				<p:column headerText="Nombre">
-					<h:outputText value="#" />
-				</p:column>
+					<p:column headerText="Nombre">
+						<h:outputText value="#{catalogo.catalogo.producto.nombre}" />
+					</p:column>
 
-				<p:column headerText="Cantidad">
-					<h:outputText value="#" />
-				</p:column>
+					<p:column headerText="Cantidad">
+						<h:outputText value="#{catalogo.cantidad}" />
+					</p:column>
 
-			</p:dataTable>
+				</p:dataTable>
+			</h:panelGroup>
 			<br />
-			<p:commandButton action="#" value="Pedir" update="form2" id="pedir" />
-
-
-
+			<div>
+				<f:ajax event="click" render="panelGroup" execute="@this" />
+				<p:commandButton action="#{aprobarPedidoWeb.pedir()}" value="Pedir"
+					update="form2" id="pedir" />
+			</div>
 		</h:form>
 	</ui:define>
 </ui:composition>

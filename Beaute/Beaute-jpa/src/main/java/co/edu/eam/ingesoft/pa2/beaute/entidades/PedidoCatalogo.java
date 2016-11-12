@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.TemporalType;
 
@@ -21,10 +23,13 @@ import javax.persistence.Temporal;
 
 @Entity
 @Table(name = "PEDIDOS_CATALOGOS")
+@NamedQueries({
+		@NamedQuery(name = PedidoCatalogo.LISTAR_PEDIDOS_AFI, query = "select p from PedidoCatalogo p where p.afiliado.cedulaAfiliado=?1 and p.estadoPedido=false") })
 public class PedidoCatalogo implements Serializable {
 
+	public static final String LISTAR_PEDIDOS_AFI = "PedidoCatalogo.listar";
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "CODIGO", length = 20)
 	private int codigo;
 
@@ -44,15 +49,21 @@ public class PedidoCatalogo implements Serializable {
 	@Column(name = "TIPO_PAGO", length = 10, nullable = false)
 	private TipoPagoEnum tipoPago;
 
+	@Column(name = "ESTADO_PEDIDO")
+	private boolean estadoPedido;
+
 	public PedidoCatalogo() {
 	}
 
-	public PedidoCatalogo(Afiliado afiliado, Cliente cliente, Date fechaPedido, TipoPagoEnum tipoPago) {
+	public PedidoCatalogo(int codigo, Afiliado afiliado, Cliente cliente, Date fechaPedido, TipoPagoEnum tipoPago,
+			boolean estadoPedido) {
 		super();
+		this.codigo = codigo;
 		this.afiliado = afiliado;
 		this.cliente = cliente;
 		this.fechaPedido = fechaPedido;
 		this.tipoPago = tipoPago;
+		this.estadoPedido = estadoPedido;
 	}
 
 	public int getCodigo() {
@@ -93,6 +104,14 @@ public class PedidoCatalogo implements Serializable {
 
 	public void setTipoPago(TipoPagoEnum tipoPago) {
 		this.tipoPago = tipoPago;
+	}
+
+	public boolean isEstadoPedido() {
+		return estadoPedido;
+	}
+
+	public void setEstadoPedido(boolean estadoPedido) {
+		this.estadoPedido = estadoPedido;
 	}
 
 }

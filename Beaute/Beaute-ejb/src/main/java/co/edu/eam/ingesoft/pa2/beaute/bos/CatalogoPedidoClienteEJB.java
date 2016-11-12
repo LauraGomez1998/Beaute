@@ -1,6 +1,7 @@
 package co.edu.eam.ingesoft.pa2.beaute.bos;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import co.edu.eam.ingesoft.pa2.beaute.entidades.CatalogoProducto;
 import co.edu.eam.ingesoft.pa2.beaute.entidades.Cliente;
 import co.edu.eam.ingesoft.pa2.beaute.entidades.Cuota;
 import co.edu.eam.ingesoft.pa2.beaute.entidades.PedidoCatalogo;
+import co.edu.eam.ingesoft.pa2.beaute.entidades.Producto;
 import co.edu.eam.ingesoft.pa2.beaute.enumeraciones.TipoPagoEnum;
 import co.edu.eam.ingesoft.pa2.beaute.implementacion.EJBGenerico;
 import co.edu.eam.ingesoft.pa2.beaute.util.ListaProductoPedidoDTO;
@@ -35,7 +37,7 @@ public class CatalogoPedidoClienteEJB extends EJBGenerico<CatalogoPedidoCliente>
 
 	@EJB
 	private AfiliadoEJB AfiliadoEjb;
-	
+
 	@EJB
 	private CuotasEJB cuotaEjb;
 
@@ -47,9 +49,17 @@ public class CatalogoPedidoClienteEJB extends EJBGenerico<CatalogoPedidoCliente>
 
 	private List<ListaProductoPedidoDTO> listaProductoPedido;
 
+	public List<PedidoCatalogo> listarPedidosAfiliado(int cedulaAfiliado) {
+		return dao.ejecutarNamedQuery(PedidoCatalogo.LISTAR_PEDIDOS_AFI, cedulaAfiliado);
+	}
+
+	public List<CatalogoPedidoCliente> listaProductosPedido(int pedido) {
+		return dao.ejecutarNamedQuery(CatalogoPedidoCliente.LISTAR_PRODUCTOS_PEDIDO, pedido);
+	}
+
 	public boolean RealizarPedidoCliente(PedidoClienteDTO dto) {
-		listaProductoPedido =  new ArrayList<>();
-		
+		listaProductoPedido = new ArrayList<>();
+
 		for (ListaProductoPedidoDTO lista : dto.getListaProductoPedidoDTO()) {
 
 			if (lista != null && lista.getCantidad() > 0) {
@@ -80,14 +90,14 @@ public class CatalogoPedidoClienteEJB extends EJBGenerico<CatalogoPedidoCliente>
 			Afiliado afiliado = AfiliadoEjb.buscar(dto.getAfiliado());
 			PedidoCatalogo pedidoCatalogo;
 			if (dto.getCuotas() == 1) {
-				pedidoCatalogo = new PedidoCatalogo(afiliado, cliente, GregorianCalendar.getInstance().getTime(),
-						TipoPagoEnum.CONTADO);
+				pedidoCatalogo = new PedidoCatalogo(1, afiliado, cliente, Calendar.getInstance().getTime(),
+						TipoPagoEnum.CONTADO, false);
 				pedidoCatalogoEjb.crear(pedidoCatalogo);
 			} else {
-				pedidoCatalogo = new PedidoCatalogo(afiliado, cliente, GregorianCalendar.getInstance().getTime(),
-						TipoPagoEnum.CREDITO);
+				pedidoCatalogo = new PedidoCatalogo(1, afiliado, cliente, Calendar.getInstance().getTime(),
+						TipoPagoEnum.CREDITO, false);
 				pedidoCatalogoEjb.crear(pedidoCatalogo);
-				Cuota cuota = new Cuota(pedidoCatalogo, dto.getCuotas());
+				Cuota cuota = new Cuota(1, pedidoCatalogo, dto.getCuotas());
 				cuotaEjb.crear(cuota);
 			}
 
