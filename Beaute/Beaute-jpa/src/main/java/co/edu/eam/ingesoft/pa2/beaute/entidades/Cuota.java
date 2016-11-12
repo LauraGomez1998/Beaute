@@ -9,11 +9,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "CUOTAS")
+@NamedQueries({ @NamedQuery(name = Cuota.LISTAR_CUOTAS, query = "select c from Cuota c where c.pedidoCatalogo=?1") })
 public class Cuota implements Serializable {
+
+	public static final String LISTAR_CUOTAS = "Cuotas.listar";
 
 	@Id
 	@Column(name = "CODIGO", length = 50)
@@ -29,11 +34,16 @@ public class Cuota implements Serializable {
 	public Cuota() {
 	}
 
-	public Cuota(PedidoCatalogo pedidoCatalogo, int numeroCuotas) {
+	
+
+	public Cuota(int codigo, PedidoCatalogo pedidoCatalogo, int numeroCuotas) {
 		super();
+		this.codigo = codigo;
 		this.pedidoCatalogo = pedidoCatalogo;
 		this.numeroCuotas = numeroCuotas;
 	}
+
+
 
 	public int getCodigo() {
 		return codigo;

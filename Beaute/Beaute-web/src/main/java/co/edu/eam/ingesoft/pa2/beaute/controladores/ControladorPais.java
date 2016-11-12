@@ -1,8 +1,11 @@
 package co.edu.eam.ingesoft.pa2.beaute.controladores;
 
+import java.io.IOException;
 import java.io.Serializable;
+import java.sql.SQLException;
 
 import javax.ejb.EJB;
+import javax.ejb.EJBTransactionRolledbackException;
 import javax.inject.Named;
 
 import org.omnifaces.cdi.ViewScoped;
@@ -19,12 +22,36 @@ public class ControladorPais implements Serializable {
 
 	public void crear() {
 		try {
-			Pais pais = new Pais(1, "Colombia");
+			Pais pais = new Pais(1, "Argentina");
 			paisEJB.crear(pais);
 		} catch (Exception e) {
-			System.out.println("excepcion:"+e.getClass());
-			e.printStackTrace();
+			Throwable t = e;
+			while (!(t.getCause() instanceof SQLException)) {
+				t = t.getCause();
+				if (t == null) {
+					break;
+				}
+				if (t.getCause() instanceof SQLException) {
+					SQLException sql = (SQLException) t.getCause();
+					System.out.println(" ----------------------");
+					if (sql.getErrorCode() == 20001) {
+						
+						System.out.println(sql.getMessage() + " ----------------------");
+					}
+				}
+			}
+
+			
+			// while (true) {
+			// t = t.getCause();
+			// if (t.getCause() instanceof SQLException) {
+			// break;
+			// }
+			// System.out.println(t.getCause());
+			// if (t == null) {
+			// break;
+			// }
+			// }
 		}
 	}
-
 }
