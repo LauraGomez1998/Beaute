@@ -14,7 +14,10 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "CATALOGOS")
+@NamedQueries({ @NamedQuery(name=Catalogo.LISTAR_CATALOGO, query="Select c from Catalogo c") })
 public class Catalogo implements Serializable {
+	
+	public static final String LISTAR_CATALOGO = "Catalogo.listar";
 
 	@Id
 	@Column(name = "CODIGO", length = 20)

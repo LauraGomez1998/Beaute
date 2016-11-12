@@ -12,29 +12,29 @@
 			style="display: flex; justify-content:center; align-items:center; flex-direction:column;">
 
 			<h1>Resgistrar Catalogo</h1>
-
-
 			<br />
 			<br />
 			<h:panelGrid columns="2" id="contenedor">
 
 				<p:outputLabel value="Codigo" for="cod" />
-				<h:inputText value="" id="cod" required="true" />
+				<h:inputText value="#{catalogoWeb.codigo}" id="cod" required="true" />
 
-				<p:outputLabel value="Producto" for="prod" />
-				<h:inputText value="" id="prod" required="true" />
-				
 				<p:outputLabel value="Fecha Vigencia" for="vig" />
-				<p:calendar id="vig" value="#{calendarView.date9}" pattern="dd-MM-yyyy" mask="true" />
-				
+				<p:calendar id="vig" value="#{catalogoWeb.fechaVigencia}"
+					pattern="dd-MM-yyyy" mask="true" />
+
 				<p:outputLabel value="Unidades" for="unid" />
-				<h:inputTextarea value="" id="unid" required="true" />
+				<h:inputTextarea value="#{catalogoWeb.unidades}" id="unid"
+					required="true" />
 
 			</h:panelGrid>
 			<br />
-			<p:commandButton action="#" value="Registrar" update="form2"
-				id="registrar" />
-
+			<h:panelGrid columns="2">
+				<p:commandButton action="#{catalogoWeb.crear()}" value="Registrar"
+					update="form2" id="registrar" />
+				<p:commandButton action="#{catalogoWeb.buscar()}" value="Buscar"
+					update="form2" id="buscar" />
+			</h:panelGrid>
 		</h:form>
 	</ui:define>
 </ui:composition>

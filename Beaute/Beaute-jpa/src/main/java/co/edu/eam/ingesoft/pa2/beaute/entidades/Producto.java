@@ -10,13 +10,18 @@ import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import co.edu.eam.ingesoft.pa2.beaute.enumeraciones.CategoriaProductoEnum;
 
 @Entity
 @Table(name = "PRODUCTOS")
+@NamedQueries({ @NamedQuery(name = Producto.LISTAR_PRODUCTOS, query = "Select p from Producto p where p.estado=true") })
 public class Producto implements Serializable {
+
+	public static final String LISTAR_PRODUCTOS = "Producto.listar";
 
 	@Id
 	@Column(name = "CODIGO", length = 20)

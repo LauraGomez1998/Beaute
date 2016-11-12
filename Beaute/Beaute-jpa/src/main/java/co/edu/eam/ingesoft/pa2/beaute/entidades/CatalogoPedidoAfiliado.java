@@ -17,7 +17,6 @@ import co.edu.eam.ingesoft.pa2.beaute.pks.CatalogoPedidoAfiliadoPK;
 @Table(name = "CATALOGO_PEDIDO_AFI")
 @IdClass(value = CatalogoPedidoAfiliadoPK.class)
 public class CatalogoPedidoAfiliado implements Serializable {
-
 	@Id
 	@ManyToOne
 	@JoinColumns({ @JoinColumn(name = "CATALOGO", referencedColumnName = "catalogo", nullable = false),

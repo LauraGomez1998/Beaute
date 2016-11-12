@@ -205,4 +205,6 @@ public class ControladorVentanaAfiliadoPremio implements Serializable {
 	public void setPremiosVentas(List<PremioVenta> premiosVentas) {
 		this.premiosVentas = premiosVentas;
 	}
+	
+	
 }

@@ -37,5 +37,9 @@ public class ProductoEJB extends EJBGenerico<Producto> {
 	public Producto buscar(Object pk) {
 		return dao.buscar(pk);
 	}
+	
+	public List<Producto> listarProductos(){
+		return dao.ejecutarNamedQuery(Producto.LISTAR_PRODUCTOS);
+	}
 
 }

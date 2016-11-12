@@ -1,6 +1,7 @@
 package co.edu.eam.ingesoft.pa2.beaute.bos;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.ejb.LocalBean;
 
@@ -26,7 +27,10 @@ public class PromocionEJB extends EJBGenerico<Promocion> {
 	}
 
 	public Promocion buscar(Object pk) {
-
 		return dao.buscar(pk);
+	}
+	
+	public List<Promocion> listarPromociones(){
+		return dao.ejecutarNamedQuery(Promocion.LISTAR_PROMOCIONES);
 	}
 }

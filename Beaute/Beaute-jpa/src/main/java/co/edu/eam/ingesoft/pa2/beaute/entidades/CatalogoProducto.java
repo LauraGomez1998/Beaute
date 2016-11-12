@@ -22,12 +22,14 @@ import co.edu.eam.ingesoft.pa2.beaute.pks.CatalogoProductoPK;
 @IdClass(value = CatalogoProductoPK.class)
 @NamedQueries({
 		@NamedQuery(name = CatalogoProducto.LISTAR_PRODUCTOS_CATALOGO, query = "select p.producto from CatalogoProducto p where p.producto.categoria =?1 and p.catalogo.fechaVigencia = (SELECT MAX(u.catalogo.fechaVigencia) FROM CatalogoProducto u)"),
-		@NamedQuery(name = CatalogoProducto.BUSCAR_CATALOGO_PRODUCTO, query = "select p from CatalogoProducto p where p.producto.codigo =?1 and p.catalogo.fechaVigencia = (SELECT MAX(u.catalogo.fechaVigencia) FROM CatalogoProducto u)") })
+		@NamedQuery(name = CatalogoProducto.BUSCAR_CATALOGO_PRODUCTO, query = "select p from CatalogoProducto p where p.producto.codigo =?1 and p.catalogo.fechaVigencia = (SELECT MAX(u.catalogo.fechaVigencia) FROM CatalogoProducto u)"),})
+
 public class CatalogoProducto implements Serializable {
 
 	public static final String LISTAR_PRODUCTOS_CATALOGO = "Catalogo.Productos";
 
 	public static final String BUSCAR_CATALOGO_PRODUCTO = "Catalogo.BuscarProducto";
+
 
 	@Id
 	@ManyToOne

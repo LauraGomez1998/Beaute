@@ -24,7 +24,6 @@ import javax.persistence.Temporal;
 public class PedidoCatalogo implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "CODIGO", length = 20)
 	private int codigo;
 

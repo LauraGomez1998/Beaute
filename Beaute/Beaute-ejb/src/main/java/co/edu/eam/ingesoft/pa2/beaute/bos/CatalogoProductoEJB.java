@@ -6,6 +6,7 @@ import java.util.List;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+import co.edu.eam.ingesoft.pa2.beaute.entidades.Catalogo;
 import co.edu.eam.ingesoft.pa2.beaute.entidades.CatalogoProducto;
 import co.edu.eam.ingesoft.pa2.beaute.entidades.Producto;
 import co.edu.eam.ingesoft.pa2.beaute.enumeraciones.CategoriaProductoEnum;
@@ -36,5 +37,9 @@ public class CatalogoProductoEJB extends EJBGenerico<CatalogoProducto> {
 	public List<Producto> listarProductosCatalogo(CategoriaProductoEnum categoria) {
 		return dao.ejecutarNamedQuery(CatalogoProducto.LISTAR_PRODUCTOS_CATALOGO, categoria);
 	}
+	
+	
+	
+	
 
 }

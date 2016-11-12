@@ -16,7 +16,6 @@ import javax.persistence.Table;
 public class Cuota implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "CODIGO", length = 50)
 	private int codigo;
 

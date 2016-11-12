@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:q="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/default.xhtml">
+
+	<ui:define name="contenido">
+		<h:form id="form2" prependId="false"
+			style="display: flex; justify-content:center; align-items:center; flex-direction:column;">
+
+			<h1>Resgistro Producto Catalogo</h1>
+			<br />
+			<br />
+			<h:panelGrid columns="2" id="contenedor">
+
+				<p:outputLabel value="Catalogo" for="cata" />
+				<p:selectOneMenu id="cata" value="#{catalogoProductoWeb.catalogo}">
+					<f:selectItems value="#{catalogoProductoWeb.catalogos}" var="cat"
+						itemValue="#{cat}" itemLabel="#{cat.codigo}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Producto" for="prod" />
+				<p:selectOneMenu id="prod" value="#{catalogoProductoWeb.producto}">
+					<f:selectItems value="#{catalogoProductoWeb.productos}" var="cat"
+						itemValue="#{cat}" itemLabel="#{cat.nombre}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Registrar Promocion" />
+				<p:selectOneRadio value="#{catalogoProductoWeb.promocionSelect}"
+					id="tipo" required="true">
+					<f:selectItem itemValue="0" itemLabel="Sí" />
+					<f:selectItem itemValue="1" itemLabel="No" />
+					<f:ajax event="change" render="panelGroup" execute="@this"
+						listener="#{catalogoProductoWeb.activarPromocion()}" />
+				</p:selectOneRadio>
+
+			</h:panelGrid>
+
+			<h:panelGroup id="panelGroup">
+
+				<h:panelGrid columns="2" rendered="#{catalogoProductoWeb.desactivar}">
+
+					<p:outputLabel value="Promocion" for="prom" />
+					<p:selectOneMenu id="prom" value="#{catalogoProductoWeb.promocion}">
+						<f:selectItems value="#{catalogoProductoWeb.promociones}"
+							var="cat" itemValue="#{cat}" itemLabel="#{cat.descripcion}"/>
+					</p:selectOneMenu>
+
+					<p:outputLabel value="Fecha Inicio" for="fechaInicio" />
+					<p:calendar id="fechaInicio"
+						value="#{catalogoProductoWeb.fechaInicio}"/>
+
+					<p:outputLabel value="Fecha Fin" for="fechaFin" />
+					<p:calendar id="fechaFin" value="#{catalogoProductoWeb.fechaFin}" />
+				</h:panelGrid>
+
+
+			</h:panelGroup>
+			<br />
+			<p:commandButton action="#{catalogoProductoWeb.crear()}"
+				value="Registrar Producto" update="form2" id="registrar" />
+
+		</h:form>
+	</ui:define>
+</ui:composition>

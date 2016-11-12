@@ -17,6 +17,17 @@ public class CatalogoEJB extends EJBGenerico<Catalogo> {
 		// TODO Auto-generated method stub
 		return Catalogo.class;
 	}
+	
+	public List<Catalogo> listar(){
+		return dao.ejecutarNamedQuery(Catalogo.LISTAR_CATALOGO);
+	}
+	
+	public Catalogo buscar(Object pk){
+		return dao.buscar(pk);
+	}
+	public void crear(Catalogo c){
+		dao.crear(c);
+	}
 
 	
 
