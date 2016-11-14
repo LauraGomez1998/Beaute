@@ -1,6 +1,7 @@
 package co.edu.eam.ingesoft.pa2.beaute.controladores;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -77,7 +78,7 @@ public class ControladorVentanaVenta implements Serializable {
 				codigoProducto);
 		if (productoPedido != null) {
 			Producto p = productoEJB.buscar(codigoProducto);
-			Venta v = new Venta(1, p.getPrecio() * cantidad);
+			Venta v = new Venta(1, p.getPrecio() * cantidad, Calendar.getInstance().getTime());
 			ventaEJB.crear(v);
 			VentaProductoPedido venta = new VentaProductoPedido(1, v, productoPedido, cantidad);
 			ventaProductoPedidoEJB.crear(venta);
