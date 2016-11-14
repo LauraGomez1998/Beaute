@@ -117,11 +117,11 @@ public class ControladorVentanaAfiliado implements Serializable {
 		Afiliado afiliador = afiliadoEJB.buscar(cedulaAfiliador);
 		Afiliado afiliado = new Afiliado();
 		if (afiliador == null) {
-			afiliado = new Afiliado(cedulaAfiliado, genero, null, ciudadSeleccionada, telefono, usuario, contrasenia,
-					nombre, apellido, Calendar.getInstance().getTime());
+			afiliado = new Afiliado(cedulaAfiliado, genero, null, ciudadSeleccionada, Calendar.getInstance().getTime(),
+					telefono, usuario, contrasenia, nombre, apellido, true);
 		} else {
-			afiliado = new Afiliado(cedulaAfiliado, genero, afiliador, ciudadSeleccionada, telefono, usuario,
-					contrasenia, nombre, apellido, Calendar.getInstance().getTime());
+			afiliado = new Afiliado(cedulaAfiliado, genero, afiliador, ciudadSeleccionada,
+					Calendar.getInstance().getTime(), telefono, usuario, contrasenia, nombre, apellido, true);
 		}
 		afiliadoEJB.crear(afiliado);
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "El afiliado ha sido registrado", null);

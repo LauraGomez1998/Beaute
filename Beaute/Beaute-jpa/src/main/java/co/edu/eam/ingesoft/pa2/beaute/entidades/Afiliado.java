@@ -22,11 +22,12 @@ import co.edu.eam.ingesoft.pa2.beaute.enumeraciones.NivelAfiliadoEnum;
 
 @Entity
 @Table(name = "AFILIADOS")
-@NamedQueries({ @NamedQuery(name = Afiliado.LISTAR_AFILADOS_CIUDAD, query = "select a from Afiliado a where a.ciudad.codigo =?1") }) 	
+@NamedQueries({
+		@NamedQuery(name = Afiliado.LISTAR_AFILADOS_CIUDAD, query = "select a from Afiliado a where a.ciudad.codigo =?1") })
 public class Afiliado implements Serializable {
 
-	public static final String LISTAR_AFILADOS_CIUDAD = "Afiliado.listarAfiliado"; 
-	
+	public static final String LISTAR_AFILADOS_CIUDAD = "Afiliado.listarAfiliado";
+
 	@Id
 	@Column(name = "CEDULA_AFILIADO", length = 50)
 	private int cedulaAfiliado;
@@ -62,22 +63,26 @@ public class Afiliado implements Serializable {
 	@Column(name = "APELLIDO", length = 50, nullable = false)
 	private String apellido;
 
-	public Afiliado(int cedulaAfiliado, GeneroAfiliadoEnum genero, Afiliado afiliador, Ciudad ciudad, int telefono,
-			String usuario, String contrasenia, String nombre, String apellido, Date fechaIngreso) {
+	@Column(name = "ESTADO")
+	private boolean estado;
+
+	public Afiliado() {
+	}
+
+	public Afiliado(int cedulaAfiliado, GeneroAfiliadoEnum genero, Afiliado afiliador, Ciudad ciudad, Date fechaIngreso,
+			int telefono, String usuario, String contrasenia, String nombre, String apellido, boolean estado) {
 		super();
 		this.cedulaAfiliado = cedulaAfiliado;
 		this.genero = genero;
 		this.afiliador = afiliador;
 		this.ciudad = ciudad;
+		this.fechaIngreso = fechaIngreso;
 		this.telefono = telefono;
 		this.usuario = usuario;
 		this.contrasenia = contrasenia;
 		this.nombre = nombre;
 		this.apellido = apellido;
-		this.fechaIngreso = fechaIngreso;
-	}
-
-	public Afiliado() {
+		this.estado = estado;
 	}
 
 	public int getCedulaAfiliado() {
@@ -110,6 +115,14 @@ public class Afiliado implements Serializable {
 
 	public void setCiudad(Ciudad ciudad) {
 		this.ciudad = ciudad;
+	}
+
+	public Date getFechaIngreso() {
+		return fechaIngreso;
+	}
+
+	public void setFechaIngreso(Date fechaIngreso) {
+		this.fechaIngreso = fechaIngreso;
 	}
 
 	public int getTelefono() {
@@ -152,12 +165,16 @@ public class Afiliado implements Serializable {
 		this.apellido = apellido;
 	}
 
-	public Date getFechaIngreso() {
-		return fechaIngreso;
+	public boolean isEstado() {
+		return estado;
 	}
 
-	public void setFechaIngreso(Date fechaIngreso) {
-		this.fechaIngreso = fechaIngreso;
+	public void setEstado(boolean estado) {
+		this.estado = estado;
+	}
+
+	public static String getListarAfiladosCiudad() {
+		return LISTAR_AFILADOS_CIUDAD;
 	}
 
 }
