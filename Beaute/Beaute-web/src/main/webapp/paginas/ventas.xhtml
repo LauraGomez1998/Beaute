@@ -16,53 +16,51 @@
 			<br />
 
 			<h3>INVENTARIO PRODUCTOS</h3>
-			<p:dataTable var="car" value="tab">
-				<p:column headerText="Código">
-					<h:outputText value="#" />
+			<p:dataTable var="inv" value="#{ventaWeb.listaInventario}">
+				<p:column headerText="Código pedido">
+					<h:outputText value="#{inv.pedido.codigo}" />
+				</p:column>
+
+				<p:column headerText="Código producto">
+					<h:outputText value="#{inv.catalogo.producto.codigo}" />
 				</p:column>
 
 				<p:column headerText="Nombre">
-					<h:outputText value="#" />
+					<h:outputText value="#{inv.catalogo.producto.nombre}" />
 				</p:column>
 
 				<p:column headerText="Precio">
-					<h:outputText value="#" />
+					<h:outputText value="#{inv.catalogo.producto.precio}" />
 				</p:column>
 
 				<p:column headerText="Caracteristicas">
-					<h:outputText value="#" />
+					<h:outputText value="#{inv.catalogo.producto.caracteristica}" />
 				</p:column>
 
 				<p:column headerText="Promocion">
-					<h:outputText value="#" />
+					<h:outputText value="#{inv.catalogo.finPromocion}" />
 				</p:column>
-				<p:column headerText="Limite Promocion">
-					<h:outputText value="#" />
-				</p:column>
-
-
 
 			</p:dataTable>
 
 			<h:panelGrid columns="2">
-				
-				<p:outputLabel for="cod" value="Código" /> 
-				<h:inputText value="123" id="cod" required="true" readonly="true"/> 
-			
-				<p:outputLabel for="cant" value="Cantidad" /> 
-				<h:inputText value="#" id="cant" required="true" /> 
-				
-				<p:outputLabel for="prod" value="Codigo Producto" />
-				<h:inputText value="#" id="prod" required="true" />
+
+				<p:outputLabel for="codP" value="Código pedido" />
+				<h:inputText value="#{ventaWeb.codigoPedido}" id="codP"
+					required="true" />
+
+				<p:outputLabel for="codPr" value="Código producto" />
+				<h:inputText value="#{ventaWeb.codigoProducto}" id="codPr"
+					required="true" />
+
+				<p:outputLabel for="cant" value="Cantidad" />
+				<h:inputText value="#{ventaWeb.cantidad}" id="cant" required="true" />
+
 			</h:panelGrid>
-			
-
-
-
 
 			<br />
-			<p:commandButton action="#"
-				value="Vender" update="form2" id="registrar" />
+			<p:commandButton action="#{ventaWeb.vender()}" value="Vender"
+				update="form2" id="Vender" />
 
 		</h:form>
 	</ui:define>
