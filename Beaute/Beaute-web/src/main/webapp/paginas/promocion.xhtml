@@ -16,14 +16,14 @@
 
 			<br />
 			<br />
-			<h:panelGrid columns="2" id="contenedor">
+			<h:panelGrid columns="3" id="contenedor">
 
 
 				<p:outputLabel value="Codigo" for="cod" />
-				<h:inputText value="#{promocionWeb.codigo}" id="cod" required="true" />
+				<h:inputText value="#{promocionWeb.codigo}" id="cod" required="true" /><h4/>
 
-				<p:outputLabel value="Descripcion" for="desc" />
-				<h:inputTextarea value="#{promocionWeb.descripcion}" id="desc" required="true" />
+				<p:outputLabel value="Descuento" for="desc" />
+				<h:inputText value="#{promocionWeb.descuento}" id="desc" required="true" /><h4>%</h4>
 
 			</h:panelGrid>
 			<br />

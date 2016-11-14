@@ -22,10 +22,12 @@ public class VentaProductoPedido implements Serializable {
 	@JoinColumn(name = "VENTA", nullable = false)
 	private Venta venta;
 
-	@ManyToOne
-	@JoinColumns({ @JoinColumn(name = "CODIGO_PEDIDO", referencedColumnName = "codigo", nullable = false),
-			@JoinColumn(name = "PRODUCTO", referencedColumnName = "producto", nullable = false) })
-	private ProductoPedido pedidoProducto;
+	/**@ManyToOne
+	@JoinColumns({ 
+		@JoinColumn(name = "CATALOGO_PEDIDO", nullable = false),
+		@JoinColumn(name = "CODIGO_PEDIDO", nullable = false),
+		@JoinColumn(name = "CODIGO_PRODUCTO", nullable = false)})**/
+	private CatalogoPedidoAfiliado productoPedido;
 
 	@Column(name = "CANTIDAD", length = 10, nullable = false)
 	private int cantidad;
@@ -33,12 +35,12 @@ public class VentaProductoPedido implements Serializable {
 	public VentaProductoPedido() {
 	}
 
-	public VentaProductoPedido(int codigo, int cantidad, Venta venta, ProductoPedido pedidoProducto) {
+	public VentaProductoPedido(int codigo, Venta venta, CatalogoPedidoAfiliado productoPedido, int cantidad) {
 		super();
 		this.codigo = codigo;
-		this.cantidad = cantidad;
 		this.venta = venta;
-		this.pedidoProducto = pedidoProducto;
+		this.productoPedido = productoPedido;
+		this.cantidad = cantidad;
 	}
 
 	public int getCodigo() {
@@ -65,12 +67,12 @@ public class VentaProductoPedido implements Serializable {
 		this.venta = venta;
 	}
 
-	public ProductoPedido getPedidoProducto() {
-		return pedidoProducto;
+	public CatalogoPedidoAfiliado getProductoPedido() {
+		return productoPedido;
 	}
 
-	public void setPedidoProducto(ProductoPedido pedidoProducto) {
-		this.pedidoProducto = pedidoProducto;
+	public void setProductoPedido(CatalogoPedidoAfiliado productoPedido) {
+		this.productoPedido = productoPedido;
 	}
 
 }

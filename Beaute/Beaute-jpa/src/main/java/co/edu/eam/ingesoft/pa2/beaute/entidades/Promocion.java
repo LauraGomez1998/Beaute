@@ -22,7 +22,7 @@ public class Promocion implements Serializable {
 
 	@Id
 	@Column(name = "CODIGO", length = 10)
-	private int codigo;
+	private String codigo;
 
 	@Column(name = "DESCUENTO", length = 50, nullable = false)
 	private double descuento;
@@ -31,17 +31,17 @@ public class Promocion implements Serializable {
 
 	}
 
-	public Promocion(int codigo, double descuento) {
+	public Promocion(String codigo, double descuento) {
 		super();
 		this.codigo = codigo;
 		this.descuento = descuento;
 	}
 
-	public int getCodigo() {
+	public String getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(int codigo) {
+	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
 
