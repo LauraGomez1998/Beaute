@@ -16,11 +16,12 @@ public class CategoriaAfiliado implements Serializable {
 	@Id
 	@Column(name = "CODIGO", length = 10)
 	private int codigo;
-
+	
 	@ManyToOne
-	@JoinColumn(name = "COMISION", nullable = true)
-	private Comision comision;
+	@JoinColumn(name="AFILIADO", nullable=false)
+	private Afiliado afiliado;
 
+	
 	@Column(name = "PUNTOS", length = 10, nullable = false)
 	private int puntos;
 
@@ -30,12 +31,12 @@ public class CategoriaAfiliado implements Serializable {
 	public CategoriaAfiliado() {
 	}
 
-	public CategoriaAfiliado(int codigo, Comision comision, int puntos, String nombre) {
+	public CategoriaAfiliado(int codigo, Afiliado afiliado,  int puntos, String nombre) {
 		super();
 		this.codigo = codigo;
-		this.comision = comision;
 		this.puntos = puntos;
 		this.nombre = nombre;
+		this.afiliado = afiliado;
 	}
 
 	public int getCodigo() {
@@ -46,12 +47,14 @@ public class CategoriaAfiliado implements Serializable {
 		this.codigo = codigo;
 	}
 
-	public Comision getComision() {
-		return comision;
+	
+
+	public Afiliado getAfiliado() {
+		return afiliado;
 	}
 
-	public void setComision(Comision comision) {
-		this.comision = comision;
+	public void setAfiliado(Afiliado afiliado) {
+		this.afiliado = afiliado;
 	}
 
 	public int getPuntos() {

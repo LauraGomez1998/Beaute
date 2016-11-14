@@ -1,6 +1,7 @@
 package co.edu.eam.ingesoft.pa2.beaute.controladores;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -27,40 +28,63 @@ public class ControladorVentanaCatalogo implements Serializable {
 	private Date fechaVigencia;
 
 	private int unidades;
-	
-	private List<Catalogo> catalogo;
-	
+
+	private Catalogo catalogo;
 
 	public void crear() {
-		Catalogo c = catalogoEJB.buscar(codigo);
+
 		if (codigo != 0 && fechaVigencia != null && unidades != 0) {
-			if (c==null) {
-				Catalogo cata = new Catalogo(codigo, fechaVigencia, unidades);
-				catalogoEJB.crear(cata);
-				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
-						"Se registró catalogo exitosamente", null);
+			catalogo = catalogoEJB.buscarUltimoCatalogo();
+			Date fechaActual = Calendar.getInstance().getTime();
+			if (catalogo != null) {
+				Date fechaVigenciaCatalogoAnterior = catalogo.getFechaVigencia();
+
+				if (fechaVigenciaCatalogoAnterior.before(fechaActual) && fechaActual.before(fechaVigencia)) {
+					Catalogo cata = new Catalogo(codigo, fechaVigencia, unidades);
+					catalogoEJB.crear(cata);
+					FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+							"Se registró catalogo exitosamente", null);
+					FacesContext.getCurrentInstance().addMessage(null, message);
+				} else {
+					FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Fechas inconsitentes", null);
+					FacesContext.getCurrentInstance().addMessage(null, message);
+
+				}
 			} else {
-				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
-						"Ya se encuentra registrado un catalogo", null);
-				FacesContext.getCurrentInstance().addMessage(null, message);
+				if (fechaActual.before(fechaVigencia)) {
+					Catalogo cata = new Catalogo(codigo, fechaVigencia, unidades);
+					catalogoEJB.crear(cata);
+					FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+							"Se registró catalogo exitosamente", null);
+					FacesContext.getCurrentInstance().addMessage(null, message);
+				} else {
+					FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Fechas inconsitentes", null);
+					FacesContext.getCurrentInstance().addMessage(null, message);
+				}
+
 			}
 		} else {
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Llene campos", null);
 			FacesContext.getCurrentInstance().addMessage(null, message);
 		}
 	}
-	
-	public void buscar(){
-		if(!catalogo.isEmpty()){
-			codigo = catalogo.get(0).getCodigo();
-			fechaVigencia =  catalogo.get(0).getFechaVigencia();
-			unidades = catalogo.get(0).getUnidades();
-			
-		}else{
-			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
-					"No hay catalogo registrado", null);
+
+	public void buscar() {
+		catalogo = catalogoEJB.buscar(codigo);
+		if (catalogo != null) {
+			codigo = catalogo.getCodigo();
+			fechaVigencia = catalogo.getFechaVigencia();
+			unidades = catalogo.getUnidades();
+
+		} else {
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "No hay catalogo registrado", null);
 			FacesContext.getCurrentInstance().addMessage(null, message);
 		}
+	}
+	
+	public void editar(){
+		catalogo = catalogoEJB.buscarUltimoCatalogo();
+		
 	}
 
 	public int getCodigo() {
@@ -87,14 +111,12 @@ public class ControladorVentanaCatalogo implements Serializable {
 		this.unidades = unidades;
 	}
 
-	public List<Catalogo> getCatalogo() {
+	public Catalogo getCatalogo() {
 		return catalogo;
 	}
 
-	public void setCatalogo(List<Catalogo> catalogo) {
+	public void setCatalogo(Catalogo catalogo) {
 		this.catalogo = catalogo;
 	}
-	
-	
 
 }

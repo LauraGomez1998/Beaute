@@ -1,7 +1,8 @@
 package co.edu.eam.ingesoft.pa2.beaute.controladores;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -44,8 +45,6 @@ public class ControladorVentanaCatalogoProducto implements Serializable {
 
 	private Producto producto;
 
-	private Catalogo catalogo;
-
 	private Promocion promocion;
 
 	private String promocionSelect;
@@ -54,41 +53,91 @@ public class ControladorVentanaCatalogoProducto implements Serializable {
 
 	private List<Promocion> promociones;
 
-	private List<Catalogo> catalogos;
+	private Catalogo catalogoAnterior;
+
+	private int codigoCatalogo;
 
 	private boolean desactivar;
+
+	private double precioVenta;
 
 	@PostConstruct
 	public void inicializar() {
 		productos = productoEJB.listarProductos();
-		catalogos = catalogoEJB.listar();
-		
-		
+		cargarCatalogo();
 		desactivar = false;
 	}
 
 	public void activarPromocion() {
 		if (promocionSelect.equals("0")) {
 			promociones = promcionEJB.listarPromociones();
-			System.out.println(promocionSelect);
 			desactivar = true;
 		} else {
 			desactivar = false;
 		}
 	}
 
-	public void crear() {
-		if (catalogo != null && producto != null) {
-				CatalogoProducto catProd = new CatalogoProducto(catalogo, producto, promocion, fechaInicio, fechaFin);
-				catalogoProdEJB.crear(catProd);
-				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
-						"El producto se registro en el catalogo exitosamente", null);
-				FacesContext.getCurrentInstance().addMessage(null, message);
-			
+	public void mostrarPrecio() {
+		if (producto != null) {
+			precioVenta = producto.getPrecio();
 		} else {
-			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Llene campos", null);
-			FacesContext.getCurrentInstance().addMessage(null, message);
+			precioVenta = 3;
 		}
+
+	}
+
+	public void cargarCatalogo() {
+		catalogoAnterior = catalogoEJB.buscarUltimoCatalogo();
+		Date fechaActual = Calendar.getInstance().getTime();
+		if (catalogoAnterior != null && catalogoAnterior.getFechaVigencia().after(fechaActual)) {
+			codigoCatalogo = catalogoAnterior.getCodigo();
+		} else {
+			codigoCatalogo = 0;
+		}
+	}
+
+	/**
+	 * FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+	 * "El producto se registro en el catalogo exitosamente", null);
+	 * FacesContext.getCurrentInstance().addMessage(null, message);
+	 */
+	public void crear() {
+		System.out.println("ALGOOOOOOOOOOOOOOOOOOOO --------------gbvsdfghfdsbfnjfhgdfdcfghjkjhgfdsfghjkhgfdsdfghjhgfds");
+		/**if (codigoCatalogo != 0) {
+			System.out.println("HAY CATALOGOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+			if (producto != null && desactivar == true) {
+				CatalogoProducto c = catalogoProdEJB.validar(producto.getCodigo(), codigoCatalogo);
+				System.out.println("entro--------------------------------------------------");
+				if (c == null) {
+					precioVenta = producto.getPrecio() * (promocion.getDescuento() / 100);
+					CatalogoProducto catalogoProduc = new CatalogoProducto(catalogoAnterior, producto, promocion, fechaInicio, fechaFin, precioVenta);
+					catalogoProdEJB.crear(catalogoProduc);
+					FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "El producto se ha registrado en el catalogo", null);
+					FacesContext.getCurrentInstance().addMessage(null, message);
+				} else {
+					FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+							"Este producto ya está registrado en el catalogo", null);
+					FacesContext.getCurrentInstance().addMessage(null, message);
+				}
+
+			} else {
+				System.out.println("producto nulo -----------------------------------");
+				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Llene campos", null);
+				FacesContext.getCurrentInstance().addMessage(null, message);
+			}
+		} else {
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+					"Por favor, ingrese un catálogo primero", null);
+			FacesContext.getCurrentInstance().addMessage(null, message);
+		}**/
+	}
+
+	public void agregarPromocion() {
+
+	}
+
+	public void buscar() {
+
 	}
 
 	public Producto getProducto() {
@@ -99,12 +148,20 @@ public class ControladorVentanaCatalogoProducto implements Serializable {
 		this.producto = producto;
 	}
 
-	public Catalogo getCatalogo() {
-		return catalogo;
+	public Catalogo getCatalogoAnterior() {
+		return catalogoAnterior;
 	}
 
-	public void setCatalogo(Catalogo catalogo) {
-		this.catalogo = catalogo;
+	public void setCatalogoAnterior(Catalogo catalogoAnterior) {
+		this.catalogoAnterior = catalogoAnterior;
+	}
+
+	public int getCodigoCatalogo() {
+		return codigoCatalogo;
+	}
+
+	public void setCodigoCatalogo(int codigoCatalogo) {
+		this.codigoCatalogo = codigoCatalogo;
 	}
 
 	public Promocion getPromocion() {
@@ -147,14 +204,6 @@ public class ControladorVentanaCatalogoProducto implements Serializable {
 		this.fechaFin = fechaFin;
 	}
 
-	public List<Catalogo> getCatalogos() {
-		return catalogos;
-	}
-
-	public void setCatalogos(List<Catalogo> catalogos) {
-		this.catalogos = catalogos;
-	}
-
 	public String getPromocionSelect() {
 		return promocionSelect;
 	}
@@ -169,6 +218,14 @@ public class ControladorVentanaCatalogoProducto implements Serializable {
 
 	public void setDesactivar(boolean desactivar) {
 		this.desactivar = desactivar;
+	}
+
+	public double getPrecioVenta() {
+		return precioVenta;
+	}
+
+	public void setPrecioVenta(double precioVenta) {
+		this.precioVenta = precioVenta;
 	}
 
 }

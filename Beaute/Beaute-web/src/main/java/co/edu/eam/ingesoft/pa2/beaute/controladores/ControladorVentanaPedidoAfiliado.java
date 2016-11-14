@@ -63,13 +63,13 @@ public class ControladorVentanaPedidoAfiliado implements Serializable {
 	 */
 	public void mostrarProductos(int seleecionado) {
 		if (seleecionado == 0) {
-			listaProductos = catalogoProductoEJB.listarProductosCatalogo(CategoriaProductoEnum.POLVOS);
+			listaProductos = catalogoProductoEJB.listarProductosCatalogo(CategoriaProductoEnum.SALUD);
 		} else if (seleecionado == 1) {
-			listaProductos = catalogoProductoEJB.listarProductosCatalogo(CategoriaProductoEnum.LABIAL);
+			listaProductos = catalogoProductoEJB.listarProductosCatalogo(CategoriaProductoEnum.MAQUILLAJE);
 		} else if (seleecionado == 2) {
-			listaProductos = catalogoProductoEJB.listarProductosCatalogo(CategoriaProductoEnum.JABONES);
+			listaProductos = catalogoProductoEJB.listarProductosCatalogo(CategoriaProductoEnum.ROPA);
 		} else {
-			listaProductos = catalogoProductoEJB.listarProductosCatalogo(CategoriaProductoEnum.OTROS);
+			listaProductos = catalogoProductoEJB.listarProductosCatalogo(CategoriaProductoEnum.JOYERÍA);
 		}
 	}
 

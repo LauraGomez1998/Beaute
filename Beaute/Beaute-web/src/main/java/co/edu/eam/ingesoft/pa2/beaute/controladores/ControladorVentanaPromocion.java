@@ -21,13 +21,13 @@ public class ControladorVentanaPromocion implements Serializable {
 
 	private int codigo;
 
-	private String descripcion;
+	private double descuento;
 
 	public void crear() {
 		Promocion p = promocionEJB.buscar(codigo);
-		if (codigo != 0 && descripcion != null) {
+		if (codigo != 0 && descuento != 0) {
 			if (p == null) {
-				Promocion pro = new Promocion(codigo, descripcion);
+				Promocion pro = new Promocion(codigo, descuento);
 				promocionEJB.crear(pro);
 				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "La promocion ha sido registrada", null);
 				FacesContext.getCurrentInstance().addMessage(null, message);
@@ -46,7 +46,7 @@ public class ControladorVentanaPromocion implements Serializable {
 		Promocion p = promocionEJB.buscar(codigo);
 		if (p != null) {
 			codigo = p.getCodigo();
-			descripcion = p.getDescripcion();
+			descuento = p.getDescuento();
 		} else {
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "La promocion no se ha registrado",
 					null);
@@ -62,12 +62,13 @@ public class ControladorVentanaPromocion implements Serializable {
 		this.codigo = codigo;
 	}
 
-	public String getDescripcion() {
-		return descripcion;
+	public double getDescuento() {
+		return descuento;
 	}
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+	public void setDescuento(double descuento) {
+		this.descuento = descuento;
 	}
 
+	
 }

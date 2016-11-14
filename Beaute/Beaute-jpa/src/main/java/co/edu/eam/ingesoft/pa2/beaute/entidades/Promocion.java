@@ -17,23 +17,24 @@ import javax.xml.XMLConstants;
 @Table(name = "PROMOCIONES")
 @NamedQueries({ @NamedQuery(name = Promocion.LISTAR_PROMOCIONES, query = "Select p from Promocion p") })
 public class Promocion implements Serializable {
-	
+
 	public static final String LISTAR_PROMOCIONES = "Promocion.listar";
 
 	@Id
 	@Column(name = "CODIGO", length = 10)
 	private int codigo;
 
-	@Column(name = "DESCRIPCION", length = 50, nullable = false)
-	private String descripcion;
+	@Column(name = "DESCUENTO", length = 50, nullable = false)
+	private double descuento;
 
 	public Promocion() {
+
 	}
 
-	public Promocion(int codigo, String descripcion) {
+	public Promocion(int codigo, double descuento) {
 		super();
 		this.codigo = codigo;
-		this.descripcion = descripcion;
+		this.descuento = descuento;
 	}
 
 	public int getCodigo() {
@@ -44,12 +45,14 @@ public class Promocion implements Serializable {
 		this.codigo = codigo;
 	}
 
-	public String getDescripcion() {
-		return descripcion;
+	public double getDescuento() {
+		return descuento;
 	}
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+	public void setDescuento(double descuento) {
+		this.descuento = descuento;
 	}
+
+	
 
 }

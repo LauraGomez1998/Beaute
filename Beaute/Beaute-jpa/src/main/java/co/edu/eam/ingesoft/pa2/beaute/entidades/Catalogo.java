@@ -14,7 +14,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "CATALOGOS")
-@NamedQueries({ @NamedQuery(name=Catalogo.LISTAR_CATALOGO, query="Select c from Catalogo c") })
+@NamedQueries({ @NamedQuery(name=Catalogo.LISTAR_CATALOGO, query="Select c from Catalogo c where c.fechaVigencia = (select MAX(c1.fechaVigencia) from Catalogo c1)") })
 public class Catalogo implements Serializable {
 	
 	public static final String LISTAR_CATALOGO = "Catalogo.listar";
