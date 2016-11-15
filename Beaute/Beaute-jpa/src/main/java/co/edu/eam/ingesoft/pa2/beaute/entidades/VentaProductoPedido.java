@@ -22,12 +22,13 @@ public class VentaProductoPedido implements Serializable {
 	@JoinColumn(name = "VENTA", nullable = false)
 	private Venta venta;
 
-	/**@ManyToOne
-	@JoinColumns({ 
-		@JoinColumn(name = "CATALOGO_PEDIDO", nullable = false),
-		@JoinColumn(name = "CODIGO_PEDIDO", nullable = false),
-		@JoinColumn(name = "CODIGO_PRODUCTO", nullable = false)})**/
-	private CatalogoPedidoAfiliado productoPedido;
+	@ManyToOne
+	@JoinColumn(name = "PRODUCTO", nullable = false)
+	private Producto producto;
+
+	@ManyToOne
+	@JoinColumn(name = "PEDIDO", nullable = false)
+	private Pedido pedido;
 
 	@Column(name = "CANTIDAD", length = 10, nullable = false)
 	private int cantidad;
@@ -35,11 +36,12 @@ public class VentaProductoPedido implements Serializable {
 	public VentaProductoPedido() {
 	}
 
-	public VentaProductoPedido(int codigo, Venta venta, CatalogoPedidoAfiliado productoPedido, int cantidad) {
+	public VentaProductoPedido(int codigo, Venta venta, Producto producto, Pedido pedido, int cantidad) {
 		super();
 		this.codigo = codigo;
 		this.venta = venta;
-		this.productoPedido = productoPedido;
+		this.producto = producto;
+		this.pedido = pedido;
 		this.cantidad = cantidad;
 	}
 
@@ -51,14 +53,6 @@ public class VentaProductoPedido implements Serializable {
 		this.codigo = codigo;
 	}
 
-	public int getCantidad() {
-		return cantidad;
-	}
-
-	public void setCantidad(int cantidad) {
-		this.cantidad = cantidad;
-	}
-
 	public Venta getVenta() {
 		return venta;
 	}
@@ -67,12 +61,28 @@ public class VentaProductoPedido implements Serializable {
 		this.venta = venta;
 	}
 
-	public CatalogoPedidoAfiliado getProductoPedido() {
-		return productoPedido;
+	public Producto getProducto() {
+		return producto;
 	}
 
-	public void setProductoPedido(CatalogoPedidoAfiliado productoPedido) {
-		this.productoPedido = productoPedido;
+	public void setProducto(Producto producto) {
+		this.producto = producto;
+	}
+
+	public Pedido getPedido() {
+		return pedido;
+	}
+
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
+	}
+
+	public int getCantidad() {
+		return cantidad;
+	}
+
+	public void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
 	}
 
 }

@@ -13,10 +13,12 @@ import javax.inject.Named;
 import org.omnifaces.cdi.ViewScoped;
 
 import co.edu.eam.ingesoft.pa2.beaute.bos.CatalogoPedidoAfiliadoEJB;
+import co.edu.eam.ingesoft.pa2.beaute.bos.PedidoEJB;
 import co.edu.eam.ingesoft.pa2.beaute.bos.ProductoEJB;
 import co.edu.eam.ingesoft.pa2.beaute.bos.VentaEJB;
 import co.edu.eam.ingesoft.pa2.beaute.bos.VentaProductoPedidoEJB;
 import co.edu.eam.ingesoft.pa2.beaute.entidades.CatalogoPedidoAfiliado;
+import co.edu.eam.ingesoft.pa2.beaute.entidades.Pedido;
 import co.edu.eam.ingesoft.pa2.beaute.entidades.Producto;
 import co.edu.eam.ingesoft.pa2.beaute.entidades.Venta;
 import co.edu.eam.ingesoft.pa2.beaute.entidades.VentaProductoPedido;
@@ -45,6 +47,11 @@ public class ControladorVentanaVenta implements Serializable {
 	 */
 	@EJB
 	private VentaProductoPedidoEJB ventaProductoPedidoEJB;
+	/**
+	 * EJB de la clase pedido
+	 */
+	@EJB
+	private PedidoEJB pedidoEJB;
 	/**
 	 * lista de pedidos del afiliado
 	 */
@@ -78,10 +85,11 @@ public class ControladorVentanaVenta implements Serializable {
 				codigoProducto);
 		if (productoPedido != null) {
 			Producto p = productoEJB.buscar(codigoProducto);
+			Pedido pedido = pedidoEJB.buscar(codigoPedido);
 			Venta v = new Venta(1, p.getPrecio() * cantidad, Calendar.getInstance().getTime());
 			ventaEJB.crear(v);
-			VentaProductoPedido venta = new VentaProductoPedido(1, v, productoPedido, cantidad);
-			ventaProductoPedidoEJB.crear(venta);
+			VentaProductoPedido ventaPro = new VentaProductoPedido(1, v, p, pedido, cantidad);
+			ventaProductoPedidoEJB.crear(ventaPro);
 		} else {
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Los datos ingresados son erroneos",
 					null);
