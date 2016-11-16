@@ -70,6 +70,10 @@ public class CatalogoPedidoAfiliadoEJB extends EJBGenerico<CatalogoPedidoAfiliad
 	
 	private List<ListaProductoPedidoDTO> listaProductoPedido;
 	
+	public int autoIncremental() {
+		return dao.ejecutarNamedQuery(Pedido.TAMANIO).size();
+	}
+	
 	/**
 	 * Androiiiiiiddd
 	 * @param dto
@@ -79,38 +83,39 @@ public class CatalogoPedidoAfiliadoEJB extends EJBGenerico<CatalogoPedidoAfiliad
 	public boolean pedir(PedidoDTO dto) throws ExcepcionNegocio {
 		
 		
-//		listaProductoPedido = new ArrayList<>();
-//
-//		for (ListaProductoPedidoDTO lista : dto.getListaProductoPedidoDTO()) {
-//
-//			if (lista != null && lista.getCantidad() > 0) {
-//				if (listaProductoPedido.isEmpty()) {
-//					ListaProductoPedidoDTO productoAgregar = new ListaProductoPedidoDTO(lista.getCodigo(),
-//							lista.getCantidad());
-//					listaProductoPedido.add(productoAgregar);
-//				} else {
-//					boolean encontro = false;
-//					for (int i = 0; i < listaProductoPedido.size(); i++) {
-//						if (listaProductoPedido.get(i).getCodigo().equalsIgnoreCase(lista.getCodigo())) {
-//							int cant = listaProductoPedido.get(i).getCantidad();
-//							listaProductoPedido.get(i).setCantidad(cant + lista.getCantidad());
-//							encontro = true;
-//						}
-//					}
-//					if (!encontro) {
-//						ListaProductoPedidoDTO productoAgregar = new ListaProductoPedidoDTO(lista.getCodigo(),
-//								lista.getCantidad());
-//						listaProductoPedido.add(productoAgregar);
-//					}
-//				}
-//			}
-//		}
-//		
-//		
+		listaProductoPedido = new ArrayList<>();
+
+		for (ListaProductoPedidoDTO lista : dto.getListaProductoPedidoDTO()) {
+
+			if (lista != null && lista.getCantidad() > 0) {
+				if (listaProductoPedido.isEmpty()) {
+					ListaProductoPedidoDTO productoAgregar = new ListaProductoPedidoDTO(lista.getCodigo(),
+							lista.getCantidad());
+					listaProductoPedido.add(productoAgregar);
+				} else {
+					boolean encontro = false;
+					for (int i = 0; i < listaProductoPedido.size(); i++) {
+						if (listaProductoPedido.get(i).getCodigo().equalsIgnoreCase(lista.getCodigo())) {
+							int cant = listaProductoPedido.get(i).getCantidad();
+							listaProductoPedido.get(i).setCantidad(cant + lista.getCantidad());
+							encontro = true;
+						}
+					}
+					if (!encontro) {
+						ListaProductoPedidoDTO productoAgregar = new ListaProductoPedidoDTO(lista.getCodigo(),
+								lista.getCantidad());
+						listaProductoPedido.add(productoAgregar);
+					}
+				}
+			}
+		}
+		
+		
 		
 		if (dto != null) {
+			int codP = autoIncremental();
 			Afiliado afiliado = afiliadoEJb.buscar(dto.getAfiliado());
-			Pedido pedido = new Pedido(5, afiliado, GregorianCalendar.getInstance().getTime(),
+			Pedido pedido = new Pedido(codP, afiliado, GregorianCalendar.getInstance().getTime(),
 					GregorianCalendar.getInstance().getTime());
 			pedidoEJb.crear(pedido);
 			for (ListaProductoPedidoDTO lista : dto.getListaProductoPedidoDTO()) {

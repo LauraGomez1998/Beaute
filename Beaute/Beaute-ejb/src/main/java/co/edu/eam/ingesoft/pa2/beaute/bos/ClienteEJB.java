@@ -1,6 +1,7 @@
 package co.edu.eam.ingesoft.pa2.beaute.bos;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.ejb.LocalBean;
 
@@ -58,4 +59,16 @@ public class ClienteEJB extends EJBGenerico<Cliente> {
 		}
 	}
 
+	
+	
+	
+	public Cliente buscarClienteUsuario(String user, String pass) {
+		//pass = MD5Util.code(pass);
+		List<Cliente> lista = dao.ejecutarNamedQuery(Cliente.BUSCAR_CLIENTE_USER_PASS, user, pass);
+		if (!lista.isEmpty()) {
+			return lista.get(0);
+		} else {  
+			return null;
+		}
+	}
 }

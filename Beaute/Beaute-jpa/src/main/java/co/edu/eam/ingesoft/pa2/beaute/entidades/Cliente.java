@@ -9,14 +9,23 @@ import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import co.edu.eam.ingesoft.pa2.beaute.enumeraciones.GeneroAfiliadoEnum;
 
 @Entity
 @Table(name = "CLIENTES")
+@NamedQueries({
+	@NamedQuery(name = Cliente.BUSCAR_CLIENTE_USER_PASS, query = "select a from Cliente a where a.usuario =?1 and a.contrasenia = ?2")
+	})
 public class Cliente implements Serializable {
 
+	public static final String BUSCAR_CLIENTE_USER_PASS = "Cliente.BuscarUsuarioCLiente";
+	
+	
+	
 	@Id
 	@Column(name = "CEDULA", length = 30)
 	private int cedula;

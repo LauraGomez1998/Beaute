@@ -7,25 +7,25 @@
 			<h3 class="text-center">Categorias</h3>
 		</em>
 		<div class="row" align="center">
-			<div class="col-md-3" ng-click="listarProductos()">
+			<div class="col-md-3" ng-click="listarProductos('SALUD')">
 				<p ng-model="categoria">SALUD</p>
 				<img src="../resources/productos/limpieza.jpg" alt="Pulpit Rock"
 					style="width: 100px; height: 100px">
 			</div>
 			<div class="col-md-3" >
-				<p ng-model="categoria">POLVOS</p>
+				<p ng-model="categoria">MAQUILLAJE</p>
 				<img src="../resources/productos/maquillaje.jpg"
-					alt="Moustiers Sainte Marie" style="width: 100px; height: 100px" ng-click="listarProductos('POLVOS')">
+					alt="Moustiers Sainte Marie" style="width: 100px; height: 100px" ng-click="listarProductos('MAQUILLAJE')">
 			</div>
 			<div class="col-md-3">
-				<p>Ropa</p>
+				<p>ROPA</p>
 				<img src="../resources/productos/ropaa.jpg" alt="Cinque Terre"
-					style="width: 100px; height: 100px">
+					style="width: 100px; height: 100px" ng-click="listarProductos('ROPA')">
 			</div>
 			<div class="col-md-3">
-				<p>Accesorios</p>
+				<p>JOYERÍA</p>
 				<img src="../resources/productos/acce.jpg" alt="Cinque Terre"
-					style="width: 100px; height: 100px">
+					style="width: 100px; height: 100px" ng-click="listarProductos('JOYERÍA')">
 			</div>
 
 		</div>

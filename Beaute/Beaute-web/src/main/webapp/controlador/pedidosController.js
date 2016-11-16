@@ -1,14 +1,12 @@
 app.controller("pedidosController", function($scope,$http,$sessionStorage) {
 	$scope.cantidad=1;
 	$scope.cuotas=1;
-	$scope.cliente=1;
 	$scope.afiliado=0;
 	$scope.ciudad = '';
 	$scope.seleccionado='';
 	$scope.productos= [];
 	$scope.listaTabla= [];
 	$scope.lista= [];
-	$sessionStorage = $scope.cliente;
 	$scope.ciudades = [];
 	$scope.afiliados = [];
 	
@@ -105,16 +103,15 @@ $scope.listarAfiliados = function(ciudad) {
 	
 	
 $scope.realizarPedido = function() {
-		
 	alert("entroo");
 		var dato3 = JSON.stringify({
 			listaProductoPedidoDTO : $scope.lista,
 			afiliado : $scope.afiliado.cedulaAfiliado,
-			cliente : $scope.cliente,
+			cliente : $sessionStorage.objeto.cedula,
 			cuotas : $scope.cuotas
 		});
 		
-		alert(dato3);
+		
 		$http({
 			url : 'rest/pedido/realizarPedido',
 			method : "POST",

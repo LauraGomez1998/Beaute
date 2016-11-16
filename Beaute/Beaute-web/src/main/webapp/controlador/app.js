@@ -7,8 +7,5 @@ app.config(function($routeProvider) {
 	}).when("/pedidos", {
 		controller : "pedidosController",
 		templateUrl : "paginas/pedidosClientes.html"
-	}).when("/cliente", {
-		controller : "clienteController",
-		templateUrl : "paginas/gestionCliente.html"
 	});
 });
