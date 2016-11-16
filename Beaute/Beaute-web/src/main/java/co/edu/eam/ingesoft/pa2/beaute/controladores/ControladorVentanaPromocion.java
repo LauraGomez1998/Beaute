@@ -19,13 +19,13 @@ public class ControladorVentanaPromocion implements Serializable {
 	@EJB
 	private PromocionEJB promocionEJB;
 
-	private int codigo;
+	private String codigo;
 
 	private double descuento;
 
 	public void crear() {
 		Promocion p = promocionEJB.buscar(codigo);
-		if (codigo != 0 && descuento != 0) {
+		if (codigo != null && descuento != 0) {
 			if (p == null) {
 				Promocion pro = new Promocion(codigo, descuento);
 				promocionEJB.crear(pro);
@@ -54,11 +54,11 @@ public class ControladorVentanaPromocion implements Serializable {
 		}
 	}
 
-	public int getCodigo() {
+	public String getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(int codigo) {
+	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
 

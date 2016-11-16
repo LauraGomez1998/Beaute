@@ -59,8 +59,6 @@ public class ControladorVentanaCatalogoProducto implements Serializable {
 
 	private boolean desactivar;
 
-	private double precioVenta;
-
 	@PostConstruct
 	public void inicializar() {
 		productos = productoEJB.listarProductos();
@@ -77,15 +75,6 @@ public class ControladorVentanaCatalogoProducto implements Serializable {
 		}
 	}
 
-	public void mostrarPrecio() {
-		if (producto != null) {
-			precioVenta = producto.getPrecio();
-		} else {
-			precioVenta = 3;
-		}
-
-	}
-
 	public void cargarCatalogo() {
 		catalogoAnterior = catalogoEJB.buscarUltimoCatalogo();
 		Date fechaActual = Calendar.getInstance().getTime();
@@ -96,40 +85,42 @@ public class ControladorVentanaCatalogoProducto implements Serializable {
 		}
 	}
 
-	/**
-	 * FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
-	 * "El producto se registro en el catalogo exitosamente", null);
-	 * FacesContext.getCurrentInstance().addMessage(null, message);
-	 */
 	public void crear() {
-		System.out.println("ALGOOOOOOOOOOOOOOOOOOOO --------------gbvsdfghfdsbfnjfhgdfdcfghjkjhgfdsfghjkhgfdsdfghjhgfds");
-		/**if (codigoCatalogo != 0) {
-			System.out.println("HAY CATALOGOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
-			if (producto != null && desactivar == true) {
-				CatalogoProducto c = catalogoProdEJB.validar(producto.getCodigo(), codigoCatalogo);
-				System.out.println("entro--------------------------------------------------");
-				if (c == null) {
-					precioVenta = producto.getPrecio() * (promocion.getDescuento() / 100);
-					CatalogoProducto catalogoProduc = new CatalogoProducto(catalogoAnterior, producto, promocion, fechaInicio, fechaFin, precioVenta);
-					catalogoProdEJB.crear(catalogoProduc);
-					FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "El producto se ha registrado en el catalogo", null);
-					FacesContext.getCurrentInstance().addMessage(null, message);
+		if (codigoCatalogo != 0) {
+			CatalogoProducto c = catalogoProdEJB.validar(producto.getCodigo(), codigoCatalogo);
+			if (c == null) {
+				if (desactivar == true) {
+					if (fechaInicio.before(fechaFin)) {
+						CatalogoProducto catalogoProduc = new CatalogoProducto(catalogoAnterior, producto, promocion,
+								fechaInicio, fechaFin);
+						catalogoProdEJB.crear(catalogoProduc);
+						FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+								"El producto se ha registrado en el catalogo", null);
+						FacesContext.getCurrentInstance().addMessage(null, message);
+					} else {
+						FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+								"Fechas de promocion invalidad", null);
+						FacesContext.getCurrentInstance().addMessage(null, message);
+					}
 				} else {
-					FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
-							"Este producto ya está registrado en el catalogo", null);
+					CatalogoProducto catalogoPro = new CatalogoProducto(catalogoAnterior, producto, null,
+							null, null);
+					catalogoProdEJB.crear(catalogoPro);
+					FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+							"El producto se ha registrado en el catalogo", null);
 					FacesContext.getCurrentInstance().addMessage(null, message);
 				}
-
 			} else {
-				System.out.println("producto nulo -----------------------------------");
-				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Llene campos", null);
+				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+						"Este producto ya está registrado en el catalogo", null);
 				FacesContext.getCurrentInstance().addMessage(null, message);
 			}
+
 		} else {
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
 					"Por favor, ingrese un catálogo primero", null);
 			FacesContext.getCurrentInstance().addMessage(null, message);
-		}**/
+		}
 	}
 
 	public void agregarPromocion() {
@@ -218,14 +209,6 @@ public class ControladorVentanaCatalogoProducto implements Serializable {
 
 	public void setDesactivar(boolean desactivar) {
 		this.desactivar = desactivar;
-	}
-
-	public double getPrecioVenta() {
-		return precioVenta;
-	}
-
-	public void setPrecioVenta(double precioVenta) {
-		this.precioVenta = precioVenta;
 	}
 
 }

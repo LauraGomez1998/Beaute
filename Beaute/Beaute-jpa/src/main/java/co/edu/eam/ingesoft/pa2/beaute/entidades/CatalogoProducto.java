@@ -55,21 +55,19 @@ public class CatalogoProducto implements Serializable {
 	@Column(name = "FIN_PROMOCION", nullable = true)
 	private Date finPromocion;
 
-	@Column(name = "PRECIO_VENTA", length = 10, nullable = false)
-	private double precioVenta;
+	
 
 	public CatalogoProducto() {
 	}
 
 	public CatalogoProducto(Catalogo catalogo, Producto producto, Promocion promocion, Date inicioPromocion,
-			Date finPromocion, double precioVenta) {
+			Date finPromocion) {
 		super();
 		this.catalogo = catalogo;
 		this.producto = producto;
 		this.promocion = promocion;
 		this.inicioPromocion = inicioPromocion;
 		this.finPromocion = finPromocion;
-		this.precioVenta = precioVenta;
 	}
 
 	public Catalogo getCatalogo() {

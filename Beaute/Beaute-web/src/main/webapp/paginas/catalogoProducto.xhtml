@@ -20,16 +20,12 @@
 				<h:inputText value="#{catalogoProductoWeb.codigoCatalogo}" id="cata" readonly="true" />
 
 				<p:outputLabel value="Producto" for="prod" />
-				<p:selectOneMenu id="prod" value="#{catalogoProductoWeb.producto}">
-					<f:selectItems value="#{catalogoProductoWeb.productos}" var="cat"
-						itemValue="#{cat}" itemLabel="#{cat.nombre}" />
-						<f:ajax event="change" render="pre" execute="@this"
-						listener="#{catalogoProductoWeb.mostrarPrecio()}" />
+				<p:selectOneMenu converter="#{productoConverter}" id="prod" value="#{catalogoProductoWeb.producto}">
+					<f:selectItems value="#{catalogoProductoWeb.productos}" var="pr"
+						itemValue="#{pr}" itemLabel="#{pr.nombre}" />
 				</p:selectOneMenu>
 				
-				<p:outputLabel value="Precio Venta" for="pre" />
-				<h:inputText value="#{catalogoProductoWeb.precioVenta}" id="pre" readonly="true"
-				rendered="true" />
+				
 
 				<p:outputLabel value="Registrar Promocion" />
 				<p:selectOneRadio value="#{catalogoProductoWeb.promocionSelect}"
@@ -47,9 +43,9 @@
 				<h:panelGrid columns="2" rendered="#{catalogoProductoWeb.desactivar}">
 
 					<p:outputLabel value="Promocion" for="prom" />
-					<p:selectOneMenu id="prom" value="#{catalogoProductoWeb.promocion}">
+					<p:selectOneMenu converter="#{promocionConverter}" id="prom" value="#{catalogoProductoWeb.promocion}">
 						<f:selectItems value="#{catalogoProductoWeb.promociones}"
-							var="cat" itemValue="#{cat}" itemLabel="#{cat.descuento}%"/>
+							var="p" itemValue="#{p}" itemLabel="#{p.descuento}%"/>
 					</p:selectOneMenu>
 
 					<p:outputLabel value="Fecha Inicio" for="fechaInicio" />
