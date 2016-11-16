@@ -21,7 +21,7 @@ public class PedidoProductoVentaEJB extends EJBGenerico<VentaProductoPedido> {
 		return VentaProductoPedido.class;
 	}
 
-	public void crear(VentaProductoPedido pedidoProductoVenta){
+	public void crear(VentaProductoPedido pedidoProductoVenta) {
 		dao.crear(pedidoProductoVenta);
 
 	}

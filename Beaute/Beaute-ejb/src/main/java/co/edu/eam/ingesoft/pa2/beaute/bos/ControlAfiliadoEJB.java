@@ -21,7 +21,7 @@ public class ControlAfiliadoEJB extends EJBGenerico<ControlAfiliado> {
 		return ControlAfiliado.class;
 	}
 
-	public void crear(ControlAfiliado controlAfiliado)  {
+	public void crear(ControlAfiliado controlAfiliado) {
 		dao.crear(controlAfiliado);
 
 	}

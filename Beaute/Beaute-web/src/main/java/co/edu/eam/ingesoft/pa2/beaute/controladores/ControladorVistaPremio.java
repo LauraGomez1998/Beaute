@@ -34,6 +34,7 @@ public class ControladorVistaPremio implements Serializable {
 	@PostConstruct
 	public void iniciar() {
 		listaPremios = new ArrayList<>();
+		//corregir dato quemado
 		listaPremios = premioAfiliadoEJB.listarPremios(123);
 	}
 

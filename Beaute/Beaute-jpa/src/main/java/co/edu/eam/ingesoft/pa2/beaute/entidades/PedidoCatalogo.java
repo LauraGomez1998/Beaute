@@ -24,10 +24,13 @@ import javax.persistence.Temporal;
 @Entity
 @Table(name = "PEDIDOS_CATALOGOS")
 @NamedQueries({
-		@NamedQuery(name = PedidoCatalogo.LISTAR_PEDIDOS_AFI, query = "select p from PedidoCatalogo p where p.afiliado.cedulaAfiliado=?1 and p.estadoPedido=false") })
+		@NamedQuery(name = PedidoCatalogo.LISTAR_PEDIDOS_AFI, query = "select p from PedidoCatalogo p where p.afiliado.cedulaAfiliado=?1 and p.estadoPedido=false"),
+		@NamedQuery(name = PedidoCatalogo.TAMANIO, query = "select p from PedidoCatalogo p") })
 public class PedidoCatalogo implements Serializable {
 
 	public static final String LISTAR_PEDIDOS_AFI = "PedidoCatalogo.listar";
+
+	public static final String TAMANIO = "PedidoCatalogo.Tamanio";
 
 	@Id
 	@Column(name = "CODIGO", length = 20)
