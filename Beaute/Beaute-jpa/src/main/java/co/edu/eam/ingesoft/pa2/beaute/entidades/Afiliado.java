@@ -23,10 +23,13 @@ import co.edu.eam.ingesoft.pa2.beaute.enumeraciones.NivelAfiliadoEnum;
 @Entity
 @Table(name = "AFILIADOS")
 @NamedQueries({
-		@NamedQuery(name = Afiliado.LISTAR_AFILADOS_CIUDAD, query = "select a from Afiliado a where a.ciudad.codigo =?1") })
+		@NamedQuery(name = Afiliado.LISTAR_AFILADOS_CIUDAD, query = "select a from Afiliado a where a.ciudad.codigo =?1"),
+		@NamedQuery(name = Afiliado.LOGIN_ANDROID, query = "select a from Afiliado a where a.usuario = ?1 and a.contrasenia = ?2")})
+
 public class Afiliado implements Serializable {
 
 	public static final String LISTAR_AFILADOS_CIUDAD = "Afiliado.listarAfiliado";
+	public static final String LOGIN_ANDROID = "Afiliado.buscarAfiliado";
 
 	@Id
 	@Column(name = "CEDULA_AFILIADO", length = 50)

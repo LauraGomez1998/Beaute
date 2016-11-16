@@ -34,5 +34,10 @@ public class AfiliadoEJB extends EJBGenerico<Afiliado> {
 		return dao.ejecutarNamedQuery(Afiliado.LISTAR_AFILADOS_CIUDAD, codigo);
 		
 	}
+	
+	public List<Afiliado> loginAfiliado(String usuario, String contrasenia){
+		return dao.ejecutarNamedQuery(Afiliado.LOGIN_ANDROID, usuario, contrasenia);
+		
+	}
 
 }

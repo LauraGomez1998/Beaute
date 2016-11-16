@@ -68,7 +68,6 @@ public class PedidoRest {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public RespuestaDTO listarProductosCatalogo(@FormParam(value = "categoria") CategoriaProductoEnum categoria) {
-     System.out.println("jajajajihrighrigjrigrigjrijgrijijiiiiiiiiiiiiiiiiiiiiiiiii");
 		
 		List<Producto> lista = catalogoProductoEJb.listarProductosCatalogo(categoria);
 		if (!lista.isEmpty()) {

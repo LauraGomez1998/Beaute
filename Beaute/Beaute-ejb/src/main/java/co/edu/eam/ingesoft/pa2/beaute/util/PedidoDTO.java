@@ -7,7 +7,9 @@ public class PedidoDTO {
 	private List<ListaProductoPedidoDTO> listaProductoPedidoDTO;
 	private int afiliado;
 	
-	
+	public PedidoDTO() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	
 	public PedidoDTO(List<ListaProductoPedidoDTO> listaProductoPedidoDTO, int afiliado) {
