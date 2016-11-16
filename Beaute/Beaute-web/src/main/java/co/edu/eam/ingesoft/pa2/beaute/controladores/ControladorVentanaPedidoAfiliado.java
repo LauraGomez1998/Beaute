@@ -10,6 +10,7 @@ import javax.inject.Named;
 
 import org.omnifaces.cdi.ViewScoped;
 
+import co.edu.eam.ingesoft.pa2.beaute.bos.AfiliadoEJB;
 import co.edu.eam.ingesoft.pa2.beaute.bos.CatalogoProductoEJB;
 import co.edu.eam.ingesoft.pa2.beaute.bos.PedidoEJB;
 import co.edu.eam.ingesoft.pa2.beaute.dto.PedidoAfiliadoDTO;
@@ -20,6 +21,12 @@ import co.edu.eam.ingesoft.pa2.beaute.enumeraciones.CategoriaProductoEnum;
 @Named("pedidoAfiliadoWeb")
 @ViewScoped
 public class ControladorVentanaPedidoAfiliado implements Serializable {
+	
+	/**
+	 * EJB de la clase afiliado
+	 */
+	@EJB
+	private AfiliadoEJB afiliadoEJB;
 	/**
 	 * EJB de la clase catalogo producto
 	 */
@@ -77,8 +84,8 @@ public class ControladorVentanaPedidoAfiliado implements Serializable {
 	 * crea el pedido del afiliado
 	 */
 	public void pedir() {
-		//corregir dato quemado
-		PedidoAfiliadoDTO pedidoAfiliado = new PedidoAfiliadoDTO(listaProductoPedido, 123);
+		// corregir dato quemado
+		PedidoAfiliadoDTO pedidoAfiliado = new PedidoAfiliadoDTO(listaProductoPedido, afiliadoEJB.CEDULAAFILIADO);
 		pedidoEJB.crearPedido(pedidoAfiliado);
 		listaProductoPedido = null;
 		listaProductoPedido = new ArrayList<>();

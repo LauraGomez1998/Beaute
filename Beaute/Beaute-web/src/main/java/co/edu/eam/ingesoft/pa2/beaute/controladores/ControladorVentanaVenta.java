@@ -12,6 +12,7 @@ import javax.inject.Named;
 
 import org.omnifaces.cdi.ViewScoped;
 
+import co.edu.eam.ingesoft.pa2.beaute.bos.AfiliadoEJB;
 import co.edu.eam.ingesoft.pa2.beaute.bos.CatalogoPedidoAfiliadoEJB;
 import co.edu.eam.ingesoft.pa2.beaute.bos.PedidoEJB;
 import co.edu.eam.ingesoft.pa2.beaute.bos.ProductoEJB;
@@ -26,7 +27,11 @@ import co.edu.eam.ingesoft.pa2.beaute.entidades.VentaProductoPedido;
 @Named("ventaWeb")
 @ViewScoped
 public class ControladorVentanaVenta implements Serializable {
-
+	/**
+	 * EJB de la clase afiliado
+	 */
+	@EJB
+	private AfiliadoEJB afiliadoEJB;
 	/**
 	 * EJB de la clase catalogoPedidoAfiliado
 	 */
@@ -74,7 +79,7 @@ public class ControladorVentanaVenta implements Serializable {
 	 */
 	@PostConstruct
 	public void inicializar() {
-		listaInventario = catalogoPEdidoAfiliadoEJB.listarCatalogoPedido(123);
+		listaInventario = catalogoPEdidoAfiliadoEJB.listarCatalogoPedido(afiliadoEJB.CEDULAAFILIADO);
 	}
 
 	/**

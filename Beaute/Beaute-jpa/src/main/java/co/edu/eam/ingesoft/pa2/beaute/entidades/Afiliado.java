@@ -24,7 +24,7 @@ import co.edu.eam.ingesoft.pa2.beaute.enumeraciones.NivelAfiliadoEnum;
 @Table(name = "AFILIADOS")
 @NamedQueries({
 		@NamedQuery(name = Afiliado.LISTAR_AFILADOS_CIUDAD, query = "select a from Afiliado a where a.ciudad.codigo =?1"),
-		@NamedQuery(name = Afiliado.LOGIN_ANDROID, query = "select a from Afiliado a where a.usuario = ?1 and a.contrasenia = ?2")})
+		@NamedQuery(name = Afiliado.LOGIN_ANDROID, query = "select a from Afiliado a where a.usuario = ?1 and a.contrasenia = ?2") })
 
 public class Afiliado implements Serializable {
 
@@ -54,10 +54,10 @@ public class Afiliado implements Serializable {
 	@Column(name = "TELEFONO", length = 7, nullable = false)
 	private int telefono;
 
-	@Column(name = "USUARIO", unique = true, length = 10, nullable = false)
+	@Column(name = "USUARIO", unique = true, length = 200, nullable = false)
 	private String usuario;
 
-	@Column(name = "CONTRASENIA", length = 10, nullable = false)
+	@Column(name = "CONTRASENIA", length = 200, nullable = false)
 	private String contrasenia;
 
 	@Column(name = "NOMBRE", length = 50, nullable = false)

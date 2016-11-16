@@ -97,6 +97,7 @@ public class ControladorVentanaAfiliado implements Serializable {
 	public void inicializar() {
 		listaCiudades = ciudadEJB.listarCiudades();
 		listarGenero();
+		cedulaAfiliador = afiliadoEJB.CEDULAAFILIADO;
 	}
 
 	/**
@@ -114,7 +115,7 @@ public class ControladorVentanaAfiliado implements Serializable {
 	 * metodo para registrar un afiliado
 	 */
 	public void registrarAfiliado() {
-		Afiliado afiliador = afiliadoEJB.buscar(cedulaAfiliador);
+		Afiliado afiliador = afiliadoEJB.buscar(cedulaAfiliado);
 		Afiliado afiliado = new Afiliado();
 		if (afiliador == null) {
 			afiliado = new Afiliado(cedulaAfiliado, genero, null, ciudadSeleccionada, Calendar.getInstance().getTime(),
@@ -132,7 +133,7 @@ public class ControladorVentanaAfiliado implements Serializable {
 	 * metodo que busca un afiliado
 	 */
 	public void buscarAfiliado() {
-		Afiliado afiliado = afiliadoEJB.buscar(cedulaAfiliado);
+		Afiliado afiliado = afiliadoEJB.buscar(cedulaAfiliador);
 		if (afiliado != null) {
 			cedulaAfiliado = afiliado.getCedulaAfiliado();
 			genero = afiliado.getGenero();

@@ -12,6 +12,7 @@ import javax.inject.Named;
 
 import org.omnifaces.cdi.ViewScoped;
 
+import co.edu.eam.ingesoft.pa2.beaute.bos.AfiliadoEJB;
 import co.edu.eam.ingesoft.pa2.beaute.bos.CatalogoPedidoClienteEJB;
 import co.edu.eam.ingesoft.pa2.beaute.bos.CuotasEJB;
 import co.edu.eam.ingesoft.pa2.beaute.bos.PedidoCatalogoEJB;
@@ -49,6 +50,13 @@ public class ControladorVentanaAprobarPedido implements Serializable {
 	 */
 	@EJB
 	private PedidoEJB pedidoEJB;
+
+	/**
+	 * EJB de la clase afiliado
+	 */
+	@EJB
+	private AfiliadoEJB afiliadoEJB;
+
 	/**
 	 * lista de pedidos a un afiliado
 	 */
@@ -76,7 +84,7 @@ public class ControladorVentanaAprobarPedido implements Serializable {
 
 	@PostConstruct
 	public void inicializar() {
-		listaPedidosPendientes = pedidoCliente.listarPedidosAfiliado(123);
+		listaPedidosPendientes = pedidoCliente.listarPedidosAfiliado(afiliadoEJB.CEDULAAFILIADO);
 		pedidosPorAprobar = new ArrayList<>();
 		for (int i = 0; i < listaPedidosPendientes.size(); i++) {
 			Cuota c = cuotaEJB.buscarCuotaPedido(listaPedidosPendientes.get(i));
@@ -106,8 +114,8 @@ public class ControladorVentanaAprobarPedido implements Serializable {
 			for (int i = 0; i < lista.size(); i++) {
 				ProductoDTO e = new ProductoDTO(lista.get(i).getCatalogo().getProducto(), lista.get(i).getCantidad());
 				listaProductoPedido.add(e);
-			//corregir quemado
-				pedidoEJB.crearPedidoCliente(listaProductoPedido, 123);
+				// corregir quemado
+				pedidoEJB.crearPedidoCliente(listaProductoPedido, afiliadoEJB.CEDULAAFILIADO);
 			}
 		} else {
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,

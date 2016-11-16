@@ -2,13 +2,10 @@ package co.edu.eam.ingesoft.pa2.beaute.dao;
 
 import java.sql.SQLException;
 
-
-
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-
 
 public class DAOGenerico {
 
@@ -25,11 +22,11 @@ public class DAOGenerico {
 		em.persist(obj);
 	}
 
-	public void editar(Object obj){
+	public void editar(Object obj) {
 		em.merge(obj);
 	}
 
-	public void eliminar(Object obj)  {
+	public void eliminar(Object obj) {
 		em.remove(em.contains(obj) ? obj : em.merge(obj));
 	}
 
@@ -48,4 +45,20 @@ public class DAOGenerico {
 		return q.getResultList();
 	}
 
+	public String verificar(String usuario, String contrasenia) {
+		Query query = em.createNativeQuery("select LOGIN(:USUARIO,:CONTRASENIA) from dual");
+		query.setParameter("USUARIO", usuario);
+		query.setParameter("CONTRASENIA", contrasenia);
+		return query.getSingleResult().toString();
+	}
+
+	public String estadoAfiliado(int cedula){
+		Query query = em.createNativeQuery("select ESTADO_AFILIADO(:CEDULA) from dual");
+		query.setParameter("CEDULA", cedula);
+		return query.getSingleResult().toString();
+	}
+	
+	
+	
+	
 }
