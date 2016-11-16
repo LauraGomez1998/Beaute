@@ -106,6 +106,7 @@ public class ControladorVentanaAprobarPedido implements Serializable {
 			for (int i = 0; i < lista.size(); i++) {
 				ProductoDTO e = new ProductoDTO(lista.get(i).getCatalogo().getProducto(), lista.get(i).getCantidad());
 				listaProductoPedido.add(e);
+			//corregir quemado
 				pedidoEJB.crearPedidoCliente(listaProductoPedido, 123);
 			}
 		} else {

@@ -8,13 +8,18 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "VENTAS")
+@NamedQueries({ @NamedQuery(name = Venta.TAMANIO, query = "select v from Venta v") })
 public class Venta implements Serializable {
+
+	public static final String TAMANIO = "Venta.Tamanio";
 
 	@Id
 	@Column(name = "CODIGO", length = 10)

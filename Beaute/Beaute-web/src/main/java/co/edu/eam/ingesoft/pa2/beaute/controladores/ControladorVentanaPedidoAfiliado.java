@@ -77,6 +77,7 @@ public class ControladorVentanaPedidoAfiliado implements Serializable {
 	 * crea el pedido del afiliado
 	 */
 	public void pedir() {
+		//corregir dato quemado
 		PedidoAfiliadoDTO pedidoAfiliado = new PedidoAfiliadoDTO(listaProductoPedido, 123);
 		pedidoEJB.crearPedido(pedidoAfiliado);
 		listaProductoPedido = null;

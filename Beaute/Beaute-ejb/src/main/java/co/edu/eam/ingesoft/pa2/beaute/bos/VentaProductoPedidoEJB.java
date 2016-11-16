@@ -19,4 +19,8 @@ public class VentaProductoPedidoEJB extends EJBGenerico<VentaProductoPedido> {
 		dao.crear(venta);
 	}
 
+	public int autoIncremental() {
+		return dao.ejecutarNamedQuery(VentaProductoPedido.TAMANIO).size();
+	}
+
 }

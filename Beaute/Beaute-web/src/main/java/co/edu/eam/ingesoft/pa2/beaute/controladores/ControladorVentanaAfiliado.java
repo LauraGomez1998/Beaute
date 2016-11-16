@@ -153,20 +153,6 @@ public class ControladorVentanaAfiliado implements Serializable {
 	}
 
 	/**
-	 * metodo para eliminar un afiliado
-	 */
-	public void eliminarAfiliado() {
-		Afiliado afiliado = afiliadoEJB.buscar(cedulaAfiliado);
-		if (afiliado != null) {
-			afiliadoEJB.eliminar(afiliado);
-		} else {
-			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "No se ha encontrado el afiliado",
-					null);
-			FacesContext.getCurrentInstance().addMessage(null, message);
-		}
-	}
-
-	/**
 	 * metodo para editar un afiliado
 	 */
 	public void editar() {

@@ -31,12 +31,12 @@ public class ClienteEJB extends EJBGenerico<Cliente> {
 	}
 
 	public Cliente buscarCliente(Object pk) {
-	Cliente c = dao.buscar(pk);
-	if(c!=null){
-		return c;
-	}else{
-		return null;
-	}
+		Cliente c = dao.buscar(pk);
+		if (c != null) {
+			return c;
+		} else {
+			return null;
+		}
 
 	}
 

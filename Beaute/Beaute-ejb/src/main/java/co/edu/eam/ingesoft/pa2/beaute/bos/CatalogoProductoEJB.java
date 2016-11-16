@@ -18,7 +18,6 @@ public class CatalogoProductoEJB extends EJBGenerico<CatalogoProducto> {
 
 	@Override
 	public Class getClase() {
-		// TODO Auto-generated method stub
 		return CatalogoProducto.class;
 	}
 

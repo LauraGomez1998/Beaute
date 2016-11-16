@@ -27,6 +27,10 @@ public class PedidoCatalogoEJB extends EJBGenerico<PedidoCatalogo> {
 
 	}
 
+	public int autoIncremental() {
+		return dao.ejecutarNamedQuery(PedidoCatalogo.TAMANIO).size();
+	}
+
 	public void editar(PedidoCatalogo catalogo) {
 		dao.editar(catalogo);
 	}

@@ -29,10 +29,10 @@ public class AfiliadoEJB extends EJBGenerico<Afiliado> {
 	public Afiliado buscar(Object pk) {
 		return dao.buscar(pk);
 	}
-	
-	public List<Afiliado> listarAfiliados(String codigo){
+
+	public List<Afiliado> listarAfiliados(String codigo) {
 		return dao.ejecutarNamedQuery(Afiliado.LISTAR_AFILADOS_CIUDAD, codigo);
-		
+
 	}
 
 }

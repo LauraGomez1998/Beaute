@@ -29,5 +29,9 @@ public class VentaEJB extends EJBGenerico<Venta> {
 	public Venta buscar(Object pk) {
 		return dao.buscar(pk);
 	}
+	
+	public int autoIncrementar(){
+		return dao.ejecutarNamedQuery(Venta.TAMANIO).size();
+	}
 
 }

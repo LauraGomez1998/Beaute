@@ -89,12 +89,13 @@ public class CatalogoPedidoClienteEJB extends EJBGenerico<CatalogoPedidoCliente>
 			Cliente cliente = clienteEjb.buscar(dto.getCliente());
 			Afiliado afiliado = AfiliadoEjb.buscar(dto.getAfiliado());
 			PedidoCatalogo pedidoCatalogo;
+			int codP = pedidoCatalogoEjb.autoIncremental();
 			if (dto.getCuotas() == 1) {
-				pedidoCatalogo = new PedidoCatalogo(1, afiliado, cliente, Calendar.getInstance().getTime(),
+				pedidoCatalogo = new PedidoCatalogo(codP, afiliado, cliente, Calendar.getInstance().getTime(),
 						TipoPagoEnum.CONTADO, false);
 				pedidoCatalogoEjb.crear(pedidoCatalogo);
 			} else {
-				pedidoCatalogo = new PedidoCatalogo(1, afiliado, cliente, Calendar.getInstance().getTime(),
+				pedidoCatalogo = new PedidoCatalogo(codP, afiliado, cliente, Calendar.getInstance().getTime(),
 						TipoPagoEnum.CREDITO, false);
 				pedidoCatalogoEjb.crear(pedidoCatalogo);
 				Cuota cuota = new Cuota(1, pedidoCatalogo, dto.getCuotas());

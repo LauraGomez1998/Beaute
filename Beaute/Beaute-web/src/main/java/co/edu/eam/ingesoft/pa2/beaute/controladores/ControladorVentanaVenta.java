@@ -86,9 +86,11 @@ public class ControladorVentanaVenta implements Serializable {
 		if (productoPedido != null) {
 			Producto p = productoEJB.buscar(codigoProducto);
 			Pedido pedido = pedidoEJB.buscar(codigoPedido);
-			Venta v = new Venta(1, p.getPrecio() * cantidad, Calendar.getInstance().getTime());
+			int codV = ventaEJB.autoIncrementar();
+			Venta v = new Venta(codV, p.getPrecio() * cantidad, Calendar.getInstance().getTime());
 			ventaEJB.crear(v);
-			VentaProductoPedido ventaPro = new VentaProductoPedido(1, v, p, pedido, cantidad);
+			int cod = ventaProductoPedidoEJB.autoIncremental();
+			VentaProductoPedido ventaPro = new VentaProductoPedido(cod, v, p, pedido, cantidad);
 			ventaProductoPedidoEJB.crear(ventaPro);
 		} else {
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Los datos ingresados son erroneos",
