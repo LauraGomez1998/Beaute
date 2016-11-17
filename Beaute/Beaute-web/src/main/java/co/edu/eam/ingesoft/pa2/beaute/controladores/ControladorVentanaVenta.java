@@ -1,11 +1,13 @@
 package co.edu.eam.ingesoft.pa2.beaute.controladores;
 
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.ejb.EJBTransactionRolledbackException;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
@@ -88,19 +90,41 @@ public class ControladorVentanaVenta implements Serializable {
 	public void vender() {
 		CatalogoPedidoAfiliado productoPedido = catalogoPEdidoAfiliadoEJB.buscarCatalogoPedido(codigoPedido,
 				codigoProducto);
-		if (productoPedido != null) {
-			Producto p = productoEJB.buscar(codigoProducto);
-			Pedido pedido = pedidoEJB.buscar(codigoPedido);
-			int codV = ventaEJB.autoIncrementar();
-			Venta v = new Venta(codV, p.getPrecio() * cantidad, Calendar.getInstance().getTime());
-			ventaEJB.crear(v);
-			int cod = ventaProductoPedidoEJB.autoIncremental();
-			VentaProductoPedido ventaPro = new VentaProductoPedido(cod, v, p, pedido, cantidad);
-			ventaProductoPedidoEJB.crear(ventaPro);
-		} else {
-			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Los datos ingresados son erroneos",
-					null);
-			FacesContext.getCurrentInstance().addMessage(null, message);
+		try {
+			if (productoPedido != null && cantidad > 0) {
+				Producto p = productoEJB.buscar(codigoProducto);
+				Pedido pedido = pedidoEJB.buscar(codigoPedido);
+				int codV = ventaEJB.autoIncrementar();
+				Venta v = new Venta(codV, p.getPrecio() * cantidad, Calendar.getInstance().getTime());
+				ventaEJB.crear(v);
+				int cod = ventaProductoPedidoEJB.autoIncremental();
+				VentaProductoPedido ventaPro = new VentaProductoPedido(cod, v, p, pedido, cantidad);
+				ventaProductoPedidoEJB.crear(ventaPro);
+				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+						"La venta se ha realizado con exito", null);
+				FacesContext.getCurrentInstance().addMessage(null, message);
+			} else {
+				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Los datos ingresados son erroneos",
+						null);
+				FacesContext.getCurrentInstance().addMessage(null, message);
+			}
+		} catch (EJBTransactionRolledbackException e) {
+			Throwable t = e;
+			while (!(t.getCause() instanceof SQLException)) {
+				t = t.getCause();
+				if (t == null) {
+					break;
+				}
+				if (t.getCause() instanceof SQLException) {
+					SQLException sql = (SQLException) t.getCause();
+					if (sql.getErrorCode() == 20001) {
+						FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+								"No tiene los productos suficientes para esta venta", null);
+						FacesContext.getCurrentInstance().addMessage(null, message);
+
+					}
+				}
+			}
 		}
 	}
 

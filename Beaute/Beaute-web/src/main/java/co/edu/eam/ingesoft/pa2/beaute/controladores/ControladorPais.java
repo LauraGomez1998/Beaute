@@ -24,7 +24,9 @@ public class ControladorPais implements Serializable {
 		try {
 			Pais pais = new Pais(1, "Argentina");
 			paisEJB.crear(pais);
-		} catch (Exception e) {
+		} catch (EJBTransactionRolledbackException e) {
+			System.out.println("Excepcion---- " + e.getClass());
+			System.out.println("Excepcion2---- " + e.getCause());
 			Throwable t = e;
 			while (!(t.getCause() instanceof SQLException)) {
 				t = t.getCause();
@@ -35,13 +37,12 @@ public class ControladorPais implements Serializable {
 					SQLException sql = (SQLException) t.getCause();
 					System.out.println(" ----------------------");
 					if (sql.getErrorCode() == 20001) {
-						
+
 						System.out.println(sql.getMessage() + " ----------------------");
 					}
 				}
 			}
 
-			
 			// while (true) {
 			// t = t.getCause();
 			// if (t.getCause() instanceof SQLException) {

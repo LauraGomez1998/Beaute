@@ -1,11 +1,15 @@
 package co.edu.eam.ingesoft.pa2.beaute.controladores;
 
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.ejb.EJBTransactionRolledbackException;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 import org.omnifaces.cdi.ViewScoped;
@@ -21,7 +25,7 @@ import co.edu.eam.ingesoft.pa2.beaute.enumeraciones.CategoriaProductoEnum;
 @Named("pedidoAfiliadoWeb")
 @ViewScoped
 public class ControladorVentanaPedidoAfiliado implements Serializable {
-	
+
 	/**
 	 * EJB de la clase afiliado
 	 */
@@ -84,11 +88,28 @@ public class ControladorVentanaPedidoAfiliado implements Serializable {
 	 * crea el pedido del afiliado
 	 */
 	public void pedir() {
-		// corregir dato quemado
-		PedidoAfiliadoDTO pedidoAfiliado = new PedidoAfiliadoDTO(listaProductoPedido, afiliadoEJB.CEDULAAFILIADO);
-		pedidoEJB.crearPedido(pedidoAfiliado);
-		listaProductoPedido = null;
-		listaProductoPedido = new ArrayList<>();
+		try {
+			PedidoAfiliadoDTO pedidoAfiliado = new PedidoAfiliadoDTO(listaProductoPedido, afiliadoEJB.CEDULAAFILIADO);
+			pedidoEJB.crearPedido(pedidoAfiliado);
+			listaProductoPedido = null;
+			listaProductoPedido = new ArrayList<>();
+		} catch (EJBTransactionRolledbackException e) {
+			Throwable t = e;
+			while (!(t.getCause() instanceof SQLException)) {
+				t = t.getCause();
+				if (t == null) {
+					break;
+				}
+				if (t.getCause() instanceof SQLException) {
+					SQLException sql = (SQLException) t.getCause();
+					if (sql.getErrorCode() == 20001) {
+						FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+								"A superado la cantidad de productos disponibles", null);
+						FacesContext.getCurrentInstance().addMessage(null, message);
+					}
+				}
+			}
+		}
 	}
 
 	/**

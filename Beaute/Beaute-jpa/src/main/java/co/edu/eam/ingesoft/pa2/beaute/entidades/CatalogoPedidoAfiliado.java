@@ -19,7 +19,7 @@ import co.edu.eam.ingesoft.pa2.beaute.pks.CatalogoPedidoAfiliadoPK;
 @Table(name = "CATALOGO_PEDIDO_AFI")
 @IdClass(value = CatalogoPedidoAfiliadoPK.class)
 @NamedQueries({
-		@NamedQuery(name = CatalogoPedidoAfiliado.LISTAR_PEDIDO_AFILIADO, query = "select c from CatalogoPedidoAfiliado c where c.pedido.afiliado.cedulaAfiliado=?1"),
+		@NamedQuery(name = CatalogoPedidoAfiliado.LISTAR_PEDIDO_AFILIADO, query = "select c from CatalogoPedidoAfiliado c where c.pedido.afiliado.cedulaAfiliado=?1 and c.cantidad>0"),
 		@NamedQuery(name = CatalogoPedidoAfiliado.BUSCAR_PEDIDO_AFILIADO, query = "select c from CatalogoPedidoAfiliado c where c.pedido.codigo=?1 and c.catalogo.producto.codigo=?2") })
 public class CatalogoPedidoAfiliado implements Serializable {
 

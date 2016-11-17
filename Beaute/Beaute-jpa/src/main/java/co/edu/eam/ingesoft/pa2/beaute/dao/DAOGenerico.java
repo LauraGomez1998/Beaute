@@ -46,19 +46,16 @@ public class DAOGenerico {
 	}
 
 	public String verificar(String usuario, String contrasenia) {
-		Query query = em.createNativeQuery("select LOGIN(:USUARIO,:CONTRASENIA) from dual");
-		query.setParameter("USUARIO", usuario);
-		query.setParameter("CONTRASENIA", contrasenia);
+		Query query = em.createNativeQuery("select LOGIN(:USUA,:PASS) from dual");
+		query.setParameter("USUA", usuario);
+		query.setParameter("PASS", contrasenia);
 		return query.getSingleResult().toString();
 	}
 
-	public String estadoAfiliado(int cedula){
+	public String estadoAfiliado(int cedula) {
 		Query query = em.createNativeQuery("select ESTADO_AFILIADO(:CEDULA) from dual");
 		query.setParameter("CEDULA", cedula);
 		return query.getSingleResult().toString();
 	}
-	
-	
-	
-	
+
 }
