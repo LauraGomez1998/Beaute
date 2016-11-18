@@ -32,4 +32,8 @@ public class CuotasEJB extends EJBGenerico<Cuota> {
 		}
 	}
 
+	public int autoIncremental() {
+		return dao.ejecutarNamedQuery(Cuota.AUTOINCREMENTAL).size();
+	}
+
 }

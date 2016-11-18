@@ -15,10 +15,13 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "CUOTAS")
-@NamedQueries({ @NamedQuery(name = Cuota.LISTAR_CUOTAS, query = "select c from Cuota c where c.pedidoCatalogo=?1") })
+@NamedQueries({ @NamedQuery(name = Cuota.LISTAR_CUOTAS, query = "select c from Cuota c where c.pedidoCatalogo=?1"),
+		@NamedQuery(name = Cuota.AUTOINCREMENTAL, query = "select c from Cuota c") })
 public class Cuota implements Serializable {
 
 	public static final String LISTAR_CUOTAS = "Cuotas.listar";
+
+	public static final String AUTOINCREMENTAL = "Cuotas.Incremental";
 
 	@Id
 	@Column(name = "CODIGO", length = 50)
@@ -34,16 +37,12 @@ public class Cuota implements Serializable {
 	public Cuota() {
 	}
 
-	
-
 	public Cuota(int codigo, PedidoCatalogo pedidoCatalogo, int numeroCuotas) {
 		super();
 		this.codigo = codigo;
 		this.pedidoCatalogo = pedidoCatalogo;
 		this.numeroCuotas = numeroCuotas;
 	}
-
-
 
 	public int getCodigo() {
 		return codigo;
