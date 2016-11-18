@@ -19,7 +19,6 @@ public class AfiliadoEJB extends EJBGenerico<Afiliado> {
 
 	@Override
 	public Class getClase() {
-		// TODO Auto-generated method stub
 		return Afiliado.class;
 	}
 
@@ -34,7 +33,6 @@ public class AfiliadoEJB extends EJBGenerico<Afiliado> {
 
 	public List<Afiliado> listarAfiliados(String codigo) {
 		return dao.ejecutarNamedQuery(Afiliado.LISTAR_AFILADOS_CIUDAD, codigo);
-
 	}
 
 	public List<Afiliado> loginAfiliado(String usuario, String contrasenia) {
@@ -46,7 +44,11 @@ public class AfiliadoEJB extends EJBGenerico<Afiliado> {
 		if (resultado != -1) {
 			int estado = Integer.parseInt(dao.estadoAfiliado(resultado));
 			if (estado == 1) {
-				CEDULAAFILIADO = resultado;
+				if (usuario.equalsIgnoreCase("admin")) {
+					CEDULAAFILIADO = -1;
+				} else {
+					CEDULAAFILIADO = resultado;
+				}
 				return 0;
 			} else {
 				return 1;

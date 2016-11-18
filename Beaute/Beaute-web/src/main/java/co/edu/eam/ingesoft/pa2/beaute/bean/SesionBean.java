@@ -27,23 +27,21 @@ public class SesionBean implements Serializable {
 
 	@EJB
 	private AfiliadoEJB afiliadoEJB;
-	@EJB
-	private SeguridadEJB seguridadEJB;
 	private String usuario;
 	private String contrasenia;
-	private List<Rol> roles;
-	private List<Acceso> accesos;
-	private Afiliado afiliado;
 	private boolean ocultar;
+	private boolean afiliadoUser;
+	private boolean adminUser;
 
 	@PostConstruct
 	public void inicializar() {
 		ocultar = false;
+		afiliadoUser = false;
+		adminUser = false;
 	}
 
 	public String login() {
-		afiliado = null;
-		//contrasenia = MD5Util.code(contrasenia);
+		// contrasenia = MD5Util.code(contrasenia);
 		int resultado = afiliadoEJB.login(usuario, contrasenia);
 		if (resultado == -1) {
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
@@ -53,22 +51,18 @@ public class SesionBean implements Serializable {
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Usted se encuentra desafiliado", null);
 			FacesContext.getCurrentInstance().addMessage(null, message);
 		} else {
-			// afiliado = afiliadoEJB.buscar(afiliadoEJB.CEDULAAFILIADO);
-			// roles = seguridadEJB.listarRolesPorUsuario(afiliado);
-			// accesos = seguridadEJB.listarAccesosPorRol(roles);
+			if (afiliadoEJB.CEDULAAFILIADO == -1) {
+				adminUser = true;
+			} else {
+				afiliadoUser = true;
+			}
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Se inicio seion con exito", null);
 			FacesContext.getCurrentInstance().addMessage(null, message);
 			ocultar = true;
 			return "/paginas/afiliado.jsf?faces-redirect=true";
 		}
-		roles = null;
-		accesos = null;
 		Faces.getSession().invalidate();
 		return "/login.jsf?faces-redirect=true";
-	}
-
-	public boolean isLogged() {
-		return this.afiliado != null;
 	}
 
 	public String logOut() {
@@ -77,24 +71,8 @@ public class SesionBean implements Serializable {
 		return "/login.jsf?faces-redirect=true";
 	}
 
-	public List<Acceso> getAccesos() {
-		return accesos;
-	}
-
-	public List<Rol> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(List<Rol> roles) {
-		this.roles = roles;
-	}
-
 	public String getContrasenia() {
 		return contrasenia;
-	}
-
-	public void setAccesos(List<Acceso> accesos) {
-		this.accesos = accesos;
 	}
 
 	public String getUsuario() {
@@ -115,5 +93,21 @@ public class SesionBean implements Serializable {
 
 	public void setOcultar(boolean ocultar) {
 		this.ocultar = ocultar;
+	}
+
+	public boolean isAdminUser() {
+		return adminUser;
+	}
+
+	public boolean isAfiliadoUser() {
+		return afiliadoUser;
+	}
+
+	public void setAfiliadoUser(boolean afiliadoUser) {
+		this.afiliadoUser = afiliadoUser;
+	}
+
+	public void setAdminUser(boolean adminUser) {
+		this.adminUser = adminUser;
 	}
 }

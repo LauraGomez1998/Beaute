@@ -121,7 +121,6 @@ public class ControladorVentanaVenta implements Serializable {
 						FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
 								"No tiene los productos suficientes para esta venta", null);
 						FacesContext.getCurrentInstance().addMessage(null, message);
-
 					}
 				}
 			}

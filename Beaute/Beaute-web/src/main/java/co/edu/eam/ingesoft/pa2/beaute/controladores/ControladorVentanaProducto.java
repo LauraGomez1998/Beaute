@@ -1,11 +1,13 @@
 package co.edu.eam.ingesoft.pa2.beaute.controladores;
 
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.ejb.EJBTransactionRolledbackException;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
@@ -81,12 +83,30 @@ public class ControladorVentanaProducto implements Serializable {
 	 * metodo para registrar un producto
 	 */
 	public void registrarProducto() {
-		boolean estado = true;
-		if (estadoSeleccionado != 0) {
-			estado = false;
+		try {
+			boolean estado = true;
+			if (estadoSeleccionado != 0) {
+				estado = false;
+			}
+			Producto p = new Producto(codigo, categoria, cantidad, precio, estado, nombre, caracteristica);
+			productoEJB.crear(p);
+		} catch (EJBTransactionRolledbackException e) {
+			Throwable t = e;
+			while (!(t.getCause() instanceof SQLException)) {
+				t = t.getCause();
+				if (t == null) {
+					break;
+				}
+				if (t.getCause() instanceof SQLException) {
+					SQLException sql = (SQLException) t.getCause();
+					if (sql.getErrorCode() == 20001) {
+						FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+								"El producto ya se encuentra registrado", null);
+						FacesContext.getCurrentInstance().addMessage(null, message);
+					}
+				}
+			}
 		}
-		Producto p = new Producto(codigo, categoria, cantidad, precio, estado, nombre, caracteristica);
-		productoEJB.crear(p);
 	}
 
 	/**

@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.ejb.EJBTransactionRolledbackException;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
@@ -25,6 +26,7 @@ import co.edu.eam.ingesoft.pa2.beaute.entidades.Departamento;
 import co.edu.eam.ingesoft.pa2.beaute.entidades.Pais;
 import co.edu.eam.ingesoft.pa2.beaute.enumeraciones.GeneroAfiliadoEnum;
 import co.edu.eam.ingesoft.pa2.beaute.excepciones.ExcepcionNegocio;
+import co.edu.eam.ingesoft.pa2.beaute.seguridad.MD5Util;
 
 @Named("afiliadoaWeb")
 @ViewScoped
@@ -115,18 +117,37 @@ public class ControladorVentanaAfiliado implements Serializable {
 	 * metodo para registrar un afiliado
 	 */
 	public void registrarAfiliado() {
-		Afiliado afiliador = afiliadoEJB.buscar(cedulaAfiliado);
-		Afiliado afiliado = new Afiliado();
-		if (afiliador == null) {
-			afiliado = new Afiliado(cedulaAfiliado, genero, null, ciudadSeleccionada, Calendar.getInstance().getTime(),
-					telefono, usuario, contrasenia, nombre, apellido, true);
-		} else {
-			afiliado = new Afiliado(cedulaAfiliado, genero, afiliador, ciudadSeleccionada,
-					Calendar.getInstance().getTime(), telefono, usuario, contrasenia, nombre, apellido, true);
+		try {
+			Afiliado afiliador = afiliadoEJB.buscar(cedulaAfiliado);
+			Afiliado afiliado = new Afiliado();
+			// contrasenia = MD5Util.code(contrasenia);
+			if (afiliador == null) {
+				afiliado = new Afiliado(cedulaAfiliado, genero, null, ciudadSeleccionada,
+						Calendar.getInstance().getTime(), telefono, usuario, contrasenia, nombre, apellido, true);
+			} else {
+				afiliado = new Afiliado(cedulaAfiliado, genero, afiliador, ciudadSeleccionada,
+						Calendar.getInstance().getTime(), telefono, usuario, contrasenia, nombre, apellido, true);
+			}
+			afiliadoEJB.crear(afiliado);
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "El afiliado ha sido registrado", null);
+			FacesContext.getCurrentInstance().addMessage(null, message);
+		} catch (EJBTransactionRolledbackException e) {
+			Throwable t = e;
+			while (!(t.getCause() instanceof SQLException)) {
+				t = t.getCause();
+				if (t == null) {
+					break;
+				}
+				if (t.getCause() instanceof SQLException) {
+					SQLException sql = (SQLException) t.getCause();
+					if (sql.getErrorCode() == 20001) {
+						FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+								"El afiliado ya se encuntra registrado", null);
+						FacesContext.getCurrentInstance().addMessage(null, message);
+					}
+				}
+			}
 		}
-		afiliadoEJB.crear(afiliado);
-		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "El afiliado ha sido registrado", null);
-		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 
 	/**
