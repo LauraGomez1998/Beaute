@@ -16,9 +16,6 @@ import co.edu.eam.ingesoft.pa2.beaute.implementacion.EJBGenerico;
 public class AfiliadoEJB extends EJBGenerico<Afiliado> {
 
 	public static int CEDULAAFILIADO;
-	public static boolean ocultar;
-	public static boolean afiliadoUser;
-	public static boolean adminUser;
 
 	@Override
 	public Class getClase() {
@@ -49,12 +46,9 @@ public class AfiliadoEJB extends EJBGenerico<Afiliado> {
 			if (estado == 1) {
 				if (usuario.equalsIgnoreCase("admin")) {
 					CEDULAAFILIADO = -1;
-					adminUser = true;
 				} else {
-					afiliadoUser = true;
 					CEDULAAFILIADO = resultado;
 				}
-				ocultar = true;
 				return 0;
 			} else {
 				return 1;
@@ -62,12 +56,6 @@ public class AfiliadoEJB extends EJBGenerico<Afiliado> {
 		} else {
 			return -1;
 		}
-	}
-
-	public void modificarAccesos(boolean estado) {
-		afiliadoUser = estado;
-		adminUser = estado;
-		ocultar = estado;
 	}
 
 	public double verPago(int cedula) {

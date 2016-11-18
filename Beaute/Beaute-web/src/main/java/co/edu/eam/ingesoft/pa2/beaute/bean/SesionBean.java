@@ -35,10 +35,9 @@ public class SesionBean implements Serializable {
 
 	@PostConstruct
 	public void inicializar() {
-		ocultar = afiliadoEJB.ocultar;
-		afiliadoUser = afiliadoEJB.afiliadoUser;
-		adminUser = afiliadoEJB.adminUser;
-
+		ocultar = false;
+		afiliadoUser = false;
+		adminUser = false;
 	}
 
 	public String login() {
@@ -53,12 +52,11 @@ public class SesionBean implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(null, message);
 		} else {
 			if (afiliadoEJB.CEDULAAFILIADO == -1) {
-				ocultar = true;
 				adminUser = true;
 			} else {
-				ocultar = true;
 				afiliadoUser = true;
 			}
+			ocultar = true;
 			return "/paginas/afiliado.jsf?faces-redirect=true";
 		}
 		Faces.getSession().invalidate();
@@ -66,7 +64,10 @@ public class SesionBean implements Serializable {
 	}
 
 	public String logOut() {
-		return "../paginas/login.jsf";
+		ocultar = false;
+		afiliadoUser = false;
+		adminUser = false;
+		return "/paginas/login.jsf?faces-redirect=true";
 	}
 
 	public String getContrasenia() {

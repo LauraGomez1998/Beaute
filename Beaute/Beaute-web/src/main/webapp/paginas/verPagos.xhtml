@@ -3,17 +3,25 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:q="http://xmlns.jcp.org/jsf/passthrough"  
+	xmlns:q="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/templates/default.xhtml">
 
 	<ui:define name="contenido">
 		<h:form id="form2" prependId="false"
 			style="display: flex; justify-content:center; align-items:center; flex-direction:column;">
-			<p:panelGrid columns="2" id="datos">
-	                   
-				<p:outputLabel value="Pago de este mes" />
+			<p:panelGrid columns="2" id="datos"
+				rendered="#{SesionBean.afiliadoUser}">
+				<p:outputLabel value="Pago de este mes"
+					rendered="#{SesionBean.afiliadoUser}" />
 				<p:inputText value="#{afiliadoaWeb.pago}" readonly="true" />
+			</p:panelGrid>
+			
+			<br></br>
+			<br></br>
+			
+			<p:panelGrid columns="1" id="cerrar">
+				<p:commandLink action="#{SesionBean.logOut()}" value="Cerrar sesion"></p:commandLink>
 			</p:panelGrid>
 
 		</h:form>

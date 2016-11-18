@@ -69,13 +69,9 @@
 					icon="#" />
 			</p:submenu>
 
-			<p:submenu label="Salario" icon="#"
-				rendered="#{SesionBean.afiliadoUser}">
-				<p:menuitem value="Ver pagos" url="../paginas/verPagos.jsf"
-					rendered="#{SesionBean.afiliadoUser}" />
+			<p:submenu label="Mas" icon="#" >
+				<p:menuitem value="Informacion" url="../paginas/verPagos.jsf" />
 			</p:submenu>
-
-			<p:menuitem value="Cerrar sesion" url="#{SesionBean.logOut()}" />
 
 		</p:menubar>
 	</h:form>
