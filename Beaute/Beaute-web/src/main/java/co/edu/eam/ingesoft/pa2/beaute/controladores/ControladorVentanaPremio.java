@@ -17,7 +17,7 @@ import co.edu.eam.ingesoft.pa2.beaute.entidades.Premio;
 
 @Named("vistaPremiosWeb")
 @ViewScoped
-public class ControladorVistaPremio implements Serializable {
+public class ControladorVentanaPremio implements Serializable {
 	/**
 	 * EJB de la clase premio afiliado
 	 */
