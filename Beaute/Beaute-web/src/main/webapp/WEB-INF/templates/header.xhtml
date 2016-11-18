@@ -7,14 +7,10 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <h:head>
-
-
 	<!--   ENCABEZADO -->
 	<div id="slider">
 		<img src="../resources/images/slidebeaute.jpg" />
 	</div>
-
-
 </h:head>
 <body>
 	<style>
@@ -23,77 +19,65 @@
 }
 </style>
 	<h:form>
-
-
 		<p:growl id="messages" />
-
-		<p:menubar style="background-color: #5e9af9 !important;" rendered="#{SesionBean.ocultar}"
-			styleClass="affaires">
+		<p:menubar style="background-color: #5e9af9 !important;"
+			rendered="#{SesionBean.ocultar}" styleClass="affaires">
 			<p:submenu label="Afiliados" icon="#">
-				<p:menuitem value="Registro" url="../paginas/afiliado.xhtml" />
-				<p:separator />
-				<p:menuitem value="Categoria"
-					url="../paginas/categoriaAfiliado.xhtml" />
-				<p:separator />
-				<p:menuitem value="Comision" url="../paginas/comision.xhtml" />
+				<p:menuitem value="Registro" url="../paginas/afiliado.jsf" />
 			</p:submenu>
 
-			<p:submenu label="Pedidos" icon="#">
-				<p:menuitem value="Afiliado" url="../paginas/pedido.xhtml" icon="#" />
-				<p:separator />
-				<p:menuitem value="Cliente" url="../paginas/pedidosClientes.html"
-					icon="#" />
-				<p:separator />
+			<p:submenu label="Pedidos" icon="#"
+				rendered="#{SesionBean.afiliadoUser}">
+				<p:menuitem value="Pedir" url="../paginas/pedido.jsf" icon="#" />
 				<p:menuitem value="Pendientes"
-					url="../paginas/pedidosPendientes.xhtml" icon="#" />
+					url="../paginas/pedidosPendientes.jsf" icon="#" />
 			</p:submenu>
 
 			<p:submenu label="Premios" icon="#">
-				<p:menuitem value="Registro" url="../paginas/premios.xhtml" icon="#" />
+				<p:menuitem value="Registro" url="../paginas/premios.jsf" icon="#"
+					rendered="#{SesionBean.adminUser}" />
 				<p:separator />
-				<p:menuitem value="Listado Premios"
-					url="../paginas/vistaPremios.xhtml" icon="#" />
+				<p:menuitem value="Ver premios" url="../paginas/vistaPremios.jsf"
+					icon="#" rendered="#{SesionBean.afiliadoUser}" />
 			</p:submenu>
 
-			<p:submenu label="Pagos" icon="#">
-				<p:menuitem value="Credito" url="../paginas/credito.xhtml" icon="#" />
-				<p:separator />
-				<p:menuitem value="Cuotas" url="../paginas/cuotas.xhtml" icon="#" />
+			<p:submenu label="Pagos" icon="#"
+				rendered="#{SesionBean.afiliadoUser}">
+				<p:menuitem value="Cuotas" url="../paginas/cuotas.jsf" icon="#" />
 			</p:submenu>
 
-			<p:submenu label="Productos" icon="#">
-				<p:menuitem value="Registro" url="../paginas/producto.xhtml"
-					icon="#" />
-				
+			<p:submenu label="Productos" icon="#"
+				rendered="#{SesionBean.adminUser}">
+				<p:menuitem value="Registro" url="../paginas/producto.jsf" icon="#" />
 			</p:submenu>
 
-			<p:menuitem value="Ventas" url="../paginas/historialVentas.xhtml"
-				icon="#" />
+			<p:menuitem value="Ventas" url="../paginas/ventas.jsf" icon="#"
+				rendered="#{SesionBean.afiliadoUser}" />
 
-			<p:submenu label="Catalogo" icon="#">
-				<p:menuitem value="Catalogo" url="../paginas/catalogo.xhtml"
-					icon="#" />
+			<p:menuitem value="Historial de ventas"
+				rendered="#{SesionBean.afiliadoUser}"
+				url="../paginas/historialVentas.jsf" icon="#" />
+
+			<p:submenu label="Catalogo" icon="#"
+				rendered="#{SesionBean.adminUser}">
+				<p:menuitem value="Catalogo" url="../paginas/catalogo.jsf" icon="#" />
 				<p:separator />
 				<p:menuitem value="Producto Catalogo"
-					url="../paginas/catalogoProducto.xhtml" icon="#" />
-					<p:separator />
-				<p:menuitem value="Promociones" url="../paginas/promocion.xhtml"
+					url="../paginas/catalogoProducto.jsf" icon="#" />
+				<p:separator />
+				<p:menuitem value="Promociones" url="../paginas/promocion.jsf"
 					icon="#" />
 			</p:submenu>
 
-			<p:menuitem value="Historial Ventas" url="../paginas/historialVentas.xhtml" icon="#" />
-			
-			<p:menuitem value="Ventas" url="../paginas/ventas.xhtml" icon="#" />
+			<p:submenu label="Salario" icon="#"
+				rendered="#{SesionBean.afiliadoUser}">
+				<p:menuitem value="Ver pagos" url="../paginas/verPagos.jsf"
+					rendered="#{SesionBean.afiliadoUser}" />
+			</p:submenu>
 
-
-			<p:menuitem value="Cliente" url="../paginas/cliente.xhtml" icon="#" />
-
-
+			<p:menuitem value="Cerrar sesion" url="#{SesionBean.logOut()}" />
 
 		</p:menubar>
-
-
-
 	</h:form>
 </body>
 </html>

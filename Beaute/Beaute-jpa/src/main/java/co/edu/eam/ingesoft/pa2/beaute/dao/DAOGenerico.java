@@ -57,10 +57,15 @@ public class DAOGenerico {
 		query.setParameter("CEDULA", cedula);
 		return query.getSingleResult().toString();
 	}
-	
-	public void refrescar(Object entity){
+
+	public void refrescar(Object entity) {
 		em.refresh(entity);
 	}
-	
+
+	public String pago(int cedula) {
+		Query query = em.createNativeQuery("select CALCULAR_PAGO(:CEDULA) from dual");
+		query.setParameter("CEDULA", cedula);
+		return query.getSingleResult().toString();
+	}
 
 }
