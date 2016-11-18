@@ -18,7 +18,8 @@
 
 				<p:outputLabel value="Categorias">
 				</p:outputLabel>
-				<h:panelGrid columns="2">
+				<h:panelGrid columns="4">
+				<h:panelGrid columns="1">
 					<p:outputLabel value="Salud" />
 					<p:graphicImage value="../resources/productos/limpieza.jpg" />
 
@@ -26,7 +27,7 @@
 						listener="#{pedidoAfiliadoWeb.mostrarProductos(0)}" />
 				</h:panelGrid>
 
-				<h:panelGrid columns="2">
+				<h:panelGrid columns="1">
 					<p:outputLabel value="Belleza" />
 					<p:graphicImage value="../resources/productos/maquillaje.jpg" />
 
@@ -34,7 +35,7 @@
 						listener="#{pedidoAfiliadoWeb.mostrarProductos(1)}" />
 				</h:panelGrid>
 
-				<h:panelGrid columns="2">
+				<h:panelGrid columns="1">
 					<p:outputLabel value="Ropa" />
 					<p:graphicImage value="../resources/productos/ropaa.jpg" />
 
@@ -42,13 +43,15 @@
 						listener="#{pedidoAfiliadoWeb.mostrarProductos(2)}" />
 				</h:panelGrid>
 
-				<h:panelGrid columns="2">
+				<h:panelGrid columns="1">
 					<p:outputLabel value="Accesorios" />
-					<p:graphicImage value="../resources/productos/acce.jpg" />
+					<p:graphicImage value="../resources/productos/acc.jpg" />
 					<f:ajax event="click" render="panelGroup" execute="@this"
 						listener="#{pedidoAfiliadoWeb.mostrarProductos(3)}" />
 				</h:panelGrid>
-			</div>
+				
+				</h:panelGrid>
+							</div>
 
 			<div>
 				<h:panelGroup id="panelGroup">

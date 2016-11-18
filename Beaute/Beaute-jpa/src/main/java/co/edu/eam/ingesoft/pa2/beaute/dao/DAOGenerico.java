@@ -57,5 +57,10 @@ public class DAOGenerico {
 		query.setParameter("CEDULA", cedula);
 		return query.getSingleResult().toString();
 	}
+	
+	public void refrescar(Object entity){
+		em.refresh(entity);
+	}
+	
 
 }

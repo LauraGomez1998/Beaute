@@ -15,13 +15,13 @@ import co.edu.eam.ingesoft.pa2.beaute.excepciones.ExcepcionNegocio;
 public abstract class EJBGenerico<T> {
 
 	@PersistenceContext
-	private EntityManager em;
+	protected EntityManager em;
 
 	protected DAOGenerico dao;
 
 	@PostConstruct
 	public void inicializar()  {
-		dao = new DAOGenerico(em, getClase());
+		dao = new DAOGenerico(getEm(), getClase());
 	}
 
 	public void editar(T entidad) throws ExcepcionNegocio{
@@ -44,5 +44,13 @@ public abstract class EJBGenerico<T> {
 	}
 
 	public abstract Class getClase();
+
+	public EntityManager getEm() {
+		return em;
+	}
+
+	public void setEm(EntityManager em) {
+		this.em = em;
+	}
 
 }

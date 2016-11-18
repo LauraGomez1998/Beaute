@@ -14,22 +14,24 @@
 			<h1>Resgistro Producto Catalogo</h1>
 			<br />
 			<br />
-			<h:panelGrid columns="2" id="contenedor">
 
+			<h:panelGrid columns="2" id="contenedor">
 				<p:outputLabel value="Código Catálogo" for="cata" />
-				<h:inputText value="#{catalogoProductoWeb.codigoCatalogo}" id="cata" readonly="true" />
+				<h:inputText value="#{catalogoProductoWeb.codigoCatalogo}" id="cata"
+					readonly="true" />
 
 				<p:outputLabel value="Producto" for="prod" />
-				<p:selectOneMenu converter="#{productoConverter}" id="prod" value="#{catalogoProductoWeb.producto}">
+				<p:selectOneMenu converter="#{productoConverter}" id="prod"
+					value="#{catalogoProductoWeb.producto}">
 					<f:selectItems value="#{catalogoProductoWeb.productos}" var="pr"
 						itemValue="#{pr}" itemLabel="#{pr.nombre}" />
 				</p:selectOneMenu>
-				
-				
+
+
 
 				<p:outputLabel value="Registrar Promocion" />
 				<p:selectOneRadio value="#{catalogoProductoWeb.promocionSelect}"
-					id="tipo" required="true">
+					id="tipo">
 					<f:selectItem itemValue="0" itemLabel="Sí" />
 					<f:selectItem itemValue="1" itemLabel="No" />
 					<f:ajax event="change" render="panelGroup" execute="@this"
@@ -40,17 +42,19 @@
 
 			<h:panelGroup id="panelGroup">
 
-				<h:panelGrid columns="2" rendered="#{catalogoProductoWeb.desactivar}">
+				<h:panelGrid columns="2"
+					rendered="#{catalogoProductoWeb.desactivar}">
 
 					<p:outputLabel value="Promocion" for="prom" />
-					<p:selectOneMenu converter="#{promocionConverter}" id="prom" value="#{catalogoProductoWeb.promocion}">
-						<f:selectItems value="#{catalogoProductoWeb.promociones}"
-							var="p" itemValue="#{p}" itemLabel="#{p.descuento}%"/>
+					<p:selectOneMenu converter="#{promocionConverter}" id="prom"
+						value="#{catalogoProductoWeb.promocion}">
+						<f:selectItems value="#{catalogoProductoWeb.promociones}" var="p"
+							itemValue="#{p}" itemLabel="#{p.descuento}%" />
 					</p:selectOneMenu>
 
 					<p:outputLabel value="Fecha Inicio" for="fechaInicio" />
 					<p:calendar id="fechaInicio"
-						value="#{catalogoProductoWeb.fechaInicio}"/>
+						value="#{catalogoProductoWeb.fechaInicio}" />
 
 					<p:outputLabel value="Fecha Fin" for="fechaFin" />
 					<p:calendar id="fechaFin" value="#{catalogoProductoWeb.fechaFin}" />
@@ -58,6 +62,8 @@
 
 
 			</h:panelGroup>
+
+
 			<br />
 			<p:commandButton action="#{catalogoProductoWeb.crear()}"
 				value="Registrar Producto" update="form2" id="registrar" />

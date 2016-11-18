@@ -53,6 +53,18 @@ public class Promocion implements Serializable {
 		this.descuento = descuento;
 	}
 
-	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Promocion) {
+			Promocion tmpPromocion = (Promocion) obj;
+			if (this.codigo.equals(tmpPromocion.codigo)) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
 
 }

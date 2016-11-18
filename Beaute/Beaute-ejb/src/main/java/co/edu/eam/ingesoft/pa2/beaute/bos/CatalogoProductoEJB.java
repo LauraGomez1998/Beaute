@@ -1,10 +1,10 @@
 package co.edu.eam.ingesoft.pa2.beaute.bos;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
 
 import co.edu.eam.ingesoft.pa2.beaute.entidades.Catalogo;
 import co.edu.eam.ingesoft.pa2.beaute.entidades.CatalogoProducto;
@@ -22,6 +22,12 @@ public class CatalogoProductoEJB extends EJBGenerico<CatalogoProducto> {
 	}
 
 	public void crear(CatalogoProducto catalogoProducto) {
+		
+		Catalogo cat=catalogoProducto.getCatalogo();
+		Producto prod=catalogoProducto.getProducto();
+		catalogoProducto.setCatalogo(em.find(Catalogo.class,cat.getCodigo()));
+		catalogoProducto.setProducto(em.find(Producto.class,prod.getCodigo()));
+			
 		dao.crear(catalogoProducto);
 	}
 
@@ -45,7 +51,6 @@ public class CatalogoProductoEJB extends EJBGenerico<CatalogoProducto> {
 		} else {
 			return null;
 		}
-
 	}
 
 }

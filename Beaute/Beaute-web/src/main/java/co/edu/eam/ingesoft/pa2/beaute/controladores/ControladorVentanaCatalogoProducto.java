@@ -22,6 +22,7 @@ import co.edu.eam.ingesoft.pa2.beaute.entidades.Catalogo;
 import co.edu.eam.ingesoft.pa2.beaute.entidades.CatalogoProducto;
 import co.edu.eam.ingesoft.pa2.beaute.entidades.Producto;
 import co.edu.eam.ingesoft.pa2.beaute.entidades.Promocion;
+import co.edu.eam.ingesoft.pa2.beaute.enumeraciones.CategoriaProductoEnum;
 
 @Named("catalogoProductoWeb")
 @ViewScoped
@@ -62,8 +63,10 @@ public class ControladorVentanaCatalogoProducto implements Serializable {
 	@PostConstruct
 	public void inicializar() {
 		productos = productoEJB.listarProductos();
+		catalogoAnterior = catalogoEJB.buscarUltimoCatalogo();
 		cargarCatalogo();
 		desactivar = false;
+
 	}
 
 	public void activarPromocion() {
@@ -86,29 +89,35 @@ public class ControladorVentanaCatalogoProducto implements Serializable {
 	}
 
 	public void crear() {
-		if (codigoCatalogo != 0) {
+		if (catalogoAnterior != null) {
 			CatalogoProducto c = catalogoProdEJB.validar(producto.getCodigo(), codigoCatalogo);
 			if (c == null) {
 				if (desactivar == true) {
-					if (fechaInicio.before(fechaFin)) {
-						CatalogoProducto catalogoProduc = new CatalogoProducto(catalogoAnterior, producto, promocion,
-								fechaInicio, fechaFin);
-						catalogoProdEJB.crear(catalogoProduc);
-						FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
-								"El producto se ha registrado en el catalogo", null);
-						FacesContext.getCurrentInstance().addMessage(null, message);
+					if (fechaInicio.before(fechaFin) && fechaInicio.after(Calendar.getInstance().getTime())) {
+						Catalogo catalogo = catalogoEJB.buscarUltimoCatalogo();
+						if (catalogo != null) {
+							CatalogoProducto catalogoProduc = new CatalogoProducto(catalogo, producto, promocion,
+									fechaInicio, fechaFin);
+							catalogoProdEJB.crear(catalogoProduc);
+							FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+									"El producto se ha registrado en el catalogo", null);
+							FacesContext.getCurrentInstance().addMessage(null, message);
+						}
 					} else {
 						FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
 								"Fechas de promocion invalidad", null);
 						FacesContext.getCurrentInstance().addMessage(null, message);
 					}
 				} else {
-					CatalogoProducto catalogoPro = new CatalogoProducto(catalogoAnterior, producto, null,
-							null, null);
-					catalogoProdEJB.crear(catalogoPro);
-					FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
-							"El producto se ha registrado en el catalogo", null);
-					FacesContext.getCurrentInstance().addMessage(null, message);
+					Catalogo catalogo = catalogoEJB.buscarUltimoCatalogo();
+					if (catalogo != null) {
+						CatalogoProducto catalogoPro = new CatalogoProducto(catalogoAnterior, producto, null, null,
+								null);
+						catalogoProdEJB.crear(catalogoPro);
+						FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+								"El producto se ha registrado en el catalogo", null);
+						FacesContext.getCurrentInstance().addMessage(null, message);
+					}
 				}
 			} else {
 				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
@@ -121,62 +130,6 @@ public class ControladorVentanaCatalogoProducto implements Serializable {
 					"Por favor, ingrese un catálogo primero", null);
 			FacesContext.getCurrentInstance().addMessage(null, message);
 		}
-	}
-
-	public void agregarPromocion() {
-
-	}
-
-	public void buscar() {
-
-	}
-
-	public Producto getProducto() {
-		return producto;
-	}
-
-	public void setProducto(Producto producto) {
-		this.producto = producto;
-	}
-
-	public Catalogo getCatalogoAnterior() {
-		return catalogoAnterior;
-	}
-
-	public void setCatalogoAnterior(Catalogo catalogoAnterior) {
-		this.catalogoAnterior = catalogoAnterior;
-	}
-
-	public int getCodigoCatalogo() {
-		return codigoCatalogo;
-	}
-
-	public void setCodigoCatalogo(int codigoCatalogo) {
-		this.codigoCatalogo = codigoCatalogo;
-	}
-
-	public Promocion getPromocion() {
-		return promocion;
-	}
-
-	public void setPromocion(Promocion promocion) {
-		this.promocion = promocion;
-	}
-
-	public List<Producto> getProductos() {
-		return productos;
-	}
-
-	public void setProductos(List<Producto> productos) {
-		this.productos = productos;
-	}
-
-	public List<Promocion> getPromociones() {
-		return promociones;
-	}
-
-	public void setPromociones(List<Promocion> promociones) {
-		this.promociones = promociones;
 	}
 
 	public Date getFechaInicio() {
@@ -195,12 +148,60 @@ public class ControladorVentanaCatalogoProducto implements Serializable {
 		this.fechaFin = fechaFin;
 	}
 
+	public Producto getProducto() {
+		return producto;
+	}
+
+	public void setProducto(Producto producto) {
+		this.producto = producto;
+	}
+
+	public Promocion getPromocion() {
+		return promocion;
+	}
+
+	public void setPromocion(Promocion promocion) {
+		this.promocion = promocion;
+	}
+
 	public String getPromocionSelect() {
 		return promocionSelect;
 	}
 
 	public void setPromocionSelect(String promocionSelect) {
 		this.promocionSelect = promocionSelect;
+	}
+
+	public List<Producto> getProductos() {
+		return productos;
+	}
+
+	public void setProductos(List<Producto> productos) {
+		this.productos = productos;
+	}
+
+	public List<Promocion> getPromociones() {
+		return promociones;
+	}
+
+	public void setPromociones(List<Promocion> promociones) {
+		this.promociones = promociones;
+	}
+
+	public Catalogo getCatalogoAnterior() {
+		return catalogoAnterior;
+	}
+
+	public void setCatalogoAnterior(Catalogo catalogoAnterior) {
+		this.catalogoAnterior = catalogoAnterior;
+	}
+
+	public int getCodigoCatalogo() {
+		return codigoCatalogo;
+	}
+
+	public void setCodigoCatalogo(int codigoCatalogo) {
+		this.codigoCatalogo = codigoCatalogo;
 	}
 
 	public boolean isDesactivar() {
