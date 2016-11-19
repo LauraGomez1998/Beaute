@@ -12,8 +12,11 @@ import org.omnifaces.cdi.ViewScoped;
 
 import co.edu.eam.ingesoft.pa2.beaute.bos.AfiliadoEJB;
 import co.edu.eam.ingesoft.pa2.beaute.bos.AfiliadoPremioEJB;
+import co.edu.eam.ingesoft.pa2.beaute.bos.PremioEJB;
 import co.edu.eam.ingesoft.pa2.beaute.entidades.AfiliadoPremio;
 import co.edu.eam.ingesoft.pa2.beaute.entidades.Premio;
+import co.edu.eam.ingesoft.pa2.beaute.entidades.PremioAfiliado;
+import co.edu.eam.ingesoft.pa2.beaute.entidades.PremioVenta;
 
 @Named("vistaPremiosWeb")
 @ViewScoped
