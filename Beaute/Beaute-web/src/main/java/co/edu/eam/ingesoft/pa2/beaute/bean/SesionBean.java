@@ -41,7 +41,7 @@ public class SesionBean implements Serializable {
 	}
 
 	public String login() {
-		// contrasenia = MD5Util.code(contrasenia);
+		 contrasenia = MD5Util.code(contrasenia);
 		int resultado = afiliadoEJB.login(usuario, contrasenia);
 		if (resultado == -1) {
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,

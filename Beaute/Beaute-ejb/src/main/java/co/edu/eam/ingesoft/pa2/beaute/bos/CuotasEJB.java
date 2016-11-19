@@ -23,6 +23,10 @@ public class CuotasEJB extends EJBGenerico<Cuota> {
 		dao.crear(cuota);
 	}
 
+	public void editar(Cuota c) {
+		dao.editar(c);
+	}
+
 	public Cuota buscarCuotaPedido(PedidoCatalogo pedido) {
 		List<Cuota> cuotas = dao.ejecutarNamedQuery(Cuota.LISTAR_CUOTAS, pedido);
 		if (cuotas.isEmpty()) {
@@ -34,6 +38,15 @@ public class CuotasEJB extends EJBGenerico<Cuota> {
 
 	public int autoIncremental() {
 		return dao.ejecutarNamedQuery(Cuota.AUTOINCREMENTAL).size();
+	}
+
+	public Cuota buscarCuota(int codigoPedido) {
+		List<Cuota> lista = dao.ejecutarNamedQuery(Cuota.CUOTAS_PEDIDO, codigoPedido);
+		if (lista.isEmpty()) {
+			return null;
+		} else {
+			return lista.get(0);
+		}
 	}
 
 }

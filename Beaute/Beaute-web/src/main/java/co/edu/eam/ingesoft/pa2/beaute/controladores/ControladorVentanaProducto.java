@@ -90,6 +90,9 @@ public class ControladorVentanaProducto implements Serializable {
 			}
 			Producto p = new Producto(codigo, categoria, cantidad, precio, estado, nombre, caracteristica);
 			productoEJB.crear(p);
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+					"Se ha registrado el producto", null);
+			FacesContext.getCurrentInstance().addMessage(null, message);
 		} catch (EJBTransactionRolledbackException e) {
 			Throwable t = e;
 			while (!(t.getCause() instanceof SQLException)) {

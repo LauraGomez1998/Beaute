@@ -19,6 +19,12 @@ import co.edu.eam.ingesoft.pa2.beaute.entidades.Premio;
 @ViewScoped
 public class ControladorVentanaPremio implements Serializable {
 	/**
+	 * EJB de la clase afiliado
+	 */
+	@EJB
+	private AfiliadoEJB AfiliadoEJB;
+
+	/**
 	 * EJB de la clase premio afiliado
 	 */
 	@EJB
@@ -34,8 +40,7 @@ public class ControladorVentanaPremio implements Serializable {
 	@PostConstruct
 	public void iniciar() {
 		listaPremios = new ArrayList<>();
-		//corregir dato quemado
-		listaPremios = premioAfiliadoEJB.listarPremios(123);
+		listaPremios = premioAfiliadoEJB.listarPremios(AfiliadoEJB.CEDULAAFILIADO);
 	}
 
 	/**

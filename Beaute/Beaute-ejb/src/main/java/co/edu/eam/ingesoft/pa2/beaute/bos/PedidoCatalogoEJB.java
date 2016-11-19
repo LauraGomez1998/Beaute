@@ -1,6 +1,7 @@
 package co.edu.eam.ingesoft.pa2.beaute.bos;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.ejb.LocalBean;
 
@@ -29,6 +30,10 @@ public class PedidoCatalogoEJB extends EJBGenerico<PedidoCatalogo> {
 
 	public int autoIncremental() {
 		return dao.ejecutarNamedQuery(PedidoCatalogo.TAMANIO).size();
+	}
+
+	public List<PedidoCatalogo> listarAprobaods(int cedulaAfiliado) {
+		return dao.ejecutarNamedQuery(PedidoCatalogo.LISTAR_PEDIDOS_APROBADOS, cedulaAfiliado);
 	}
 
 	public void editar(PedidoCatalogo catalogo) {

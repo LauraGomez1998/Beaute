@@ -123,7 +123,7 @@ public class ControladorVentanaAfiliado implements Serializable {
 		try {
 			Afiliado afiliador = afiliadoEJB.buscar(cedulaAfiliador);
 			Afiliado afiliado = new Afiliado();
-			// contrasenia = MD5Util.code(contrasenia);
+			 contrasenia = MD5Util.code(contrasenia);
 			if (afiliador == null) {
 				afiliado = new Afiliado(cedulaAfiliado, genero, null, ciudadSeleccionada,
 						Calendar.getInstance().getTime(), telefono, usuario, contrasenia, nombre, apellido, true);

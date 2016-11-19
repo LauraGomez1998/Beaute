@@ -114,9 +114,11 @@ public class ControladorVentanaAprobarPedido implements Serializable {
 			for (int i = 0; i < lista.size(); i++) {
 				ProductoDTO e = new ProductoDTO(lista.get(i).getCatalogo().getProducto(), lista.get(i).getCantidad());
 				listaProductoPedido.add(e);
-				// corregir quemado
 				pedidoEJB.crearPedidoCliente(listaProductoPedido, afiliadoEJB.CEDULAAFILIADO);
 			}
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+					"El pedido ha sido registrado", null);
+			FacesContext.getCurrentInstance().addMessage(null, message);
 		} else {
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
 					"No se ha encontrado el pedido ingresado", null);
