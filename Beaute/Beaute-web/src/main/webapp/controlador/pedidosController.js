@@ -49,7 +49,6 @@ $scope.listarAfiliados = function(ciudad) {
 		var dato2 = $.param({
 			codigo : ciudad.codigo
 		});
-		alert(dato2);
 		$http({
 			url : 'rest/pedido/listarAfiliados',
 			method : "POST",
@@ -103,7 +102,6 @@ $scope.listarAfiliados = function(ciudad) {
 	
 	
 $scope.realizarPedido = function() {
-	alert("entroo");
 		var dato3 = JSON.stringify({
 			listaProductoPedidoDTO : $scope.lista,
 			afiliado : $scope.afiliado.cedulaAfiliado,
@@ -158,12 +156,7 @@ $scope.realizarPedido = function() {
 			$scope.lista.push(dato2);	
 	}
 	
-	/*$scope.eliminarTarea = function (dato) {
-		alert(dato);
-       
-        $scope.tareas.splice(dato);
-        delete[dato]
-    }*/
+	
 	
 	
 	$scope.iniciar = function(){

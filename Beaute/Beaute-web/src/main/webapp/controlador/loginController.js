@@ -16,7 +16,6 @@ app.controller("loginController", function($scope, $http, $window,
 	 * funcion para consumir servicio de verificar usuario
 	 */
 	$scope.login = function() {
-		alert("hhhhhhhhhhhh");
 		var xsrf = $.param({
 			usuario : $scope.user,
 			contrasenia : $scope.pass

@@ -21,6 +21,7 @@ import co.edu.eam.ingesoft.pa2.beaute.bos.PromocionEJB;
 import co.edu.eam.ingesoft.pa2.beaute.entidades.Afiliado;
 import co.edu.eam.ingesoft.pa2.beaute.entidades.Producto;
 import co.edu.eam.ingesoft.pa2.beaute.enumeraciones.CategoriaProductoEnum;
+import co.edu.eam.ingesoft.pa2.beaute.seguridad.MD5Util;
 import co.edu.eam.ingesoft.pa2.beaute.util.PedidoDTO;
 
 @Path("/pedidoAndroid")
@@ -48,7 +49,8 @@ public class PedidoAndroidRest {
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public int loginAndroid(@FormParam(value = "usuario") String usuario,
 			@FormParam(value = "contrasenia") String contrasenia) {
-		Afiliado afiliado = afiliadoEjb.loginAfiliado(usuario, contrasenia).get(0);
+		String contra = MD5Util.code(contrasenia);
+		Afiliado afiliado = afiliadoEjb.loginAfiliado(usuario, contra).get(0);
 		if (afiliado != null) {
 			return afiliado.getCedulaAfiliado();
 		} else {
