@@ -1,6 +1,7 @@
 package co.edu.eam.ingesoft.pa2.beaute.bos;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.ejb.LocalBean;
 
@@ -34,4 +35,5 @@ public class VentaEJB extends EJBGenerico<Venta> {
 		return dao.ejecutarNamedQuery(Venta.TAMANIO).size();
 	}
 
+	
 }
