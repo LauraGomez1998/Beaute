@@ -17,14 +17,15 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-	
+
 
 <!-- Librerias de Angular -->
 <script type="text/javascript" src="../resources/js/angular.min.js"></script>
 <script type="text/javascript" src="../resources/js/angular-route.js"></script>
 
 <!-- Librerias Jquery necesarias para el bootstrap y el material design -->
-<script type="text/javascript" src="../resources/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript"
+	src="../resources/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="../resources/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../resources/js/material.min.js"></script>
 <script type="text/javascript" src="../resources/js/ripples.min.js"></script>
@@ -41,50 +42,102 @@
 
 <body ng-app="miApp">
 
-<div class=container ng-controller="clienteController">
-<form name="frmTest" id="frmTest" class="form-horizontal" role="form">
-	<div class="row" align="center">
-		<h3 class="text-center">Datos Cliente</h3>
-
-		<div class="form-group">
-			<label class="control-label col-sm-2">Cedula</label> <input
-				type="number" align="center" ng-model="cedula"> <br /> <label
-				class="control-label col-sm-2">Nombre</label> <input type="text"
-				align="center" ng-model="nombre"> <br /> <label
-				class="control-label col-sm-2">Apellido</label> <input type="text"
-				ng-model="apellido"> <br /> <label
-				class="control-label col-sm-2">Ciudad</label> <select
-				id="sel1" ng-model="ciudad"
-				ng-options="c as c.nombre for c in ciudades">
-				<option value="">Seleccione una opcion</option>
-			</select> <br /> <label class="control-label col-sm-2">Telefono</label> <input
-				type="number" ng-model="telefono"> <br /> <label
-				class="control-label col-sm-2">Genero</label> <select
-				id="sel1" ng-model="genero">
-				
-				<option value="MASCULINO">MASCULINO</option>
-				<option value="FEMENINO">FEMENINO</option>
-			</select> <br /> <label class="control-label col-sm-2">Usuario</label> <input
-				type="text" align="center" ng-model="usuario"> <br /> <label
-				class="control-label col-sm-2" >contrasenia</label> <input
-				type="password" align="center" ng-model="contrasenia"> <br>
-				<table><tr><td>
-			<button type="button" class="btn btn-primary center-block"
-				ng-click="crear()">Crear</button></td><td>
-			<button type="button" class="btn btn-primary center-block"
-				ng-click="buscar()">Buscar</button></td><td>
-			<button type="button" class="btn btn-primary center-block"
-				ng-click="editar()">Editar</button></td><td>
-			<button type="button" class="btn btn-primary center-block"
-				ng-click="eliminar()">Elimnar</button></td>
-				</tr>
-				</table>
-		</div>
+	<div class=container ng-controller="clienteController">
+		<form name="frmTest" id="frmTest" class="form-horizontal" role="form">
+			<div class="row" align="center">
+				<h3 class="text-center">Datos Cliente</h3>
 
 
+				<form >
+					<div class="form-group" align="center">
+						<label class="control-label ">Cedula</label> 
+						<input type="number" align="center" ng-model="cedula">
+					</div>
+
+					<div class="form-group">
+						<label class="control-label ">Nombre</label> <input type="text"
+							align="center" ng-model="nombre">
+					</div>
+
+					<div class="form-group">
+						<label class="control-label ">Apellido</label> <input type="text"
+							ng-model="apellido">
+					</div>
+
+					<div class="form-group">
+						<label class="control-label ">Ciudad</label> <select id="sel1"
+							ng-model="ciudad" ng-options="c as c.nombre for c in ciudades">
+							<option value="">Seleccione una opcion</option>
+						</select>
+					</div>
+
+
+					<div class="form-group">
+						<label class="control-label ">Telefono</label> <input
+							type="number" ng-model="telefono">
+
+					</div>
+
+
+					<div class="form-group">
+						<label class="control-label ">Genero</label> <select id="sel1"
+							ng-model="genero">
+							<option value="MASCULINO">MASCULINO</option>
+							<option value="FEMENINO">FEMENINO</option>
+						</select>
+
+					</div>
+
+					<div class="form-group">
+
+						<label class="control-label ">Usuario</label> <input
+							type="text" align="center" ng-model="usuario">
+					</div>
+
+					<div class="form-group">
+
+						<label class="control-label ">contrasenia</label> <input
+							type="password" align="center" ng-model="contrasenia">
+					</div>
+
+
+
+
+
+				</form>
+
+
+
+
+				<div>
+
+					<table>
+						<tr>
+							<td>
+								<button type="button" class="btn btn-primary center-block"
+									ng-click="crear()">Crear</button>
+							</td>
+							<td>
+								<button type="button" class="btn btn-primary center-block"
+									ng-click="buscar()">Buscar</button>
+							</td>
+							<td>
+								<button type="button" class="btn btn-primary center-block"
+									ng-click="editar()">Editar</button>
+							</td>
+							<td>
+								<button type="button" class="btn btn-primary center-block"
+									ng-click="eliminar()">Elimnar</button>
+							</td>
+						</tr>
+					</table>
+
+				</div>
+
+
+			</div>
+		</form>
 	</div>
-	</form>
-</div>
 
 
 </body>
