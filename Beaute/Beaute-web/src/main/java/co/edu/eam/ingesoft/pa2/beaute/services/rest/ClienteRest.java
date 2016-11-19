@@ -31,7 +31,6 @@ public class ClienteRest {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public RespuestaDTO crear(Cliente cliente) {
-		cliente.setContrasenia(MD5Util.code(cliente.getContrasenia()));
 
 		if (clienteEjb.crearCliente(cliente)) {
 			return new RespuestaDTO(true, "se registro correctamente", "00");

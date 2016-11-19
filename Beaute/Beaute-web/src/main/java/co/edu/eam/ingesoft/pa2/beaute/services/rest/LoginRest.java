@@ -51,8 +51,7 @@ public class LoginRest {
 	@Produces(MediaType.APPLICATION_JSON)
 	public RespuestaDTO login(@FormParam(value = "usuario") String usuario,
 			@FormParam(value = "contrasenia") String contrasenia) {
-		String contra = MD5Util.code(contrasenia);
-		Cliente c = clienteEJB.buscarClienteUsuario(usuario, contra);
+		Cliente c = clienteEJB.buscarClienteUsuario(usuario, contrasenia);
 		if (c != null) {
 //			String token = UUID.randomUUID().toString();
 //			tokens.put(token, u.getId());

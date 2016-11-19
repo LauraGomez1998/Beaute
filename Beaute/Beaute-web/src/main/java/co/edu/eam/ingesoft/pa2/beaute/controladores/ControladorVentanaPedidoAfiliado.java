@@ -80,7 +80,7 @@ public class ControladorVentanaPedidoAfiliado implements Serializable {
 		} else if (seleecionado == 2) {
 			listaProductos = catalogoProductoEJB.listarProductosCatalogo(CategoriaProductoEnum.ROPA);
 		} else {
-			listaProductos = catalogoProductoEJB.listarProductosCatalogo(CategoriaProductoEnum.JOYERÍA);
+			listaProductos = catalogoProductoEJB.listarProductosCatalogo(CategoriaProductoEnum.JOYERIA);
 		}
 	}
 

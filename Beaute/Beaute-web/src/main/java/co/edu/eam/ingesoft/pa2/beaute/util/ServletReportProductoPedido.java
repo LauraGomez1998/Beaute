@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/productoPedido")
 public class ServletReportProductoPedido extends HttpServlet {
-	@Resource(lookup = "java:jboss/datasources/Beaute2")
+	@Resource(lookup = "java:jboss/datasources/Beaute")
 	private javax.sql.DataSource ds;
 
 	@Override

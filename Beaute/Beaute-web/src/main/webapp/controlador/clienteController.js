@@ -43,7 +43,7 @@ app.controller("clienteController", function($scope, $http, $sessionStorage) {
 			usuario : $scope.usuario,
 			contrasenia : $scope.contrasenia,
 			genero : $scope.genero,
-			ciudad : $scope.ciudad
+			ciudad : $scope.ciudad.codigo
 		
 		});
 
@@ -81,7 +81,7 @@ app.controller("clienteController", function($scope, $http, $sessionStorage) {
 			usuario : $scope.usuario,
 			contrasenia : $scope.contrasenia,
 			genero : $scope.genero,
-			ciudad : $scope.ciudad
+			ciudad : $scope.ciudad.codigo
 		
 		});
 
@@ -119,7 +119,7 @@ app.controller("clienteController", function($scope, $http, $sessionStorage) {
 			usuario : $scope.usuario,
 			contrasenia : $scope.contrasenia,
 			genero : $scope.genero,
-			ciudad : $scope.ciudad
+			ciudad : $scope.ciudad.codigo
 		
 		});
 
@@ -155,7 +155,6 @@ app.controller("clienteController", function($scope, $http, $sessionStorage) {
 		var dato2 = $.param({
 			cedula : $scope.cedula
 		});
-		alert(dato2);
 		$http({
 			url : '../rest/cliente/buscar',
 			method : "POST",

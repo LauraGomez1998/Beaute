@@ -40,11 +40,17 @@ public class ControladorVentanaPremio implements Serializable {
 	/**
 	 * metodo que inicializa la lista de premios
 	 */
+	
+	@EJB
+	private PremioEJB premioEjb;
+	
 	@PostConstruct
 	public void iniciar() {
 		listaPremios = new ArrayList<>();
 		listaPremios = premioAfiliadoEJB.listarPremios(AfiliadoEJB.CEDULAAFILIADO);
-	}
+		
+		}
+	
 
 	/**
 	 * accesores y modificadores
