@@ -21,6 +21,7 @@ public class Venta implements Serializable {
 
 	public static final String TAMANIO = "Venta.Tamanio";
 
+
 	@Id
 	@Column(name = "CODIGO", length = 10)
 	private int codigo;
