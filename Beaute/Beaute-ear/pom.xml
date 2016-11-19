@@ -81,6 +81,10 @@
 				<configuration>
 					<filename>${project.artifactId}.ear</filename>
 					<skip>false</skip>
+					<hostname>104.198.245.0</hostname>
+					<port>9990</port>
+					<username>user</username>
+					<password>password</password>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -105,6 +109,7 @@
 							<outputDirectory>deployments</outputDirectory>
 						</configuration>
 					</plugin>
+			
 				</plugins>
 			</build>
 		</profile>

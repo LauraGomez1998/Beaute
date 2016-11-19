@@ -41,7 +41,7 @@ public class SesionBean implements Serializable {
 	}
 
 	public String login() {
-		// contrasenia = MD5Util.code(contrasenia);
+		 contrasenia = MD5Util.code(contrasenia);
 		int resultado = afiliadoEJB.login(usuario, contrasenia);
 		if (resultado == -1) {
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
@@ -56,8 +56,6 @@ public class SesionBean implements Serializable {
 			} else {
 				afiliadoUser = true;
 			}
-			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Se inicio seion con exito", null);
-			FacesContext.getCurrentInstance().addMessage(null, message);
 			ocultar = true;
 			return "/paginas/afiliado.jsf?faces-redirect=true";
 		}
@@ -66,9 +64,10 @@ public class SesionBean implements Serializable {
 	}
 
 	public String logOut() {
-		Faces.getSession().invalidate();
 		ocultar = false;
-		return "/login.jsf?faces-redirect=true";
+		afiliadoUser = false;
+		adminUser = false;
+		return "/paginas/login.jsf?faces-redirect=true";
 	}
 
 	public String reporte() {

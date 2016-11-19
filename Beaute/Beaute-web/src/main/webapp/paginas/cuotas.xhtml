@@ -11,24 +11,51 @@
 		<h:form id="form2" prependId="false"
 			style="display: flex; justify-content:center; align-items:center; flex-direction:column;">
 
-			<h1>Resgistrar Cuotas</h1>
+			<h1>Cuotas pendientes</h1>
 
+			<h:panelGroup id="cuotasPendientes">
+
+				<p:dataTable var="ped" value="#{cuotasWeb.pedidosAprobados}">
+
+					<p:column headerText="Código pedido">
+						<h:outputText value="#{ped.pedidoCatalogo.codigo}" />
+					</p:column>
+
+					<p:column headerText="Fecha pedido">
+						<h:outputText value="#{ped.pedidoCatalogo.fechaPedido}" />
+					</p:column>
+
+					<p:column headerText="Cedula cliente">
+						<h:outputText value="#{ped.pedidoCatalogo.cliente.cedula}" />
+					</p:column>
+
+					<p:column headerText="Cuotas pendientes">
+						<h:outputText value="#{ped.cuota.numeroCuotas}" />
+					</p:column>
+
+					<p:column headerText="Valor restante">
+						<h:outputText value="#{ped.valorRestante}" />
+					</p:column>
+
+					<p:column headerText="Total">
+						<h:outputText value="#{ped.total}" />
+					</p:column>
+
+				</p:dataTable>
+			</h:panelGroup>
 
 			<br />
-			<br />
-			<h:panelGrid columns="2" id="contenedor">
 
-				<p:outputLabel value="Cédula" for="cedula" />
-				<h:inputText value="" id="cedula" required="true" />
+			<p:panelGrid columns="2" id="datos">
+				<p:outputLabel value="Codigo de pedido" />
+				<p:inputText value="#{cuotasWeb.codigoPedido}" required="true" />
+			</p:panelGrid>
 
-				<p:outputLabel value="Pago" for="pago" />
-				<h:inputText value="" id="pago" required="true" />
-
-
-			</h:panelGrid>
-			<br />
-			<p:commandButton action="#" value="Registrar" update="form2"
-				id="registrar" />
+			<div>
+				<p:commandButton action="#{cuotasWeb.registroPago()}"
+					value="Registrar pago" update="form2" id="registrar" />
+				<f:ajax event="click" render="cuotasPendientes" execute="@this" />
+			</div>
 
 		</h:form>
 	</ui:define>

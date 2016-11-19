@@ -58,4 +58,8 @@ public class AfiliadoEJB extends EJBGenerico<Afiliado> {
 		}
 	}
 
+	public double verPago(int cedula) {
+		return Double.parseDouble(dao.pago(cedula));
+	}
+
 }

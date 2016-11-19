@@ -18,7 +18,6 @@ app.controller("clienteController", function($scope, $http, $sessionStorage) {
 			url : '../rest/cliente/listarCiudades',
 			method : "GET",
 		}).success(function(data, status, headers, config) {
-			alert("entro aqquiii");
 			if (data.codigo == '00') {
 				$scope.ciudades = data.obj;
 			} else {
@@ -36,7 +35,6 @@ app.controller("clienteController", function($scope, $http, $sessionStorage) {
 	
 	$scope.crear = function() {
 
-		alert("entroo");
 		var dato3 = ({
 			cedula : $scope.cedula,
 			nombre : $scope.nombre,
@@ -49,7 +47,6 @@ app.controller("clienteController", function($scope, $http, $sessionStorage) {
 		
 		});
 
-		alert(dato3);
 		$http({
 			url : '../rest/cliente/crear',
 			method : "POST",
@@ -76,7 +73,6 @@ app.controller("clienteController", function($scope, $http, $sessionStorage) {
 	
 	$scope.eliminar = function() {
 
-		alert("entroo");
 		var dato3 = ({
 			cedula : $scope.cedula,
 			nombre : $scope.nombre,
@@ -89,7 +85,6 @@ app.controller("clienteController", function($scope, $http, $sessionStorage) {
 		
 		});
 
-		alert(dato3);
 		$http({
 			url : '../rest/cliente/eliminar',
 			method : "POST",
@@ -116,7 +111,6 @@ app.controller("clienteController", function($scope, $http, $sessionStorage) {
 	
 	$scope.editar = function() {
 
-		alert("entroo");
 		var dato3 = ({
 			cedula : $scope.cedula,
 			nombre : $scope.nombre,
@@ -129,7 +123,6 @@ app.controller("clienteController", function($scope, $http, $sessionStorage) {
 		
 		});
 
-		alert(dato3);
 		$http({
 			url : '../rest/cliente/editar',
 			method : "POST",
@@ -159,7 +152,6 @@ app.controller("clienteController", function($scope, $http, $sessionStorage) {
 	
 	$scope.buscar = function() {
 
-		alert("entroo");
 		var dato2 = $.param({
 			cedula : $scope.cedula
 		});

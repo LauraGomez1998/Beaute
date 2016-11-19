@@ -86,6 +86,8 @@ public class ControladorVentanaAfiliado implements Serializable {
 	 */
 	private List<GeneroAfiliadoEnum> listaGeneros;
 
+	private double pago;
+
 	/**
 	 * constructor vacio
 	 */
@@ -97,9 +99,10 @@ public class ControladorVentanaAfiliado implements Serializable {
 	 */
 	@PostConstruct
 	public void inicializar() {
+		cedulaAfiliador = afiliadoEJB.CEDULAAFILIADO;
+		pago=afiliadoEJB.verPago(cedulaAfiliador);
 		listaCiudades = ciudadEJB.listarCiudades();
 		listarGenero();
-		cedulaAfiliador = afiliadoEJB.CEDULAAFILIADO;
 	}
 
 	/**
@@ -118,9 +121,9 @@ public class ControladorVentanaAfiliado implements Serializable {
 	 */
 	public void registrarAfiliado() {
 		try {
-			Afiliado afiliador = afiliadoEJB.buscar(cedulaAfiliado);
+			Afiliado afiliador = afiliadoEJB.buscar(cedulaAfiliador);
 			Afiliado afiliado = new Afiliado();
-			// contrasenia = MD5Util.code(contrasenia);
+			 contrasenia = MD5Util.code(contrasenia);
 			if (afiliador == null) {
 				afiliado = new Afiliado(cedulaAfiliado, genero, null, ciudadSeleccionada,
 						Calendar.getInstance().getTime(), telefono, usuario, contrasenia, nombre, apellido, true);
@@ -293,4 +296,15 @@ public class ControladorVentanaAfiliado implements Serializable {
 		this.listaCiudades = listaCiudades;
 	}
 
+	public double getPago() {
+		return pago;
+	}
+
+	public void setPago(double pago) {
+		this.pago = pago;
+	}
+
+	public void setListaGeneros(List<GeneroAfiliadoEnum> listaGeneros) {
+		this.listaGeneros = listaGeneros;
+	}
 }

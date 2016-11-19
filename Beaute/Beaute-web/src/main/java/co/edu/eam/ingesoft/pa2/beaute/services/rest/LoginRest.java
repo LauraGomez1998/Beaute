@@ -16,6 +16,7 @@ import javax.ws.rs.core.MediaType;
 
 import co.edu.eam.ingesoft.pa2.beaute.bos.ClienteEJB;
 import co.edu.eam.ingesoft.pa2.beaute.entidades.Cliente;
+import co.edu.eam.ingesoft.pa2.beaute.seguridad.MD5Util;
 
 
 
@@ -50,7 +51,8 @@ public class LoginRest {
 	@Produces(MediaType.APPLICATION_JSON)
 	public RespuestaDTO login(@FormParam(value = "usuario") String usuario,
 			@FormParam(value = "contrasenia") String contrasenia) {
-		Cliente c = clienteEJB.buscarClienteUsuario(usuario, contrasenia);
+		String contra = MD5Util.code(contrasenia);
+		Cliente c = clienteEJB.buscarClienteUsuario(usuario, contra);
 		if (c != null) {
 //			String token = UUID.randomUUID().toString();
 //			tokens.put(token, u.getId());

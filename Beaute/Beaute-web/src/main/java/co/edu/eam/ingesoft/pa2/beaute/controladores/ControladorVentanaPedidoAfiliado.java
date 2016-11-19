@@ -91,6 +91,9 @@ public class ControladorVentanaPedidoAfiliado implements Serializable {
 		try {
 			PedidoAfiliadoDTO pedidoAfiliado = new PedidoAfiliadoDTO(listaProductoPedido, afiliadoEJB.CEDULAAFILIADO);
 			pedidoEJB.crearPedido(pedidoAfiliado);
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+					"Se ha registrado el pedido", null);
+			FacesContext.getCurrentInstance().addMessage(null, message);
 			listaProductoPedido = null;
 			listaProductoPedido = new ArrayList<>();
 		} catch (EJBTransactionRolledbackException e) {

@@ -6,28 +6,23 @@
 	xmlns:q="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/templates/default.xhtml">
+
 	<ui:define name="contenido">
 		<h:form id="form2" prependId="false"
 			style="display: flex; justify-content:center; align-items:center; flex-direction:column;">
-
-			<h1>Historial Ventas</h1>
-			<p:dataTable var="ven" value="#{historialWeb.listaVentas}">
-				
-				<p:column headerText="Codigo pedido">
-					<h:outputText value="#{ven.pedido.codigo}" />
-				</p:column>
-                                  
-				<p:column headerText="Fecha venta">
-					<h:outputText value="#{ven.venta.fecha_venta}" />
-				</p:column>
-
-				<p:column headerText="Total venta">
-					<h:outputText value="#{ven.venta.totalVenta}" />
-				</p:column>
-
-			</p:dataTable>
-
-
+			<p:panelGrid columns="2" id="datos"
+				rendered="#{SesionBean.afiliadoUser}">
+				<p:outputLabel value="Pago de este mes"
+					rendered="#{SesionBean.afiliadoUser}" />
+				<p:inputText value="#{afiliadoaWeb.pago}" readonly="true" />
+			</p:panelGrid>
+			
+			<br></br>
+			<br></br>
+			
+			<p:panelGrid columns="1" id="cerrar">
+				<p:commandLink action="#{SesionBean.logOut()}" value="Cerrar sesion"></p:commandLink>
+			</p:panelGrid>
 
 		</h:form>
 	</ui:define>

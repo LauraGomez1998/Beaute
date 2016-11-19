@@ -19,10 +19,13 @@ import co.edu.eam.ingesoft.pa2.beaute.pks.CatalogoPedidoClientePK;
 @Table(name = "CATALOGO_PEDIDO_CL")
 @IdClass(value = CatalogoPedidoClientePK.class)
 @NamedQueries({
-		@NamedQuery(name = CatalogoPedidoCliente.LISTAR_PRODUCTOS_PEDIDO, query = "select c from CatalogoPedidoCliente c where c.pedidoCatalogo.codigo=?1") })
+		@NamedQuery(name = CatalogoPedidoCliente.LISTAR_PRODUCTOS_PEDIDO, query = "select c from CatalogoPedidoCliente c where c.pedidoCatalogo.codigo=?1"),
+		@NamedQuery(name = CatalogoPedidoCliente.LISTAR_PEDIDOS, query = "select c from CatalogoPedidoCliente c where c.pedidoCatalogo=?1") })
 public class CatalogoPedidoCliente implements Serializable {
 
 	public static final String LISTAR_PRODUCTOS_PEDIDO = "CatalogoPedido.listar";
+
+	public static final String LISTAR_PEDIDOS = "CatalogoPedido.listarPedidosCl";
 
 	@Id
 	@ManyToOne

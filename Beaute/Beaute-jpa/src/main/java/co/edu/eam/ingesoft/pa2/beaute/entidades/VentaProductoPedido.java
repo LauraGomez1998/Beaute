@@ -14,11 +14,15 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "VENTA_PROD_VENTAS")
-@NamedQueries({ @NamedQuery(name = VentaProductoPedido.TAMANIO, query = "select v from VentaProductoPedido v") })
+@NamedQueries({ @NamedQuery(name = VentaProductoPedido.TAMANIO, query = "select v from VentaProductoPedido v"),
+	@NamedQuery(name = VentaProductoPedido.LISTAR_VENTAS, query = "select v from VentaProductoPedido v where v.pedido.afiliado.cedulaAfiliado=?1")})
 public class VentaProductoPedido implements Serializable {
 
 	public static final String TAMANIO = "VentaProductoPedido.Tamanio";
 
+	public static final String LISTAR_VENTAS = "Ventas.listar";
+
+	
 	@Id
 	@Column(name = "CODIGO", length = 10)
 	private int codigo;

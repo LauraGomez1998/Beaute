@@ -12,12 +12,21 @@ import org.omnifaces.cdi.ViewScoped;
 
 import co.edu.eam.ingesoft.pa2.beaute.bos.AfiliadoEJB;
 import co.edu.eam.ingesoft.pa2.beaute.bos.AfiliadoPremioEJB;
+import co.edu.eam.ingesoft.pa2.beaute.bos.PremioEJB;
 import co.edu.eam.ingesoft.pa2.beaute.entidades.AfiliadoPremio;
 import co.edu.eam.ingesoft.pa2.beaute.entidades.Premio;
+import co.edu.eam.ingesoft.pa2.beaute.entidades.PremioAfiliado;
+import co.edu.eam.ingesoft.pa2.beaute.entidades.PremioVenta;
 
 @Named("vistaPremiosWeb")
 @ViewScoped
-public class ControladorVistaPremio implements Serializable {
+public class ControladorVentanaPremio implements Serializable {
+	/**
+	 * EJB de la clase afiliado
+	 */
+	@EJB
+	private AfiliadoEJB AfiliadoEJB;
+
 	/**
 	 * EJB de la clase premio afiliado
 	 */
@@ -34,8 +43,7 @@ public class ControladorVistaPremio implements Serializable {
 	@PostConstruct
 	public void iniciar() {
 		listaPremios = new ArrayList<>();
-		//corregir dato quemado
-		listaPremios = premioAfiliadoEJB.listarPremios(123);
+		listaPremios = premioAfiliadoEJB.listarPremios(AfiliadoEJB.CEDULAAFILIADO);
 	}
 
 	/**

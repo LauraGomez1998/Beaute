@@ -98,7 +98,8 @@ public class CatalogoPedidoClienteEJB extends EJBGenerico<CatalogoPedidoCliente>
 				pedidoCatalogo = new PedidoCatalogo(codP, afiliado, cliente, Calendar.getInstance().getTime(),
 						TipoPagoEnum.CREDITO, false);
 				pedidoCatalogoEjb.crear(pedidoCatalogo);
-				Cuota cuota = new Cuota(1, pedidoCatalogo, dto.getCuotas());
+				int codC = cuotaEjb.autoIncremental();
+				Cuota cuota = new Cuota(codC, pedidoCatalogo, dto.getCuotas());
 				cuotaEjb.crear(cuota);
 			}
 
@@ -113,6 +114,10 @@ public class CatalogoPedidoClienteEJB extends EJBGenerico<CatalogoPedidoCliente>
 		} else {
 			return false;
 		}
+	}
+
+	public List<CatalogoPedidoCliente> listarPedidosCliente(PedidoCatalogo pedido) {
+		return dao.ejecutarNamedQuery(CatalogoPedidoCliente.LISTAR_PEDIDOS, pedido);
 	}
 
 	public void crear(CatalogoPedidoCliente catalogoCliente) {

@@ -15,6 +15,7 @@ import co.edu.eam.ingesoft.pa2.beaute.bos.CiudadEJB;
 import co.edu.eam.ingesoft.pa2.beaute.bos.ClienteEJB;
 import co.edu.eam.ingesoft.pa2.beaute.entidades.Ciudad;
 import co.edu.eam.ingesoft.pa2.beaute.entidades.Cliente;
+import co.edu.eam.ingesoft.pa2.beaute.seguridad.MD5Util;
 
 @Path("/cliente")
 public class ClienteRest {
@@ -30,6 +31,8 @@ public class ClienteRest {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public RespuestaDTO crear(Cliente cliente) {
+		cliente.setContrasenia(MD5Util.code(cliente.getContrasenia()));
+
 		if (clienteEjb.crearCliente(cliente)) {
 			return new RespuestaDTO(true, "se registro correctamente", "00");
 		} else {
