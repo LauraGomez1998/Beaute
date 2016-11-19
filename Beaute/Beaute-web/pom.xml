@@ -47,13 +47,9 @@
 			<type>ejb</type>
 			<scope>provided</scope>
 		</dependency>
-		<!--  
-		<dependency>
-			<groupId>com.github.caferrerb</groupId>
-			<artifactId>testdataJEFE</artifactId>
-			<version>1.1.2-SNAPSHOT</version>
-		</dependency>-->
-		
+		<!-- <dependency> <groupId>com.github.caferrerb</groupId> <artifactId>testdataJEFE</artifactId> 
+			<version>1.1.2-SNAPSHOT</version> </dependency> -->
+
 		<!-- https://mvnrepository.com/artifact/org.jboss.arquillian.graphene/graphene-webdriver -->
 		<dependency>
 			<groupId>org.jboss.arquillian.graphene</groupId>
@@ -93,10 +89,35 @@
 		</dependency>
 
 		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-jsr310</artifactId>
+			<version>2.4.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.codehaus.groovy/groovy-all -->
+		<dependency>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy-all</artifactId>
+			<version>2.4.7</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/net.sf.jasperreports/jasperreports-fonts -->
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports-fonts</artifactId>
+			<version>6.0.0</version>
+		</dependency>
+
+		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
-			<version>3.0.1</version>
+			<version>3.1.0</version>
 			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>6.1.1</version>
 		</dependency>
 
 		<dependency>

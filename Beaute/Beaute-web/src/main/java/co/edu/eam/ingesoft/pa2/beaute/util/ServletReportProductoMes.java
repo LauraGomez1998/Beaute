@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/productoPedido")
-public class ServletReportProductoPedido extends HttpServlet {
+@WebServlet("/productoMes")
+public class ServletReportProductoMes extends HttpServlet {
 	@Resource(lookup = "java:jboss/datasources/Beaute2")
 	private javax.sql.DataSource ds;
 
@@ -25,7 +25,7 @@ public class ServletReportProductoPedido extends HttpServlet {
 		try (Connection con = ds.getConnection();) {
 			ServletOutputStream salida = resp.getOutputStream();
 			GeneradorReporte generador = new GeneradorReporte(con);
-			byte[] byteStream = generador.generarReporte(null, "/reportes/productoPedido.jrxml", "test", salida);
+			byte[] byteStream = generador.generarReporte(null, "/reportes/productoMes.jrxml", "test", salida);
 			resp.setHeader("Content-Disposition", "filename=myReport.pdf");
 			resp.setContentType("application/pdf");
 			resp.setContentLength(byteStream.length);

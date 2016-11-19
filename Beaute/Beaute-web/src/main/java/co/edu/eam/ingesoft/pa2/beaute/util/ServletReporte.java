@@ -1,7 +1,6 @@
 package co.edu.eam.ingesoft.pa2.beaute.util;
 
 import java.io.IOException;import java.sql.Connection;
-
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -27,7 +26,7 @@ public class ServletReporte extends HttpServlet {
 				) {
 			ServletOutputStream salida=resp.getOutputStream();
 			GeneradorReporte generador=new GeneradorReporte(con);
-			byte[] byteStream=generador.generarReporte(null, "/reporte/test.jrxml", "test", salida);
+			byte[] byteStream=generador.generarReporte(null, "/reportes/test.jrxml", "test", salida);
 			resp.setHeader("Content-Disposition","filename=myReport.pdf");
 			resp.setContentType("application/pdf");
 			resp.setContentLength(byteStream.length);

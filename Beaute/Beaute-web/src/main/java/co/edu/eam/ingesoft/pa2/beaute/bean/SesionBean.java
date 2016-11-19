@@ -71,6 +71,10 @@ public class SesionBean implements Serializable {
 		return "/login.jsf?faces-redirect=true";
 	}
 
+	public String reporte() {
+		return "/reporteAfiliados";
+	}
+
 	public String getContrasenia() {
 		return contrasenia;
 	}

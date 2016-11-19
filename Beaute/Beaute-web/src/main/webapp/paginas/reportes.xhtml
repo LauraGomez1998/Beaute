@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:q="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/default.xhtml">
+
+	<ui:define name="contenido">
+		<h:form id="form2" prependId="false"
+			style="display: flex; justify-content:center; align-items:center; flex-direction:column;">
+
+			<h1>REPORTES</h1>
+
+
+			<br />
+			<br />
+			<h:panelGrid columns="2" id="contenedor">
+
+				<p:outputLabel value="Reporte Afiliados del Mes" /> <!-- reporteAfiliados -->
+				<h:link hreflang="../reporteAfiliados"/>
+				<p:button href="../reporteAfiliados" value="Go to SO" />
+				<p:commandLink action="#{SesionBean.reporte()}" value="Ingresar"></p:commandLink>
+				
+				<p:outputLabel value="Reporte Afiliados del Mes" /> <!-- pedidosClientes -->
+				<p:commandLink action="#{SesionBean.reporte()}" value="Ingresar"></p:commandLink>
+				
+				<p:outputLabel value="Reporte Afiliados del Mes" /> <!-- clientesCompras -->
+				<p:commandLink action="#{SesionBean.reporte()}" value="Ingresar"></p:commandLink>
+				
+				<p:outputLabel value="Reporte Afiliados del Mes" /> <!-- clientesFieles -->
+				<p:commandLink action="#{SesionBean.reporte()}" value="Ingresar"></p:commandLink>
+				
+				<p:outputLabel value="Reporte Afiliados del Mes" /> <!-- desafiliados -->
+				<p:commandLink action="#{SesionBean.reporte()}" value="Ingresar"></p:commandLink>
+				
+				<p:outputLabel value="Reporte Afiliados del Mes" /> <!-- productoMes -->
+				<p:commandLink action="#{SesionBean.reporte()}" value="Ingresar"></p:commandLink>
+				
+				<p:outputLabel value="Reporte Afiliados del Mes" /> <!-- productoPedido -->
+				<p:commandLink action="#{SesionBean.reporte()}" value="Ingresar"></p:commandLink>
+
+				
+
+			</h:panelGrid>
+			<br />
+
+
+		</h:form>
+	</ui:define>
+</ui:composition>
