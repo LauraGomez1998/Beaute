@@ -1,7 +1,5 @@
 package co.edu.eam.ingesoft.pa2.beaute.dao;
 
-import java.sql.SQLException;
-
 import java.util.List;
 
 import javax.persistence.EntityManager;
